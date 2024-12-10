@@ -3,31 +3,41 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Social from '@/components/shared/Social/Social';
+import { Container } from '@/components/widgets';
 
 const FooterBox = styled.footer`
-    padding: 80px 0;
+    padding: clamp(2.5rem, 1.6988rem + 3.0888vw, 5rem) 0;
     border-top: 1px solid rgb(55, 55, 55);
     position: relative;
 `;
 
 const FooterItems = styled.div`
     display: flex;
-    gap: 120px;
-    position:relative;
+    gap: clamp(2.5rem, -3.0556rem + 9.8765vw, 7.5rem);
+    position: relative;
     z-index: 10;
+
+    @media (max-width: 800px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 600px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
 `;
 
 const FooterItem = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap:  clamp(1.5rem, 1.1795rem + 1.2355vw, 2.5rem);
     max-width: 300px;
 `;
 
 const FooterContent = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap:  clamp(1.5rem, 1.1795rem + 1.2355vw, 2.5rem);
 `;
 
 const FooterItemTitle = styled.h2`
@@ -72,12 +82,21 @@ const FooterDecor = styled.div`
     right: 0;
     top: 0;
     display: flex;
+    bottom: 0;
+
+    img {
+        height: 100%;
+    }
+
+    @media (max-width: 1023px) {
+        display: none;
+    }
 `;
 
 export const Footer: React.FC = () => {
     return (
         <FooterBox>
-            <div className='container'>
+            <Container>
                 <FooterItems>
                     <FooterItem>
                         <FooterItemTitle>Our contacts</FooterItemTitle>
@@ -94,6 +113,7 @@ export const Footer: React.FC = () => {
                                             <img
                                                 src='./icons/phone.svg'
                                                 alt=''
+                                                loading='lazy'
                                             />
                                         </span>
                                         <FooterLinkText>
@@ -111,6 +131,7 @@ export const Footer: React.FC = () => {
                                             <img
                                                 src='./icons/phone.svg'
                                                 alt=''
+                                                loading='lazy'
                                             />
                                         </span>
                                         <FooterLinkText>
@@ -174,9 +195,7 @@ export const Footer: React.FC = () => {
                                         className='footer__link-item-ext'
                                         href='/services'
                                     >
-                                        <FooterLinkText>
-                                            Services
-                                        </FooterLinkText>
+                                        <FooterLinkText>Services</FooterLinkText>
                                     </FooterLinkItem>
                                 </li>
 
@@ -185,9 +204,7 @@ export const Footer: React.FC = () => {
                                         className='footer__link-item-ext'
                                         href='/cases'
                                     >
-                                        <FooterLinkText>
-                                            Case studies
-                                        </FooterLinkText>
+                                        <FooterLinkText>Case studies</FooterLinkText>
                                     </FooterLinkItem>
                                 </li>
 
@@ -196,9 +213,7 @@ export const Footer: React.FC = () => {
                                         className='footer__link-item-ext'
                                         href='/about'
                                     >
-                                        <FooterLinkText>
-                                            About us
-                                        </FooterLinkText>
+                                        <FooterLinkText>About us</FooterLinkText>
                                     </FooterLinkItem>
                                 </li>
 
@@ -207,9 +222,7 @@ export const Footer: React.FC = () => {
                                         className='footer__link-item-ext'
                                         href='/blog'
                                     >
-                                        <FooterLinkText>
-                                            Blog
-                                        </FooterLinkText>
+                                        <FooterLinkText>Blog</FooterLinkText>
                                     </FooterLinkItem>
                                 </li>
                             </FooterList>
@@ -249,7 +262,7 @@ export const Footer: React.FC = () => {
                         />
                     </picture>
                 </FooterDecor>
-            </div>
+            </Container>
         </FooterBox>
     );
 };

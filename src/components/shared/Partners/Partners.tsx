@@ -1,22 +1,25 @@
 'use client';
 import styled, { keyframes } from 'styled-components';
+import { Container } from '@/components/widgets';
+
+const gapValue = 'clamp(0.9375rem, 0.2765rem + 2.5483vw, 3rem)';
 
 const PartnersBox = styled.section`
     overflow: hidden;
-
-    .container {
-        width: 100%;
-    }
 `;
 
 const PartnersInner = styled.div`
     display: flex;
     flex-direction: column;
     gap: 24px;
+
+    @media(max-width:767px) {
+        gap: 12px;
+    }
 `;
 
 const PartnersTitle = styled.h2`
-    font-size: 40px;
+    font-size: clamp(1.25rem, 0.8494rem + 1.5444vw, 2.5rem);
     font-weight: 700;
     line-height: 1.17;
 `;
@@ -25,10 +28,15 @@ const PartnersItems = styled.div`
     position: relative;
     display: flex;
     overflow: hidden;
-    gap: 48px;
+    gap: ${gapValue};
     border-bottom: 1px solid rgb(55, 55, 55);
     border-top: 1px solid rgb(55, 55, 55);
+    background-color: #010101;
     padding: 24px 0;
+
+    img {
+        height: clamp(1.875rem, 1.2541rem + 2.3938vw, 3.8125rem);
+    }   
 `;
 
 const scrollParnners = keyframes`
@@ -37,14 +45,14 @@ const scrollParnners = keyframes`
     }
 
     100% {
-        transform: translateX(calc(-100% - 48px));
+        transform: translateX(calc(-100% - ${gapValue}));
     }
 `;
 
 const PartnersItem = styled.div`
     display: flex;
     flex-shrink: 0;
-    gap: 48px;
+    gap: ${gapValue};
     min-width: 100%;
     animation: ${scrollParnners} 10s linear infinite;
 `;
@@ -53,9 +61,9 @@ export default function Partners() {
     return (
         <PartnersBox className='partners'>
             <PartnersInner className='partners__inner'>
-                <div className='container'>
+                <Container>
                     <PartnersTitle className='partners__title'>Trusted By</PartnersTitle>
-                </div>
+                </Container>
 
                 <PartnersItems className='partners__items'>
                     <PartnersItem className='partners__item'>

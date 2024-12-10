@@ -1,5 +1,5 @@
 'use client';
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 import { Header, Footer } from '@/components/widgets';
 
@@ -7,7 +7,14 @@ const GlobalStyle = createGlobalStyle`
     @font-face {
         font-family: 'Eina';
         src: url('/fonts/EinaRegular.woff2') format('woff2');
-        font-weight: normal;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Eina';
+        src: url('/fonts/EinaSemiBold.woff2') format('woff2');
+        font-weight: 600;
         font-style: normal;
     }
 
@@ -16,6 +23,11 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         border: 0;
         box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        overflow-x: hidden;
     }
 
     *,
@@ -98,12 +110,7 @@ const GlobalStyle = createGlobalStyle`
         color: #fff;
         font-size: 14px;
         line-height: 1.35;
-    }
-
-    .container {
-        max-width: 1710px;
-        padding: 0 15px;
-        margin: 0 auto;
+        font-weight: 400;
     }
 `;
 
@@ -115,6 +122,7 @@ export default function RootLayout({
     return (
         <>
             <GlobalStyle />
+            
             <html
                 lang='en'
                 suppressHydrationWarning

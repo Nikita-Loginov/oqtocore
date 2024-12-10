@@ -18,6 +18,13 @@ const SociaLink = styled.li`
 
     &:hover {
         background-color: #fff;
+
+        svg {
+            path {
+                transition: all 0.5s;
+                fill: #000;
+            }
+        }
     }
 `;
 
@@ -38,9 +45,7 @@ export default function Social() {
     return (
         <SocialBox>
             <SociaLink>
-                <SocialItem
-                    href='https://www.linkedin.com/company/oqtacore'
-                >
+                <SocialItem href='https://www.linkedin.com/company/oqtacore'>
                     <svg
                         width='24'
                         height='24'
@@ -68,9 +73,7 @@ export default function Social() {
             </SociaLink>
 
             <SociaLink>
-                <SocialItem
-                    href='t.me/oqtacore_cto'
-                >
+                <SocialItem href='t.me/oqtacore_cto'>
                     <svg
                         width='24'
                         height='24'
@@ -100,9 +103,7 @@ export default function Social() {
             </SociaLink>
 
             <SociaLink>
-                <SocialItem
-                    href='x.com/oqtacore_devs'
-                >
+                <SocialItem href='x.com/oqtacore_devs'>
                     <svg
                         width='24'
                         height='24'

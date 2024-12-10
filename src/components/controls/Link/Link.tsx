@@ -1,11 +1,19 @@
 import styled from 'styled-components';
+import React from 'react';
+
+interface LinkProps {
+    linkUrl: string;
+    iconName: string;
+    className?: string;
+    children: React.ReactNode; 
+}
 
 const LinkBox = styled.a`
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 30px;
-    font-size: 20px;
+    font-size: 14px;
     color: #fff;
     font-weight: 700;
     min-height: 52px;
@@ -59,10 +67,11 @@ const LinkDecor = styled.span`
     }
 `;
 
-export default function Link({ children, iconName }) {
+export default function Link<LinkProps>({ children, iconName, linkUrl, className}) {
     return (
         <LinkBox
-            href='#'
+            href={linkUrl}
+            className={className}
         >
             <span className='link__text'>{children}</span>
 
@@ -72,6 +81,7 @@ export default function Link({ children, iconName }) {
                     height='16'
                     src={`./icons/${iconName}.svg`}
                     alt=''
+                    loading='lazy'
                 />
             </LinkDecor>
         </LinkBox>

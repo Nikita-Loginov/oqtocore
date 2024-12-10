@@ -86,15 +86,16 @@ const LinkDecor = styled.span`
     }
 `;
 
-export default function LinkUniq({ iconName, linkText }) {
+export default function LinkUniq({ iconName, linkText, linkUrl }) {
     return (
-        <Link href='#'>
+        <Link href={linkUrl}>
             <LinkText>{linkText}</LinkText>
 
             <LinkDecor className='link-uniq__decor'>
                 <img
                     src={`./icons/${iconName}.svg`}
                     alt=''
+                    loading='lazy'
                 />
             </LinkDecor>
         </Link>
