@@ -6,7 +6,7 @@ import { Container } from '@/components/widgets';
 
 const Gallaxy = dynamic(() => import('@/components/lib/Gallaxy/Gallaxy'), {
     loading: () => <img loading='lazy' src='./images/top/preloadChar.png' alt='' />,
-    ssr: false, 
+    ssr: true, 
 });
 
 
