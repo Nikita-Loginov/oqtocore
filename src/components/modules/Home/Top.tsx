@@ -1,8 +1,14 @@
 'use client';
+import dynamic from 'next/dynamic';
 import styled from 'styled-components';
-import Gallaxy from '@/components/lib/Gallaxy/Gallaxy';
 import LinkUniq from '@/components/controls/LinkUniq/LinkUniq';
 import { Container } from '@/components/widgets';
+
+const Gallaxy = dynamic(() => import('@/components/lib/Gallaxy/Gallaxy'), {
+    loading: () => <img loading='lazy' src='./images/top/preloadChar.png' alt='' />,
+    ssr: false, 
+});
+
 
 const TopBox = styled.section`
     padding: clamp(6.5625rem, 4.4595rem + 8.1081vw, 13.125rem) 0 clamp(5rem, 1.5951rem + 13.1274vw, 15.625rem);
@@ -46,9 +52,15 @@ const TopGallaxy = styled.div`
     bottom: -70px;
     height: 100%;
 
-    canvas {
+    canvas,
+    img {
        width:100% !important;
        height: 100% !important;
+       object-fit: cover;
+    }
+
+    img {
+        object-fit: cover;
     }
 `
 
@@ -56,6 +68,7 @@ export default function Top() {
     return (
         <TopBox>
             <Container>
+            {/* <img src='./images/top/preloader.png' alt='' /> */}
                 <TopInner>
                     <TopContent>
                         <TopTitle>Web3 Development Powerhouse & Marketing Solutionhub</TopTitle>
