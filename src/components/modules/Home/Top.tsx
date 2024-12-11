@@ -72,7 +72,7 @@ export default function Top() {
 
                 <TopGallaxy>
                     {/* <canvas className='webgl'></canvas> */}
-                    <Gallaxy />
+                    {/* <Gallaxy /> */}
                 </TopGallaxy>
             </Container>
         </TopBox>
