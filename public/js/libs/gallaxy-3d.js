@@ -183,8 +183,8 @@
         },
     };
     class P {
-        x : any;
-        y: any;
+        x : number;
+        y: number;
         constructor(t = 0, e = 0) {
             Object.defineProperty(this, 'isVector2', { value: !0 }), (this.x = t), (this.y = e);
         }
