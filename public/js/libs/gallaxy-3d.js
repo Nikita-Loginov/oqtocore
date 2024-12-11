@@ -408,6 +408,7 @@
         }
     }
     class O {
+        elements: any;
         constructor() {
             Object.defineProperty(this, 'isMatrix3', { value: !0 }),
                 (this.elements = [1, 0, 0, 0, 1, 0, 0, 0, 1]),
@@ -886,6 +887,11 @@
             },
         });
     class U {
+        x: any;
+        y: any;
+        z: any;
+        w: any;
+
         constructor(t = 0, e = 0, n = 0, i = 1) {
             Object.defineProperty(this, 'isVector4', { value: !0 }),
                 (this.x = t),
@@ -1326,6 +1332,11 @@
             },
         }));
     class k {
+        private _x: any;
+        private _y: any;
+        private _z: any;
+        private _w: any;
+
         constructor(t = 0, e = 0, n = 0, i = 1) {
             Object.defineProperty(this, 'isQuaternion', { value: !0 }),
                 (this._x = t),
@@ -1716,6 +1727,10 @@
         _onChangeCallback() {}
     }
     class G {
+        x: any;
+        y: any;
+        z: any;
+
         constructor(t = 0, e = 0, n = 0) {
             Object.defineProperty(this, 'isVector3', { value: !0 }),
                 (this.x = t),
@@ -2117,6 +2132,10 @@
     const V = new G(),
         j = new k();
     class W {
+        x: any;
+        y: any;
+        z: any;
+
         constructor(t, e) {
             Object.defineProperty(this, 'isBox3', { value: !0 }),
                 (this.min = void 0 !== t ? t : new G(1 / 0, 1 / 0, 1 / 0)),
@@ -2415,6 +2434,9 @@
         ot = new G(),
         st = new W();
     class at {
+        x: any;
+        y: any;
+        z: any;
         constructor(t, e) {
             (this.center = void 0 !== t ? t : new G()), (this.radius = void 0 !== e ? e : -1);
         }
