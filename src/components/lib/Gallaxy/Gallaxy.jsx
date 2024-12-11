@@ -26372,4 +26372,8 @@ export default function Gallaxy() {
             };
         ch();
     }, []);
+
+    return (
+        <canvas className='webgl'></canvas>
+    );
 }

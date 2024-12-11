@@ -6,6 +6,7 @@ interface LinkProps {
     iconName: string;
     className?: string;
     children: React.ReactNode; 
+    style?: React.CSSProperties;
 }
 
 const LinkBox = styled.a`
@@ -67,7 +68,7 @@ const LinkDecor = styled.span`
     }
 `;
 
-export default function Link<LinkProps>({ children, iconName, linkUrl, className}) {
+export default function Link<LinkProps>({ children, iconName, linkUrl, className, style}) {
     return (
         <LinkBox
             href={linkUrl}
@@ -81,6 +82,7 @@ export default function Link<LinkProps>({ children, iconName, linkUrl, className
                     height='16'
                     src={`./icons/${iconName}.svg`}
                     alt=''
+                    style={style}
                     loading='lazy'
                 />
             </LinkDecor>

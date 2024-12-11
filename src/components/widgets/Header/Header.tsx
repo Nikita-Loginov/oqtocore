@@ -12,7 +12,6 @@ const HeaderBox = styled.header`
     backdrop-filter: blur(35.3px);
     background: rgba(255, 255, 255, 0.01);
     z-index: 1000;
-    position: relative;
 
     &:before {
         content:"";
@@ -235,7 +234,8 @@ export const Header: React.FC = () => {
                                 <Link
                                     iconName='comment'
                                     linkUrl='/contact'
-                                    className={''}
+                                    className={""}
+                                    style={{}}
                                 >
                                     Contact us
                                 </Link>
@@ -249,6 +249,7 @@ export const Header: React.FC = () => {
                         iconName='comment'
                         linkUrl='/contact'
                         className={'header__menu-link'}
+                        style={{}}
                     >
                         Contact us
                     </Link>

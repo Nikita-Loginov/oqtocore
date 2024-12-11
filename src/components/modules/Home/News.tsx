@@ -210,6 +210,7 @@ export default function News() {
                         linkUrl='oqtacore.com/blog'
                         iconName='arrow-up-right'
                         className={'news-link'}
+                        style={{}}
                     >
                         all posts blog
                     </Link>

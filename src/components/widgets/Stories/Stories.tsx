@@ -203,6 +203,7 @@ export const Stories: React.FC = () => {
                                 linkUrl='/cases/gametrade-market'
                                 iconName='arrow-up-right'
                                 className='stories-link'
+                                style={{}}
                             >
                                 full case
                             </Link>
@@ -292,6 +293,7 @@ export const Stories: React.FC = () => {
                                 linkUrl='/cases/bitcoin-runes'
                                 iconName='arrow-up-right'
                                 className='stories-link'
+                                style={{}}
                             >
                                 full case
                             </Link>
