@@ -1,26 +1,27 @@
 'use client';
+import Script from 'next/script';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import LinkUniq from '@/components/controls/LinkUniq/LinkUniq';
 import { Container } from '@/components/widgets';
 
-const Gallaxy = dynamic(() => import('@/components/lib/Gallaxy/Gallaxy'), {
-    loading: () => <img loading='lazy' src='./images/top/preloadChar.png' alt='' />,
-    ssr: false, 
-});
-
+// const Gallaxy = dynamic(() => import('@/components/lib/Gallaxy/Gallaxy'), {
+//     loading: () => <img loading='lazy' src='./images/top/preloadChar.png' alt='' />,
+//     ssr: false,
+// });
 
 const TopBox = styled.section`
-    padding: clamp(6.5625rem, 4.4595rem + 8.1081vw, 13.125rem) 0 clamp(5rem, 1.5951rem + 13.1274vw, 15.625rem);
-    position:relative;
+    padding: clamp(6.5625rem, 4.4595rem + 8.1081vw, 13.125rem) 0
+        clamp(5rem, 1.5951rem + 13.1274vw, 15.625rem);
+    position: relative;
 `;
 
 const TopInner = styled.div`
     display: flex;
     flex-direction: column;
-    position:relative;
-    z-index:10;
-    gap: clamp(2.5rem, 1.6988rem + 3.0888vw, 5rem);;
+    position: relative;
+    z-index: 10;
+    gap: clamp(2.5rem, 1.6988rem + 3.0888vw, 5rem);
     align-items: flex-start;
 `;
 
@@ -32,7 +33,7 @@ const TopContent = styled.div`
 `;
 
 const TopTitle = styled.h1`
-    font-size: clamp(1.875rem, 0.6733rem + 4.6332vw, 5.625rem);;
+    font-size: clamp(1.875rem, 0.6733rem + 4.6332vw, 5.625rem);
     font-weight: 400;
     line-height: 1.1;
 `;
@@ -54,39 +55,42 @@ const TopGallaxy = styled.div`
 
     canvas,
     img {
-       width:100% !important;
-       height: 100% !important;
-       object-fit: cover;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
     }
 
     img {
         object-fit: cover;
     }
-`
+`;
 
 export default function Top() {
     return (
-        <TopBox>
-            <Container>
-            {/* <img src='./images/top/preloader.png' alt='' /> */}
-                <TopInner>
-                    <TopContent>
-                        <TopTitle>Web3 Development Powerhouse & Marketing Solutionhub</TopTitle>
+        <>
+            <TopBox>
+                <Container>
+                    {/* <img src='./images/top/preloader.png' alt='' /> */}
+                    <TopInner>
+                        <TopContent>
+                            <TopTitle>Web3 Development Powerhouse & Marketing Solutionhub</TopTitle>
 
-                        <TopText>Let’s build something beyond ordinary together</TopText>
-                    </TopContent>
+                            <TopText>Let’s build something beyond ordinary together</TopText>
+                        </TopContent>
 
-                    <LinkUniq
-                        iconName='arrow-down'
-                        linkText='discover more'
-                        linkUrl='/#services'
-                    ></LinkUniq>
-                </TopInner>
+                        <LinkUniq
+                            iconName='arrow-down'
+                            linkText='discover more'
+                            linkUrl='/#services'
+                        ></LinkUniq>
+                    </TopInner>
 
-                <TopGallaxy>
-                    <Gallaxy />
-                </TopGallaxy>
-            </Container>
-        </TopBox>
+                    <TopGallaxy>
+                        <canvas className='webgl'></canvas>
+                    </TopGallaxy>
+                </Container>
+            </TopBox>
+            <Script src='./js/lib/3d-gallaxy.js' async/>
+        </>
     );
 }
