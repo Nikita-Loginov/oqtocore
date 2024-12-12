@@ -215,13 +215,17 @@ export const Stories: React.FC = () => {
                                 type='image/webp'
                             />
                             <source
+                                srcSet='./images/stories/gtm.webp 2x'
+                                type='image/webp'
+                            />
+                            <source
                                 srcSet='./images/stories/gtm.png'
                                 type='image/png'
                             />
                             <StoriesImg
                                 loading='lazy'
                                 src='./images/stories/gtm.png'
-                                srcSet='./images/stories/gtm2x.png'
+                                srcSet='./images/stories/gtm2x.png 2x'
                                 alt=''
                             />
                         </picture>
@@ -229,7 +233,11 @@ export const Stories: React.FC = () => {
                     <StoriesBox className='stories-box-img-top'>
                         <picture>
                             <source
-                                srcSet='./images/stories/runes.png'
+                                srcSet='./images/stories/runes.webp'
+                                type='image/webp'
+                            />
+                            <source
+                                srcSet='./images/stories/runes2x.webp 2x'
                                 type='image/webp'
                             />
                             <source
@@ -239,7 +247,7 @@ export const Stories: React.FC = () => {
                             <StoriesImg
                                 loading='lazy'
                                 src='./images/stories/runes.png'
-                                srcSet='./images/stories/runes2x.png'
+                                srcSet='./images/stories/runes2x.png 2x'
                                 alt=''
                             />
                         </picture>

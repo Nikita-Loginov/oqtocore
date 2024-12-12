@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
-import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
-import { createGlobalStyle } from 'styled-components';
+import {createGlobalStyle} from 'styled-components';
 import { Header, Footer } from '@/components/widgets';
+import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     @font-face {
@@ -16,8 +16,15 @@ const GlobalStyle = createGlobalStyle`
 
     @font-face {
         font-family: 'Eina';
-        src: url('/fonts/EinaSemiBold.woff2') format('woff2');
+        src: url('/fonts/EinaBold.woff2') format('woff2');
         font-weight: 600;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Eina';
+        src: url('/fonts/EinaSemiBold.woff2') format('woff2');
+        font-weight: 700;
         font-style: normal;
     }
 
@@ -118,6 +125,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default function StyledComponentsRegistry({ children }: { children: React.ReactNode }) {
+    // Only create stylesheet once with lazy initial state
+    // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
     const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
 
     useServerInsertedHTML(() => {
@@ -129,16 +138,12 @@ export default function StyledComponentsRegistry({ children }: { children: React
     if (typeof window !== 'undefined') return <>{children}</>;
 
     return (
-        <>
-            <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
-                <GlobalStyle />
+        <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
+            <GlobalStyle />
 
-                <Header />
-
-                {children}
-
-                <Footer />
-            </StyleSheetManager>
-        </>
+            <Header />
+            {children}
+            <Footer />
+        </StyleSheetManager>
     );
 }

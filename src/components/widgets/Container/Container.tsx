@@ -4,9 +4,13 @@ import styled from 'styled-components';
 
 const ContainerBox = styled.div`
     max-width: 1710px;
-    padding: 0 15px;
+    padding: 0 40px;
     margin: 0 auto;
     width:100%;
+
+    @media(max-width:1023px) {
+        padding: 0 15px;
+    }
 `;
 
 interface ContainerProps {

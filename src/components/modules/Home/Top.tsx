@@ -1,14 +1,9 @@
 'use client';
+import { useEffect, useState } from 'react';
 import Script from 'next/script';
-import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import LinkUniq from '@/components/controls/LinkUniq/LinkUniq';
 import { Container } from '@/components/widgets';
-
-// const Gallaxy = dynamic(() => import('@/components/lib/Gallaxy/Gallaxy'), {
-//     loading: () => <img loading='lazy' src='./images/top/preloadChar.png' alt='' />,
-//     ssr: false,
-// });
 
 const TopBox = styled.section`
     padding: clamp(6.5625rem, 4.4595rem + 8.1081vw, 13.125rem) 0
@@ -53,8 +48,7 @@ const TopGallaxy = styled.div`
     bottom: -70px;
     height: 100%;
 
-    canvas,
-    img {
+    canvas {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover;
@@ -62,15 +56,52 @@ const TopGallaxy = styled.div`
 
     img {
         object-fit: cover;
+        object-position: right;
+        position: absolute;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        inset: 0;
+
+        @media (max-width: 767px) {
+            left: -179px;
+            object-position: center;
+            width: auto;
+        }
+
+        @media (max-width: 650px) {
+            left: -250px;
+            object-position: center;
+            width: auto;
+        }
     }
 `;
 
 export default function Top() {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = './js/lib/3d-gallaxy.js';
+        script.async = true;
+        script.onload = () => {
+            setLoading(false);
+        };
+        script.onerror = () => {
+            console.error('Ошибка при загрузке скрипта');
+            setLoading(false);
+        };
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+
     return (
         <>
             <TopBox>
                 <Container>
-                    {/* <img src='./images/top/preloader.png' alt='' /> */}
                     <TopInner>
                         <TopContent>
                             <TopTitle>Web3 Development Powerhouse & Marketing Solutionhub</TopTitle>
@@ -87,10 +118,20 @@ export default function Top() {
 
                     <TopGallaxy>
                         <canvas className='webgl'></canvas>
+                        {loading && (
+                            <picture>
+                                <source srcSet='/images/top/preloadChar2x.webp 2x' />
+                                <img
+                                    src='./images/top/preloadChar.webp'
+                                    alt='Loading...'
+                                />
+                            </picture>
+                        )}
                     </TopGallaxy>
                 </Container>
             </TopBox>
-            <Script src='./js/lib/3d-gallaxy.js' async/>
+
+            {/* <Script src='./js/lib/3d-gallaxy.js' async/> */}
         </>
     );
 }

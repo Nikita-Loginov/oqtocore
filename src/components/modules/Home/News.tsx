@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Skeleton } from '@/components/widgets';
 
 import { Container } from '@/components/widgets';
 import Link from '@/components/controls/Link/Link';
@@ -12,7 +13,7 @@ const NewsSection = styled.section`
 const NewsInner = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    // align-items: flex-start;
     gap: 40px;
 
     @media (max-width: 500px) {
@@ -134,18 +135,43 @@ const NewsItemImgTitle = styled.h3`
 
 export default function News() {
     const [news, setNews] = useState([]);
+    const [newsImages, setNewsImages] = useState({});
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await fetch(
-                    'https://oqtacore.com/blog/wp-json/wp/v2/posts?per_page=3',
-                );
+                const response = await fetch('https://oqtacore.com/blog/wp-json/wp/v2/posts?per_page=3');
+                
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
+                
                 const data = await response.json();
                 setNews(data);
+
+                const imageIds = data.map((item) => item.acf?.image).filter(Boolean);
+                
+                const imagePromises = imageIds.map(async (imgId) => {
+                    const response = await fetch(`https://oqtacore.com/blog/wp-json/wp/v2/media/${imgId}`);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    
+                    return await response.json();
+                });
+
+                const imagesData = await Promise.all(imagePromises);
+
+                const photos = imagesData.map(dataImg => {
+                    return {
+                        min: dataImg.media_details?.sizes?.min?.source_url || '',
+                        min2x: dataImg.media_details?.sizes?.min2x?.source_url || ''
+                    };
+                });
+                setNewsImages(photos)
+                setLoading(false)
             } catch (error) {
                 console.error('Ошибка при загрузке новостей:', error);
             }
@@ -158,52 +184,63 @@ export default function News() {
         <NewsSection>
             <Container>
                 <NewsInner>
+                    {/* <Skeleton /> */}
                     <NewsTitle>Learn something new in our blog</NewsTitle>
 
                     <NewsItems>
-                        {news.map((item) => (
-                            <NewsItem
-                                key={item?.id}
-                                href={item?.link}
-                                target='_blank'
-                            >
-                                <NewsItemImg>
-                                    <picture>
-                                        <img
-                                            loading='lazy'
-                                            src='./images/news/1.svg'
-                                            srcSet='./images/news/1.svg'
-                                            alt=''
-                                        />
-                                    </picture>
+                        {!loading ? (
+                            news.map((item, index) => (
+                                <NewsItem
+                                    key={item?.id}
+                                    href={item?.link}
+                                    target='_blank'
+                                >
+                                    <NewsItemImg>
+                                        {(newsImages[index]?.min || newsImages[index]?.min2x) && (
+                                            <picture>
+                                                <source srcSet={`${newsImages[index]?.min2x} 2x`} />
+                                                <img
+                                                    loading='lazy'
+                                                    src={`${newsImages[index]?.min} 2x`}
+                                                    alt=''
+                                                />
+                                            </picture>
+                                        )}
 
-                                    <NewsItemImgDecor>
-                                        <img
-                                            src='./images/news/logo.svg'
-                                            alt='logo'
-                                            loading='lazy'
-                                        />
-                                    </NewsItemImgDecor>
+                                        <NewsItemImgDecor>
+                                            <img
+                                                src='./images/news/logo.svg'
+                                                alt='logo'
+                                                loading='lazy'
+                                            />
+                                        </NewsItemImgDecor>
 
-                                    <NewsItemImgTitle
+                                        {/* <NewsItemImgTitle
                                         dangerouslySetInnerHTML={{ __html: item?.title?.rendered }}
-                                    ></NewsItemImgTitle>
-                                </NewsItemImg>
+                                    ></NewsItemImgTitle> */}
+                                    </NewsItemImg>
 
-                                <NewsItemInfo className='news__item-info'>
-                                    <NewsItemTitle
-                                        dangerouslySetInnerHTML={{ __html: item?.title?.rendered }}
-                                    ></NewsItemTitle>
+                                    <NewsItemInfo className='news__item-info'>
+                                        <NewsItemTitle
+                                            dangerouslySetInnerHTML={{
+                                                __html: item?.title?.rendered,
+                                            }}
+                                        ></NewsItemTitle>
 
-                                    <NewsItemText
-                                        dangerouslySetInnerHTML={{
-                                            __html: item?.excerpt?.rendered,
-                                        }}
-                                    />
-                                    <NewsItemLink>read more</NewsItemLink>
-                                </NewsItemInfo>
-                            </NewsItem>
-                        ))}
+                                        <NewsItemText
+                                            dangerouslySetInnerHTML={{
+                                                __html: item?.excerpt?.rendered,
+                                            }}
+                                        />
+                                        <NewsItemLink>read more</NewsItemLink>
+                                    </NewsItemInfo>
+                                </NewsItem>
+                            ))
+                        ) : (
+                            Array.from({ length: 3 }).map((_, index) => (
+                                <Skeleton key={index}/>
+                            ))
+                        )}
                     </NewsItems>
 
                     <Link
