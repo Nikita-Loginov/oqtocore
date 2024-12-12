@@ -1,10 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
-// import Script from 'next/script';
+import Script from 'next/script';
 import styled from 'styled-components';
 import LinkUniq from '@/components/controls/LinkUniq/LinkUniq';
 import { Container } from '@/components/widgets';
-
+// import initCanvas from './js/lib/3d-gallaxy.js'
 
 const TopBox = styled.section`
     padding: clamp(6.5625rem, 4.4595rem + 8.1081vw, 13.125rem) 0
@@ -81,23 +81,27 @@ const TopGallaxy = styled.div`
 export default function Top() {
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = './js/lib/3d-gallaxy.js';
-        script.async = true;
-        script.onload = () => {
-            setLoading(false);
-        };
-        script.onerror = () => {
-            console.error('Ошибка при загрузке скрипта');
-            setLoading(false);
-        };
-        document.body.appendChild(script);
+    // console.log(initCanvas)
 
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
+    // useEffect(() => {
+    //     const script = document.createElement('script');
+    //     script.src = './js/lib/3d-gallaxy.js';
+    //     script.async = true;
+    //     script.onload = () => {
+    //         setLoading(false);
+    //         console.log('script ready')
+    //     };
+    //     script.onerror = () => {
+    //         console.error('Ошибка при загрузке скрипта');
+    //         setLoading(false);
+    //     };
+    //     console.log('1234')
+    //     document.body.appendChild(script);
+
+    //     return () => {
+    //         document.body.removeChild(script);
+    //     };
+    // }, []);
 
     return (
         <>
@@ -118,8 +122,8 @@ export default function Top() {
                     </TopInner>
 
                     <TopGallaxy>
-                        <canvas className='webgl'></canvas>
-                        {/* {loading && (
+                    <canvas id="canvas"></canvas>
+                        {/* {loading ? (
                             <picture>
                                 <source srcSet='./images/top/preloadChar2x.webp 2x' />
                                 <img
@@ -127,12 +131,19 @@ export default function Top() {
                                     alt='Loading...'
                                 />
                             </picture>
-                        )} */}
+                        ) : <canvas className='webgl'></canvas>} */}
                     </TopGallaxy>
                 </Container>
             </TopBox>
 
-            {/* <Script src='./js/lib/3d-gallaxy.js' async/> */}
+            <Script
+                src='./js/lib/3d-gallaxy.js'
+                async
+                type='module'
+                onLoad={() => {
+                    document.querySelector('.lil-gui').style.display = 'none';
+                }}
+            />
         </>
     );
 }
