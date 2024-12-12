@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import LinkUniq from '@/components/controls/LinkUniq/LinkUniq';
 import { Container } from '@/components/widgets';
 
+
 const TopBox = styled.section`
     padding: clamp(6.5625rem, 4.4595rem + 8.1081vw, 13.125rem) 0
         clamp(5rem, 1.5951rem + 13.1274vw, 15.625rem);
@@ -80,23 +81,23 @@ const TopGallaxy = styled.div`
 export default function Top() {
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = './js/lib/3d-gallaxy.js';
-        script.async = true;
-        script.onload = () => {
-            setLoading(false);
-        };
-        script.onerror = () => {
-            console.error('Ошибка при загрузке скрипта');
-            setLoading(false);
-        };
-        document.body.appendChild(script);
+    // useEffect(() => {
+    //     const script = document.createElement('script');
+    //     script.src = './js/lib/3d-gallaxy.js';
+    //     script.async = true;
+    //     script.onload = () => {
+    //         setLoading(false);
+    //     };
+    //     script.onerror = () => {
+    //         console.error('Ошибка при загрузке скрипта');
+    //         setLoading(false);
+    //     };
+    //     document.body.appendChild(script);
 
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
+    //     return () => {
+    //         document.body.removeChild(script);
+    //     };
+    // }, []);
 
     return (
         <>

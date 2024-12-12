@@ -94,6 +94,7 @@ const FooterDecor = styled.div`
 `;
 
 export const Footer: React.FC = () => {
+    console.log('fdsdfdsf')
     return (
         <FooterBox>
             <Container>
@@ -266,3 +267,4 @@ export const Footer: React.FC = () => {
         </FooterBox>
     );
 };
+
