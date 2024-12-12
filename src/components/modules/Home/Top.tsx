@@ -122,7 +122,7 @@ export default function Top() {
                     </TopInner>
 
                     <TopGallaxy>
-                    <canvas id="canvas"></canvas>
+                        <canvas id='canvas'></canvas>
                         {/* {loading ? (
                             <picture>
                                 <source srcSet='./images/top/preloadChar2x.webp 2x' />
@@ -141,7 +141,10 @@ export default function Top() {
                 async
                 type='module'
                 onLoad={() => {
-                    document.querySelector('.lil-gui').style.display = 'none';
+                    const lilGuiElement = document.querySelector('.lil-gui') as HTMLElement;
+                    if (lilGuiElement) {
+                        lilGuiElement.style.display = 'none';
+                    }
                 }}
             />
         </>
