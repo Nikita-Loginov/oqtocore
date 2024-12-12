@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Script from 'next/script';
+// import Script from 'next/script';
 import styled from 'styled-components';
 import LinkUniq from '@/components/controls/LinkUniq/LinkUniq';
 import { Container } from '@/components/widgets';
@@ -118,15 +118,15 @@ export default function Top() {
 
                     <TopGallaxy>
                         <canvas className='webgl'></canvas>
-                        {loading && (
+                        {/* {loading && (
                             <picture>
-                                <source srcSet='/images/top/preloadChar2x.webp 2x' />
+                                <source srcSet='./images/top/preloadChar2x.webp 2x' />
                                 <img
                                     src='./images/top/preloadChar.webp'
                                     alt='Loading...'
                                 />
                             </picture>
-                        )}
+                        )} */}
                     </TopGallaxy>
                 </Container>
             </TopBox>

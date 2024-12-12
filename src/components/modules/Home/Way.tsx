@@ -32,7 +32,7 @@ const WaySection = styled.section`
         bottom: 0;
         height: 100%;
         width: 840px;
-        background-image: url(./images/way/decor.png);
+        background-image: url(./images/way/decor.webp);
         z-index: 0;
     }
 `;

@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import Image from 'next/image';
 import styled from 'styled-components';
 import Link from '@/components/controls/Link/Link';
 import { Container } from '@/components/widgets';
@@ -14,7 +15,7 @@ const HeaderBox = styled.header`
     z-index: 1000;
 
     &:before {
-        content:"";
+        content: '';
         position: absolute;
         left: 0;
         right: 0;
@@ -200,15 +201,22 @@ export const Header: React.FC = () => {
                         className='header__logo'
                         href='/'
                     >
-                        <img
+                        <Image
                             src='./images/header/logo.svg'
                             alt='ogtacore logo'
-                             loading='lazy'
+                            width={161}
+                            height={21}
+                            unoptimized
+                            priority
+                            //  loading='lazy'
                         />
                     </HeaderLogo>
 
                     <HeaderMenu className={isMenuOpen ? 'open' : ''}>
-                        <HaederMenuBtn type='button' onClick={() => setIsMenuOpen((prev) => !prev)}>
+                        <HaederMenuBtn
+                            type='button'
+                            onClick={() => setIsMenuOpen((prev) => !prev)}
+                        >
                             <span></span>
                         </HaederMenuBtn>
 
@@ -234,7 +242,7 @@ export const Header: React.FC = () => {
                                 <Link
                                     iconName='comment'
                                     linkUrl='/contact'
-                                    className={""}
+                                    className={''}
                                     style={{}}
                                 >
                                     Contact us

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { ReactNode } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 import { Container } from '@/components/widgets';
 import Link from '@/components/controls/Link/Link';
 
