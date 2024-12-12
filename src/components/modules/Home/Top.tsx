@@ -81,23 +81,23 @@ const TopGallaxy = styled.div`
 export default function Top() {
     const [loading, setLoading] = useState(true);
 
-    // useEffect(() => {
-    //     const script = document.createElement('script');
-    //     script.src = './js/lib/3d-gallaxy.js';
-    //     script.async = true;
-    //     script.onload = () => {
-    //         setLoading(false);
-    //     };
-    //     script.onerror = () => {
-    //         console.error('Ошибка при загрузке скрипта');
-    //         setLoading(false);
-    //     };
-    //     document.body.appendChild(script);
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = './js/lib/3d-gallaxy.js';
+        script.async = true;
+        script.onload = () => {
+            setLoading(false);
+        };
+        script.onerror = () => {
+            console.error('Ошибка при загрузке скрипта');
+            setLoading(false);
+        };
+        document.body.appendChild(script);
 
-    //     return () => {
-    //         document.body.removeChild(script);
-    //     };
-    // }, []);
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
 
     return (
         <>
