@@ -1,14 +1,9 @@
-import * as THREE from "https://cdn.skypack.dev/three@0.136.0";
-import { AdditiveBlending, BufferAttribute, BufferGeometry, CanvasTexture, Color, PerspectiveCamera, Points, RawShaderMaterial, Scene, WebGLRenderer } from "https://cdn.skypack.dev/three@0.136.0"
-import { OrbitControls } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js";
-import GUI from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/libs/lil-gui.module.min.js"
-import { TWEEN } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/libs/tween.module.min.js"
+import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
 
+import { OrbitControls } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js';
+import GUI from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/libs/lil-gui.module.min.js';
 
-
-console.clear()
-// ------------------------ //
-// SETUP
+console.clear();
 
 const debugObject = {
     count: 200000,
@@ -19,76 +14,85 @@ const debugObject = {
     randomnessPower: 3,
     innerColor: '#ff6030',
     outerColor: '#1b3984',
-    rotationSpeed: .5
-}
+    rotationSpeed: 0.5,
+};
 
 const sizes = {
     width: window.innerWidth,
-    height: window.innerHeight
-}
+    height: window.innerHeight,
+};
 
-const gui = new GUI().close()
+const gui = new GUI().close();
 
-const canvas = document.querySelector('canvas')
+const canvas = document.querySelector('canvas');
 
-const scene = new THREE.Scene()
+const scene = new THREE.Scene();
 
-let geometry = null
-let material = null
-let mesh = null
+let geometry = null;
+let material = null;
+let mesh = null;
 
 const generateGalaxy = () => {
-
-    if( geometry ) {
-        geometry.dispose()
-        material.dispose()
-        scene.remove(mesh)
+    if (geometry) {
+        geometry.dispose();
+        material.dispose();
+        scene.remove(mesh);
     }
 
-    geometry = new THREE.BufferGeometry()
-    
+    geometry = new THREE.BufferGeometry();
+
     // ====================
     // Set positions
     // ====================
-    const positions     = new Float32Array( debugObject.count * 3 )
-    const scales        = new Float32Array( debugObject.count )
-    const colors        = new Float32Array( debugObject.count * 3 )
-    const randomness    = new Float32Array( debugObject.count * 3 )
+    const positions = new Float32Array(debugObject.count * 3);
+    const scales = new Float32Array(debugObject.count);
+    const colors = new Float32Array(debugObject.count * 3);
+    const randomness = new Float32Array(debugObject.count * 3);
 
-    const innerColor = new THREE.Color(debugObject.innerColor)
-    const outerColor = new THREE.Color(debugObject.outerColor)
-    
+    const innerColor = new THREE.Color(debugObject.innerColor);
+    const outerColor = new THREE.Color(debugObject.outerColor);
+
     for (let i = 0; i < debugObject.count; i++) {
-        const randomRadius = Math.random() * debugObject.radius
+        const randomRadius = Math.random() * debugObject.radius;
         const i3 = i * 3;
-    
-        const angle = (i % debugObject.branches) / debugObject.branches * Math.PI * 2
-    
-    
-        positions[i3]       = Math.cos(angle) * randomRadius * debugObject.radius
-        positions[i3 + 1]   = 0
-        positions[i3 + 2]   = Math.sin(angle) * randomRadius * debugObject.radius
 
-        scales[i] = Math.random()
+        const angle = ((i % debugObject.branches) / debugObject.branches) * Math.PI * 2;
 
-        const pointColor = innerColor.clone()
-        pointColor.lerp(outerColor, randomRadius / debugObject.radius)
+        positions[i3] = Math.cos(angle) * randomRadius * debugObject.radius;
+        positions[i3 + 1] = 0;
+        positions[i3 + 2] = Math.sin(angle) * randomRadius * debugObject.radius;
 
-        colors[i3]       = pointColor.r
-        colors[i3 + 1]   = pointColor.g
-        colors[i3 + 2]   = pointColor.b
+        scales[i] = Math.random();
 
-        randomness[i3]     = Math.pow(Math.random(), debugObject.randomnessPower) * ( Math.random() > .5 ? -1 : 1) * debugObject.randomness * randomRadius
-        randomness[i3 + 1] = Math.pow(Math.random(), debugObject.randomnessPower) * ( Math.random() > .5 ? -1 : 1) * debugObject.randomness * randomRadius
-        randomness[i3 + 2] = Math.pow(Math.random(), debugObject.randomnessPower) * ( Math.random() > .5 ? -1 : 1) * debugObject.randomness * randomRadius
-    
+        const pointColor = innerColor.clone();
+        pointColor.lerp(outerColor, randomRadius / debugObject.radius);
+
+        colors[i3] = pointColor.r;
+        colors[i3 + 1] = pointColor.g;
+        colors[i3 + 2] = pointColor.b;
+
+        randomness[i3] =
+            Math.pow(Math.random(), debugObject.randomnessPower) *
+            (Math.random() > 0.5 ? -1 : 1) *
+            debugObject.randomness *
+            randomRadius;
+        randomness[i3 + 1] =
+            Math.pow(Math.random(), debugObject.randomnessPower) *
+            (Math.random() > 0.5 ? -1 : 1) *
+            debugObject.randomness *
+            randomRadius;
+        randomness[i3 + 2] =
+            Math.pow(Math.random(), debugObject.randomnessPower) *
+            (Math.random() > 0.5 ? -1 : 1) *
+            debugObject.randomness *
+            randomRadius;
     }
 
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-    geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1))
-    geometry.setAttribute('aColor', new THREE.BufferAttribute(colors, 3))
-    geometry.setAttribute('aRandomness', new THREE.BufferAttribute(randomness, 3))
-    
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1));
+    geometry.setAttribute('aColor', new THREE.BufferAttribute(colors, 3));
+    geometry.setAttribute('aRandomness', new THREE.BufferAttribute(randomness, 3));
+
     material = new THREE.ShaderMaterial({
         vertexShader: `
             uniform float uSize;
@@ -157,88 +161,88 @@ const generateGalaxy = () => {
         uniforms: {
             uSize: { value: debugObject.size },
             uTime: { value: 0 },
-            uRotationSpeed: { value: debugObject.rotationSpeed }
-        }
-    })
-    
+            uRotationSpeed: { value: debugObject.rotationSpeed },
+        },
+    });
+
     // ===================================
     // Mesh
     // ===================================
-    mesh = new THREE.Points( geometry, material )
-    scene.add(mesh)
+    mesh = new THREE.Points(geometry, material);
+    scene.add(mesh);
+};
 
-}
+generateGalaxy();
 
-generateGalaxy()
-
-gui.add( debugObject, 'count', 1000, 500000, 100 ).onFinishChange(generateGalaxy).name('Stars')
-gui.add( debugObject, 'size', .001, 20, .001 ).onFinishChange(generateGalaxy).name('Star size')
-gui.add( debugObject, 'branches', 1, 10, 1 ).onFinishChange(generateGalaxy).name('Branches')
-gui.add( debugObject, 'radius', .3, 4, .001 ).onFinishChange(generateGalaxy).name('Radius')
-gui.add( debugObject, 'randomness', 0, 4, .001 ).onFinishChange(generateGalaxy).name('Randomness')
-gui.add( debugObject, 'randomnessPower', 0, 10, .001 ).onFinishChange(generateGalaxy).name('RandomnessPower')
-gui.add( debugObject, 'rotationSpeed', 0, 1, .01 ).onFinishChange(generateGalaxy).name('Rotation Speed')
-gui.addColor( debugObject, 'innerColor').onFinishChange(generateGalaxy).name('Internal color')
-gui.addColor( debugObject, 'outerColor').onFinishChange(generateGalaxy).name('External color')
-
+gui.add(debugObject, 'count', 1000, 500000, 100).onFinishChange(generateGalaxy).name('Stars');
+gui.add(debugObject, 'size', 0.001, 20, 0.001).onFinishChange(generateGalaxy).name('Star size');
+gui.add(debugObject, 'branches', 1, 10, 1).onFinishChange(generateGalaxy).name('Branches');
+gui.add(debugObject, 'radius', 0.3, 4, 0.001).onFinishChange(generateGalaxy).name('Radius');
+gui.add(debugObject, 'randomness', 0, 4, 0.001).onFinishChange(generateGalaxy).name('Randomness');
+gui.add(debugObject, 'randomnessPower', 0, 10, 0.001)
+    .onFinishChange(generateGalaxy)
+    .name('RandomnessPower');
+gui.add(debugObject, 'rotationSpeed', 0, 1, 0.01)
+    .onFinishChange(generateGalaxy)
+    .name('Rotation Speed');
+gui.addColor(debugObject, 'innerColor').onFinishChange(generateGalaxy).name('Internal color');
+gui.addColor(debugObject, 'outerColor').onFinishChange(generateGalaxy).name('External color');
 
 // ===================================
 // Camera
 // ===================================
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = 3
-camera.position.y = 2
-camera.position.z = 1
-camera.lookAt(new THREE.Vector3(0, 0, 0))
-scene.add(camera)
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
+camera.position.x = 3;
+camera.position.y = 2;
+camera.position.z = 1;
+camera.lookAt(new THREE.Vector3(0, 0, 0));
+scene.add(camera);
 
 // ===================================
 // Renderer
 // ===================================
 const renderer = new THREE.WebGLRenderer({
-    canvas: canvas
-})
-renderer.setSize(sizes.width, sizes.height)
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    canvas: canvas,
+});
+renderer.setSize(sizes.width, sizes.height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-const controls = new OrbitControls( camera, renderer.domElement );
-controls.enableDamping = true
-controls.dampingFactor = 0.07
-controls.rotateSpeed = 0.03
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.07;
+controls.rotateSpeed = 0.03;
 
-
-
-const clock = new THREE.Clock()
+const clock = new THREE.Clock();
 
 const tick = () => {
-    const elapsedTime = clock.getElapsedTime()
+    const elapsedTime = clock.getElapsedTime();
 
-    if ( material ) {
-        material.uniforms.uTime.value = elapsedTime
+    if (material) {
+        material.uniforms.uTime.value = elapsedTime;
     }
 
-    controls.update()
+    controls.update();
 
-    renderer.render(scene, camera)
+    renderer.render(scene, camera);
 
-    window.requestAnimationFrame(tick)
-}
+    window.requestAnimationFrame(tick);
+};
 
-tick()
+tick();
 
 // ===================================
 // Responsive
 // ===================================
 window.addEventListener('resize', () => {
     // Update sizes
-    sizes.width = window.innerWidth
-    sizes.height = window.innerHeight
+    sizes.width = window.innerWidth;
+    sizes.height = window.innerHeight;
 
     // Update camera
-    camera.aspect = sizes.width / sizes.height
-    camera.updateProjectionMatrix()
+    camera.aspect = sizes.width / sizes.height;
+    camera.updateProjectionMatrix();
 
     // Update renderer
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
+    renderer.setSize(sizes.width, sizes.height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});

@@ -4,7 +4,6 @@ import Script from 'next/script';
 import styled from 'styled-components';
 import LinkUniq from '@/components/controls/LinkUniq/LinkUniq';
 import { Container } from '@/components/widgets';
-// import initCanvas from './js/lib/3d-gallaxy.js'
 
 const TopBox = styled.section`
     padding: clamp(6.5625rem, 4.4595rem + 8.1081vw, 13.125rem) 0
@@ -49,10 +48,19 @@ const TopGallaxy = styled.div`
     bottom: -70px;
     height: 100%;
 
+    &.showImg {
+        img {
+            opacity: 1;
+        }
+    }
+
     canvas {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover;
+        z-index: 100000;
+        position: relative;
+        transition: all 5s;
     }
 
     img {
@@ -63,6 +71,8 @@ const TopGallaxy = styled.div`
         width: 100%;
         height: 100%;
         inset: 0;
+        opacity: 0;
+        transition: all 0.5s;
 
         @media (max-width: 767px) {
             left: -179px;
@@ -81,27 +91,27 @@ const TopGallaxy = styled.div`
 export default function Top() {
     const [loading, setLoading] = useState(true);
 
-    // console.log(initCanvas)
 
-    // useEffect(() => {
-    //     const script = document.createElement('script');
-    //     script.src = './js/lib/3d-gallaxy.js';
-    //     script.async = true;
-    //     script.onload = () => {
-    //         setLoading(false);
-    //         console.log('script ready')
-    //     };
-    //     script.onerror = () => {
-    //         console.error('Ошибка при загрузке скрипта');
-    //         setLoading(false);
-    //     };
-    //     console.log('1234')
-    //     document.body.appendChild(script);
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = './js/lib/3d-gallaxy.js';
+        script.type = 'module';
+        script.async = true;
+        script.onload = () => {
+            const lilGuiElement = document.querySelector('.lil-gui') as HTMLElement;
+            if (lilGuiElement) {
+                lilGuiElement.style.display = 'none';
+            }
+            setLoading(false); // Обновите состояние загрузки
+        };
+        
+        document.body.appendChild(script);
 
-    //     return () => {
-    //         document.body.removeChild(script);
-    //     };
-    // }, []);
+        // Очистка: удалите скрипт, если компонент размонтирован
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
 
     return (
         <>
@@ -121,22 +131,29 @@ export default function Top() {
                         ></LinkUniq>
                     </TopInner>
 
-                    <TopGallaxy>
+                    <TopGallaxy className={loading  ? 'showImg' : ''}>
                         <canvas id='canvas'></canvas>
+                        {/* <picture>
+                                <source srcSet='./images/top/preloadChar2x.webp 2x' />
+                                <img
+                                    src='./images/top/preloader.webp'
+                                    alt='Loading...'
+                                />
+                            </picture> */}
                         {/* {loading ? (
                             <picture>
                                 <source srcSet='./images/top/preloadChar2x.webp 2x' />
                                 <img
-                                    src='./images/top/preloadChar.webp'
+                                    src='./images/top/preloader.webp'
                                     alt='Loading...'
                                 />
                             </picture>
-                        ) : <canvas className='webgl'></canvas>} */}
+                        ) :  null} */}
                     </TopGallaxy>
                 </Container>
             </TopBox>
 
-            <Script
+            {/* <Script
                 src='./js/lib/3d-gallaxy.js'
                 async
                 type='module'
@@ -145,8 +162,10 @@ export default function Top() {
                     if (lilGuiElement) {
                         lilGuiElement.style.display = 'none';
                     }
+
+                    // setLoading(false)
                 }}
-            />
+            /> */}
         </>
     );
 }

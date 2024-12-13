@@ -176,28 +176,6 @@ const WayItemText = styled.p`
 `;
 
 export default function Way() {
-    const checkHeights = () => {
-        const wayItems = document.querySelectorAll('.way__item');
-        console.log(wayItems);
-
-        wayItems.forEach((item) => {
-            let maxHeight = -1;
-            const wayItemContentBox = item.querySelector('.way__item-contents') as HTMLElement;
-            const wayItemContent = wayItemContentBox.querySelectorAll('.way__item-content');
-
-            if (window.innerWidth < 900) {
-                wayItemContentBox.style.height = 'auto';
-            } else {
-                if (wayItemContent.length >= 2) {
-                    wayItemContent.forEach((itemContent) => {
-                        itemContent.setAttribute('style', 'align-self: start; margin-top: auto;');
-                        maxHeight = Math.max(maxHeight, (itemContent as HTMLElement).clientHeight);
-                    });
-                    wayItemContentBox.style.height = maxHeight + 'px';
-                }
-            }
-        });
-    };
 
     const [isSmoothScrollLoaded, setIsSmoothScrollLoaded] = useState(false);
     let smoothScroll;
@@ -221,6 +199,35 @@ export default function Way() {
         });
     }
 
+    // useEffect(() => {
+    //     const checkHeights = () => {
+    //         const wayItems = document.querySelectorAll('.way__item');
+    //         console.log(wayItems);
+    
+    //         wayItems.forEach((item) => {
+    //             let maxHeight = -1;
+    //             const wayItemContentBox = item.querySelector('.way__item-contents') as HTMLElement;
+    //             const wayItemContent = wayItemContentBox.querySelectorAll('.way__item-content');
+    
+    //             if (window.innerWidth < 900) {
+    //                 wayItemContentBox.style.height = 'auto';
+    //             } else {
+    //                 if (wayItemContent.length >= 2) {
+    //                     wayItemContent.forEach((itemContent) => {
+    //                         itemContent.setAttribute('style', 'align-self: start; margin-top: auto;');
+    //                         maxHeight = Math.max(maxHeight, (itemContent as HTMLElement).clientHeight);
+    //                     });
+    //                     wayItemContentBox.style.height = maxHeight + 'px';
+    //                 }
+    //             }
+    //         });
+    //     };
+
+    //     // checkHeights()
+
+    //     // window.addEventListener('resize', checkHeights);
+    // })
+
     useEffect(() => {
         if (isSmoothScrollLoaded) {
             initSmoothScroll(1600, 105);
@@ -234,7 +241,9 @@ export default function Way() {
         function initAnimation() {
             const tl = gsap.timeline();
 
-            tl.to('.one', { y: '-100%', ease: 'power1.inOut', duration: 20 })
+            tl.to('.way__title', { opacity: 0, ease: 'power1.inOut', duration: 20 })
+            .to('.way__box', { y: '-92', ease: 'power1.inOut', duration: 20 })
+            .to('.one', { y: '-100%', ease: 'power1.inOut', duration: 20 })
                 .to('.animaton-decor', { y: '-207', ease: 'power1.inOut', duration: 20 })
                 .to('.two', { y: '-100%', ease: 'power1.inOut', duration: 20 })
                 .to('.animaton-decor', { y: '-417', ease: 'power1.inOut', duration: 20 })
@@ -312,7 +321,7 @@ export default function Way() {
                 ScrollTrigger.create({
                     animation: tl,
                     trigger: '.way',
-                    start: 'top top',
+                    start: 'top-=92 top',
                     end: 'bottom',
                     scrub: 2,
                     // stagger: 1,
@@ -338,7 +347,7 @@ export default function Way() {
         mediaQuery.addEventListener('change', handleMediaChange);
 
         handleMediaChange(mediaQuery);
-        window.removeEventListener('resize', checkHeights);
+        // window.removeEventListener('resize', checkHeights);
     }, []);
 
     return (
@@ -347,9 +356,9 @@ export default function Way() {
                 <Container>
                     <div className='way__inner'>
                         <WayContent>
-                            <WayTitle>Your way with us</WayTitle>
+                            <WayTitle className='way__title'>Your way with us</WayTitle>
 
-                            <WayAnimationBox>
+                            <WayAnimationBox className='way__box'>
                                 <WayAnimationDecor className='animaton-decor'>
                                     <img
                                         src='./icons/animation-scroll.svg'

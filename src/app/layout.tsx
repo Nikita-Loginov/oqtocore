@@ -8,7 +8,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <html>
                 <body>
                     <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-
                 </body>
             </html>
         </>
