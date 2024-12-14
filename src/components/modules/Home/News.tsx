@@ -15,6 +15,10 @@ const NewsInner = styled.div`
     flex-direction: column;
     // align-items: flex-start;
     gap: 40px;
+    
+    .news-link {
+        align-self: self-start;
+    }
 
     @media (max-width: 500px) {
         .news-link {
@@ -141,33 +145,37 @@ export default function News() {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await fetch('https://oqtacore.com/blog/wp-json/wp/v2/posts?per_page=3');
-                
+                const response = await fetch(
+                    'https://oqtacore.com/blog/wp-json/wp/v2/posts?per_page=3',
+                );
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                
+
                 const data = await response.json();
                 setNews(data);
 
                 const imageIds = data.map((item) => item.acf?.image).filter(Boolean);
-                
+
                 const imagePromises = imageIds.map(async (imgId) => {
-                    const response = await fetch(`https://oqtacore.com/blog/wp-json/wp/v2/media/${imgId}`);
-                    
+                    const response = await fetch(
+                        `https://oqtacore.com/blog/wp-json/wp/v2/media/${imgId}`,
+                    );
+
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
-                    
+
                     return await response.json();
                 });
 
                 const imagesData = await Promise.all(imagePromises);
 
-                const photos = imagesData.map(dataImg => {
+                const photos = imagesData.map((dataImg) => {
                     return {
                         min: dataImg.media_details?.sizes?.min?.source_url || '',
-                        min2x: dataImg.media_details?.sizes?.min2x?.source_url || ''
+                        min2x: dataImg.media_details?.sizes?.min2x?.source_url || '',
                     };
                 });
                 // setNewsImages(photos)
@@ -237,7 +245,7 @@ export default function News() {
                                 </NewsItem>
                             ))
                         ) : (
-                            // 
+                            //
                             <p></p>
                         )}
                     </NewsItems>

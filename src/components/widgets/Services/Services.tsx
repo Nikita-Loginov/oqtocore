@@ -50,6 +50,8 @@ const ServicesItemContent = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
+    max-width: 190px;
+    width: 100%;
 `;
 
 const ServicesItemContentBox = styled.div`
@@ -58,6 +60,7 @@ const ServicesItemContentBox = styled.div`
     gap: 28px;
     align-self: flex-start;
     transition: all 0.5s;
+    width: 100%;
 
     img {
         width: 88px;
@@ -206,7 +209,7 @@ const ServicesItem = styled.div`
 
 export const Services: React.FC = () => {
     return (
-        <ServicesBox id='services'>
+        <ServicesBox className='services' id='services'>
             <Container>
                 <ServicesInner>
                     <ServicesTitle>Our Key services</ServicesTitle>
@@ -257,7 +260,9 @@ export const Services: React.FC = () => {
                                         loading='lazy'
                                     />
 
-                                    <ServicesItemTitle>Software Design</ServicesItemTitle>
+                                    <ServicesItemTitle>
+                                        Software <br></br> Design
+                                    </ServicesItemTitle>
                                 </ServicesItemContentBox>
 
                                 <ServicesItemLink href='/software-design'>

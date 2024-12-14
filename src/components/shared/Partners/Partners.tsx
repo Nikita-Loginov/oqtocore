@@ -1,4 +1,6 @@
 'use client';
+import React from 'react';
+import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Container } from '@/components/widgets';
 
@@ -13,7 +15,7 @@ const PartnersInner = styled.div`
     flex-direction: column;
     gap: 24px;
 
-    @media(max-width:767px) {
+    @media (max-width: 767px) {
         gap: 12px;
     }
 `;
@@ -36,7 +38,7 @@ const PartnersItems = styled.div`
 
     img {
         height: clamp(1.875rem, 1.2541rem + 2.3938vw, 3.8125rem);
-    }   
+    }
 `;
 
 const scrollParnners = keyframes`
@@ -53,116 +55,85 @@ const PartnersItem = styled.div`
     display: flex;
     flex-shrink: 0;
     gap: ${gapValue};
-    min-width: 100%;
-    animation: ${scrollParnners} 10s linear infinite;
+    animation: ${scrollParnners} 30s linear infinite;
 `;
 
-export default function Partners() {
+const Partners = React.forwardRef((props, ref) => {
+    const [images, setImages] = useState([
+        {
+            srcImage: './images/partners/zellic.svg',
+            alt: 'zellic',
+        },
+        {
+            srcImage: './images/partners/allianz.svg',
+            alt: 'allianz',
+        },
+        {
+            srcImage: './images/partners/sherlock.svg',
+            alt: 'sherlock',
+        },
+        {
+            srcImage: './images/partners/bk.svg',
+            alt: 'bk',
+        },
+        {
+            srcImage: './images/partners/fortyseven.svg',
+            alt: 'fortyseven',
+        },
+        {
+            srcImage: './images/partners/otvise.svg',
+            alt: 'otvise',
+        },
+        {
+            srcImage: './images/partners/altarey.svg',
+            alt: 'altarey',
+        },
+        {
+            srcImage: './images/partners/bmv.svg',
+            alt: 'bmv',
+        },
+        {
+            srcImage: './images/partners/teams.svg',
+            alt: 'teams',
+        },
+    ]);
+    const repeations = 4;
+
+    const combinedArr = Array(repeations).fill(images).flat();
+
     return (
-        <PartnersBox className='partners'>
-            <PartnersInner className='partners__inner'>
+        <PartnersBox ref={ref}>
+            <PartnersInner>
                 <Container>
-                    <PartnersTitle className='partners__title'>Trusted By</PartnersTitle>
+                    <PartnersTitle>Trusted By</PartnersTitle>
                 </Container>
 
-                <PartnersItems className='partners__items'>
-                    <PartnersItem className='partners__item'>
-                        <img
-                            src='./images/partners/zellic.svg'
-                            alt='zellic'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/allianz.svg'
-                            alt='allianz'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/sherlock.svg'
-                            alt='sherlock'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/bk.svg'
-                            alt='bk'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/fortyseven.svg'
-                            alt='fortyseven'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/otvise.svg'
-                            alt='otvise'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/altarey.svg'
-                            alt='altarey'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/bmv.svg'
-                            alt='bmv'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/teams.svg'
-                            alt='teams'
-                            loading='lazy'
-                        />
+                <PartnersItems>
+                    <PartnersItem>
+                        {combinedArr.map((item, index) => (
+                            <img
+                                src={item.srcImage}
+                                key={index}
+                                alt={item.alt}
+                                loading='lazy'
+                            />
+                        ))}
                     </PartnersItem>
 
-                    <PartnersItem className='partners__item'>
-                        <img
-                            src='./images/partners/zellic.svg'
-                            alt='zellic'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/allianz.svg'
-                            alt='allianz'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/sherlock.svg'
-                            alt='sherlock'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/bk.svg'
-                            alt='bk'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/fortyseven.svg'
-                            alt='fortyseven'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/otvise.svg'
-                            alt='otvise'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/altarey.svg'
-                            alt='altarey'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/bmv.svg'
-                            alt='bmv'
-                            loading='lazy'
-                        />
-                        <img
-                            src='./images/partners/teams.svg'
-                            alt='teams'
-                            loading='lazy'
-                        />
+                    <PartnersItem>
+                        {combinedArr.map((item, index) => (
+                            <img
+                                src={item.srcImage}
+                                key={index}
+                                alt={item.alt}
+                                loading='lazy'
+                            />
+                        ))}
                     </PartnersItem>
                 </PartnersItems>
             </PartnersInner>
         </PartnersBox>
     );
-}
+})
+
+export default Partners

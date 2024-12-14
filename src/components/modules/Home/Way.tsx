@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 const WaySection = styled.section`
     background-color: rgb(43, 36, 255);
     padding: clamp(1.25rem, 0.8507rem + 1.5432vw, 2.5rem) 0 0 0;
-    height: 100vh;
+    height: 760px;
     overflow: hidden;
     position: relative;
 
@@ -90,13 +90,14 @@ const WayItem = styled.div`
     }
 
     &:not(:first-of-type) {
-        top: 100%;
+        opacity: 0;
     }
 
     @media (max-width: 900px) {
         min-height: auto !important;
         position: relative;
         top: 0 !important;
+        opacity: 1 !important;
 
         &:not(:last-of-type) {
             padding-bottom: 40px;
@@ -176,7 +177,6 @@ const WayItemText = styled.p`
 `;
 
 export default function Way() {
-
     const [isSmoothScrollLoaded, setIsSmoothScrollLoaded] = useState(false);
     let smoothScroll;
 
@@ -203,12 +203,12 @@ export default function Way() {
     //     const checkHeights = () => {
     //         const wayItems = document.querySelectorAll('.way__item');
     //         console.log(wayItems);
-    
+
     //         wayItems.forEach((item) => {
     //             let maxHeight = -1;
     //             const wayItemContentBox = item.querySelector('.way__item-contents') as HTMLElement;
     //             const wayItemContent = wayItemContentBox.querySelectorAll('.way__item-content');
-    
+
     //             if (window.innerWidth < 900) {
     //                 wayItemContentBox.style.height = 'auto';
     //             } else {
@@ -230,7 +230,7 @@ export default function Way() {
 
     useEffect(() => {
         if (isSmoothScrollLoaded) {
-            initSmoothScroll(1600, 105);
+            // initSmoothScroll(400, 110);
         }
     }, [isSmoothScrollLoaded]);
 
@@ -241,73 +241,81 @@ export default function Way() {
         function initAnimation() {
             const tl = gsap.timeline();
 
-            tl.to('.way__title', { opacity: 0, ease: 'power1.inOut', duration: 20 })
-            .to('.way__box', { y: '-92', ease: 'power1.inOut', duration: 20 })
-            .to('.one', { y: '-100%', ease: 'power1.inOut', duration: 20 })
+            tl.to('.services', { opacity: 0, ease: 'power1.inOut' })
+                .to('.way__title', { opacity: 0, ease: 'power1.inOut', duration: 20, delay: 0.1 })
+                .to('.way__box', { y: '-92', ease: 'power1.inOut', duration: 20 })
+                .to('.one', { opacity: 0, ease: 'power1.inOut', duration: 20 })
                 .to('.animaton-decor', { y: '-207', ease: 'power1.inOut', duration: 20 })
-                .to('.two', { y: '-100%', ease: 'power1.inOut', duration: 20 })
+                .to('.two', { opacity: 1, ease: 'power1.inOut', duration: 20 })
                 .to('.animaton-decor', { y: '-417', ease: 'power1.inOut', duration: 20 })
+                .to('.two', { opacity: 0, ease: 'power1.inOut', duration: 20 })
                 .to('.three', {
-                    y: '-100%',
+                    opacity: 1,
                     ease: 'power1.inOut',
                     duration: 20,
                     onStart: () => {
-                        gsap.to('.two', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
+                        // gsap.to('.two', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
                     },
                 })
                 .to('.animaton-decor', { y: '-627', ease: 'power1.inOut', duration: 20 })
+                .to('.three', { opacity: 0, ease: 'power1.inOut', duration: 20 })
                 .to('.four', {
-                    y: '-100%',
+                    opacity: 1,
                     ease: 'power1.inOut',
                     duration: 20,
-                    onStart: () => {
-                        gsap.to('.three', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
-                    },
+                    // onStart: () => {
+                    //     gsap.to('.three', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
+                    // },
                 })
                 .to('.animaton-decor', { y: '-837', ease: 'power1.inOut', duration: 20 })
+                .to('.four', { opacity: 0, ease: 'power1.inOut', duration: 20 })
                 .to('.five', {
-                    y: '-100%',
+                    opacity: 1,
                     ease: 'power1.inOut',
                     duration: 20,
-                    onStart: () => {
-                        gsap.to('.four', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
-                    },
+                    // onStart: () => {
+                    //     gsap.to('.four', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
+                    // },
                 })
                 .to('.animaton-decor', { y: '-1047', ease: 'power1.inOut', duration: 20 })
+                .to('.five', { opacity: 0, ease: 'power1.inOut', duration: 20 })
                 .to('.six', {
-                    y: '-100%',
+                    opacity: 1,
                     ease: 'power1.inOut',
                     duration: 20,
-                    onStart: () => {
-                        gsap.to('.five', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
-                    },
+                    // onStart: () => {
+                    //     gsap.to('.five', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
+                    // },
                 })
                 .to('.animaton-decor', { y: '-1257', ease: 'power1.inOut', duration: 20 })
+                .to('.six', { opacity: 0, ease: 'power1.inOut', duration: 20 })
                 .to('.seven', {
-                    y: '-100%',
+                    opacity: 1,
                     ease: 'power1.inOut',
                     duration: 20,
-                    onStart: () => {
-                        gsap.to('.six', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
-                    },
+                    // onStart: () => {
+                    //     gsap.to('.six', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
+                    // },
                 })
                 .to('.animaton-decor', { y: '-1467', ease: 'power1.inOut', duration: 20 })
+                .to('.seven', { opacity: 0, ease: 'power1.inOut', duration: 20 })
                 .to('.eight', {
-                    y: '-100%',
+                    opacity: 1,
                     ease: 'power1.inOut',
                     duration: 20,
-                    onStart: () => {
-                        gsap.to('.seven', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
-                    },
+                    // onStart: () => {
+                    //     gsap.to('.seven', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
+                    // },
                 })
                 .to('.animaton-decor', { y: '-1677', ease: 'power1.inOut', duration: 20 })
+                .to('.eight', { opacity: 0, ease: 'power1.inOut', duration: 20 })
                 .to('.night', {
-                    y: '-100%',
+                    opacity: 1,
                     ease: 'power1.inOut',
                     duration: 20,
-                    onStart: () => {
-                        gsap.to('.eight', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
-                    },
+                    // onStart: () => {
+                    //     gsap.to('.eight', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
+                    // },
                 });
 
             return tl;
@@ -321,23 +329,24 @@ export default function Way() {
                 ScrollTrigger.create({
                     animation: tl,
                     trigger: '.way',
-                    start: 'top-=92 top',
+                    start: 'bottom bottom',
                     end: 'bottom',
-                    scrub: 2,
+                    toggleActions: 'play none none none',
+                    scrub: 1,
                     // stagger: 1,
                     pin: true,
-                    onEnter: () => {
-                        initSmoothScroll(1600, 25);
-                    },
-                    onLeave: () => {
-                        initSmoothScroll(1600, 105);
-                    },
-                    onEnterBack: () => {
-                        initSmoothScroll(1600, 25);
-                    },
-                    onLeaveBack: () => {
-                        initSmoothScroll(1600, 105);
-                    },
+                    // onEnter: () => {
+                    //     initSmoothScroll(1600, 25);
+                    // },
+                    // onLeave: () => {
+                    //     initSmoothScroll(400, 105);
+                    // },
+                    // onEnterBack: () => {
+                    //     initSmoothScroll(1600, 25);
+                    // },
+                    // onLeaveBack: () => {
+                    //     initSmoothScroll(400, 105);
+                    // },
                 });
             }
         }
@@ -347,8 +356,11 @@ export default function Way() {
         mediaQuery.addEventListener('change', handleMediaChange);
 
         handleMediaChange(mediaQuery);
+        // document.querySelector('.pin-spacer').style.height = '500px';
         // window.removeEventListener('resize', checkHeights);
     }, []);
+
+    // initSmoothScroll(800, 55)
 
     return (
         <>

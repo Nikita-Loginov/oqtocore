@@ -2,28 +2,28 @@
 
 import React, { useState } from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
-import {createGlobalStyle} from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 // import { Header, Footer } from '@/components/widgets';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     @font-face {
         font-family: 'Eina';
-        src: url('/fonts/einaregular-english.woff2') format('woff2');
+        src: url('/fonts/Eina04-Regular.woff2') format('woff2');
         font-weight: 400;
         font-style: normal;
     }
 
     @font-face {
         font-family: 'Eina';
-        src: url('/fonts/einabold-english.woff2') format('woff2');
+        src: url('/fonts/Eina04-SemiBold.woff2') format('woff2');
         font-weight: 600;
         font-style: normal;
     }
 
     @font-face {
         font-family: 'Eina';
-        src: url('/fonts/einasemibold-english.woff2') format('woff2');
+        src: url('/fonts/Eina04-Bold.woff2') format('woff2');
         font-weight: 700;
         font-style: normal;
     }
@@ -114,13 +114,14 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        font-family: 'Eina';
+        font-family: 'Eina', sans-serif;
         overflow-x: hidden;
         background-color: #010101;
         color: #fff;
         font-size: 14px;
         line-height: 1.35;
         font-weight: 400;
+        // will-change: transform;
     }
 `;
 

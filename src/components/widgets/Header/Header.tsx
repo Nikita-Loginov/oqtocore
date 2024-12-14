@@ -13,6 +13,7 @@ const HeaderBox = styled.header`
     backdrop-filter: blur(35.3px);
     background: rgba(255, 255, 255, 0.01);
     z-index: 1000;
+    transition: all .5s;
 
     &:before {
         content: '';
@@ -192,9 +193,8 @@ const HeaderMenu = styled.div`
 
 export const Header: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
     return (
-        <HeaderBox>
+        <HeaderBox className='header'>
             <Container>
                 <HeaderInner>
                     <HeaderLogo

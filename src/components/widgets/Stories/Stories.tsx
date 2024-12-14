@@ -17,7 +17,7 @@ const StoriesSection = styled.section`
         color: rgb(55, 55, 55);
         text-transform: capitalize;
         transform: translateY(-73%);
-        left: -30px;
+        left: -35px;
         right: -5px;
         text-align: center;
 
