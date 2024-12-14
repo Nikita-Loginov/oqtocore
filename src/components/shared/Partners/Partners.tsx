@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { useState } from 'react';
+import { useState,forwardRef  } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Container } from '@/components/widgets';
 
@@ -58,7 +58,9 @@ const PartnersItem = styled.div`
     animation: ${scrollParnners} 30s linear infinite;
 `;
 
-const Partners = React.forwardRef((props, ref) => {
+interface PartnersProps extends React.HTMLProps<HTMLDivElement> {}
+
+const Partners = forwardRef<HTMLDivElement, PartnersProps>((props, ref) => {
     const [images, setImages] = useState([
         {
             srcImage: './images/partners/zellic.svg',

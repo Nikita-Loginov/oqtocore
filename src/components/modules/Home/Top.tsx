@@ -124,7 +124,6 @@ export default function Top() {
     //     };
     // }, [scriptUrl]);
 
-    console.log('dfsdf');
 
     return (
         <>
