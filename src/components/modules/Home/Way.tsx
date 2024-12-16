@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, forwardRef } from 'react';
 import Script from 'next/script';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -185,6 +185,11 @@ export default function Way() {
     };
 
     function initSmoothScroll(animationTime, animationStepSize) {
+        // if (smoothScroll) {
+        //     console.log(smoothScroll)
+        //     smoothScroll.destroy(); 
+        // }
+        
         smoothScroll = new (window as any).SmoothScroll({
             animationTime: animationTime,
             stepSize: animationStepSize,
@@ -230,7 +235,7 @@ export default function Way() {
 
     useEffect(() => {
         if (isSmoothScrollLoaded) {
-            // initSmoothScroll(400, 110);
+            initSmoothScroll(1600, 130);
         }
     }, [isSmoothScrollLoaded]);
 
@@ -335,18 +340,18 @@ export default function Way() {
                     scrub: 1,
                     // stagger: 1,
                     pin: true,
-                    // onEnter: () => {
-                    //     initSmoothScroll(1600, 25);
-                    // },
-                    // onLeave: () => {
-                    //     initSmoothScroll(400, 105);
-                    // },
-                    // onEnterBack: () => {
-                    //     initSmoothScroll(1600, 25);
-                    // },
-                    // onLeaveBack: () => {
-                    //     initSmoothScroll(400, 105);
-                    // },
+                    onEnter: () => {
+                        initSmoothScroll(1600, 25);
+                    },
+                    onLeave: () => {
+                        initSmoothScroll(1600, 130);
+                    },
+                    onEnterBack: () => {
+                        initSmoothScroll(1600, 25);
+                    },
+                    onLeaveBack: () => {                 
+                        initSmoothScroll(1600, 130);
+                    },
                 });
             }
         }
@@ -360,7 +365,7 @@ export default function Way() {
         // window.removeEventListener('resize', checkHeights);
     }, []);
 
-    // initSmoothScroll(800, 55)
+    // initSmoothScroll(1600, 55)
 
     return (
         <>
