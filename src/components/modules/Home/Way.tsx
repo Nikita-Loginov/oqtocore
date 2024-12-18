@@ -92,7 +92,7 @@ const WayItem = styled.div`
 
     &:not(:first-of-type) {
         opacity: 0;
-        transform: translateY(20px);
+        // transform: translateY(20px);
     }
 
     @media (max-width: 900px) {
@@ -235,93 +235,149 @@ export default function Way() {
     //     // window.addEventListener('resize', checkHeights);
     // })
 
-    useEffect(() => {
-        if (isSmoothScrollLoaded) {
-            initSmoothScroll(1600, 100);
-        }
-    }, [isSmoothScrollLoaded]);
+    // useEffect(() => {
+    //     if (isSmoothScrollLoaded) {
+    //         initSmoothScroll(1600, 100);
+    //     }
+    // }, [isSmoothScrollLoaded]);
 
     useEffect(() => {
         // checkHeights()
         const mediaQuery = window.matchMedia('(max-width: 900px)');
 
         let isPaused = false;
+        let currentAnimationIndex = 0;
+        let tl = undefined;
 
         function initAnimation() {
-            const tl = gsap.timeline({ paused: true });
-        
-            tl
-                .to('.way__title', { opacity: 0, ease: 'power1.inOut', duration: 20 })
-                .to('.way__box', { y: '-92', ease: 'power1.inOut', duration: 20 });
-        
-            const elements = ['.one', '.two', '.three', '.four', '.five', '.six', '.seven', '.eight', '.night'];
+            tl = gsap.timeline({ paused: true });
+
+            tl.to('.way__title', { opacity: 0, ease: 'power1.inOut', duration: 20 }).to(
+                '.way__box',
+                { y: '-92', ease: 'power1.inOut', duration: 20 },
+            );
+
+            const elements = [
+                '.one',
+                '.two',
+                '.three',
+                '.four',
+                '.five',
+                '.six',
+                '.seven',
+                '.eight',
+                '.night',
+            ];
             const offsets = [-207, -417, -627, -837, -1047, -1257, -1467, -1677];
-        
+
             elements.forEach((el, index) => {
-                
-                const delay = index * 10; 
+                const delay = 70;
 
-                if (index === elements.length - 1 ) {
-
-                    tl.to('.animaton-decor', { y: offsets[index], ease: 'power1.inOut', duration: 20, delay: delay })
+                if (index === elements.length - 1) {
+                    tl.to('.animaton-decor', {
+                        y: offsets[index],
+                        ease: 'power1.inOut',
+                        duration: 20,
+                        delay: delay,
+                    });
                 } else {
-
-                    tl.to('.animaton-decor', { y: offsets[index], ease: 'power1.inOut', duration: 20, delay: delay })
-                    .to(el, { opacity: 0, y: 10, ease: 'power1.inOut', duration: 15 }, '<')
-                    .to(elements[index + 1], { opacity: 1, y: 0, ease: 'power1.inOut', duration: 20 }, '+=15 + ' + delay);
+                    tl.to('.animaton-decor', {
+                        y: offsets[index],
+                        ease: 'power1.inOut',
+                        duration: 20,
+                        delay: delay,
+                    })
+                        .to(el, { opacity: 0, y: 10,  ease: 'power1.inOut', duration: 20 }, '<')
+                        .to(
+                            elements[index + 1],
+                            { opacity: 1, y: 0, ease: 'power1.inOut', duration: 20 },
+                            '+=15 + ' + delay,
+                        );
                 }
             });
-        
+
             return tl;
         }
 
-function handleMediaChange(e) {
-    if (e.matches) {
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    } else {
-        const tl = initAnimation();
-        
-        ScrollTrigger.create({
-            animation: tl,
-            trigger: '.way',
-            start: 'bottom bottom',
-            end: 'bottom',
-            toggleActions: 'play pause none none',
-            scrub: 1,
-            pin: true,
-            onEnter: () => {
-                if (isPaused) { 
-                    tl.resume();
-                    isPaused = false;
+        function handleMediaChange(e) {
+            if (e.matches) {
+                ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+            } else {
+                if (!tl) {
+                    initAnimation(); 
                 }
-                initSmoothScroll(1600, 45);
-            },
-            onLeave: () => {
-                isPaused = true;
-                initSmoothScroll(1600, 105);
-            },
-            onEnterBack: () => {
-                if (isPaused) {
-                    tl.resume();
-                    isPaused = false;
-                }
-                initSmoothScroll(1600, 45);
-            },
-            onLeaveBack: () => {
-                isPaused = true;
-                initSmoothScroll(1600, 105);
+
+                ScrollTrigger.create({
+                    animation: tl,
+                    trigger: '.way',
+                    start: 'bottom bottom',
+                    end: 'bottom',
+                    toggleActions: 'play pause none none',
+                    scrub: 1,
+                    pin: true,
+                    onEnter: () => {
+                        if (isPaused) {
+                            tl.resume();
+                            isPaused = false;
+                        }
+                        // initSmoothScroll(1600, 180);
+                    },
+                    onLeave: () => {
+                        isPaused = true;
+                        // initSmoothScroll(1600, 105);
+                    },
+                    onEnterBack: () => {
+                        if (isPaused) {
+                            tl.resume();
+                            isPaused = false;
+                        }
+                        // initSmoothScroll(1600, 180);
+                    },
+                    onLeaveBack: () => {
+                        isPaused = true;
+                        // initSmoothScroll(1600, 105);
+                    },
+                });
             }
-        });
-    }
-}
+        }
+
+        function handleScroll(e) {
+            // if (currentAnimationIndex < tl.getChildren().length) {
+            //     const animation = tl.getChildren()[currentAnimationIndex];
+            //     animation.play();
+            //     currentAnimationIndex++;
+            // } else {
+            //     currentAnimationIndex = 0; 
+            // }
+            // console.log(currentAnimationIndex)
+            console.log('колесииик раз')
+            // e.preventDefault();
+        
+            // const delta = e.deltaY;
+
+            // if (delta > 0 && currentAnimationIndex < tl.getChildren().length) {
+            //     const animation = tl.getChildren()[currentAnimationIndex];
+            //     animation.play();
+            //     currentAnimationIndex++;
+            // } else if (delta < 0 && currentAnimationIndex > 0) {
+            //     currentAnimationIndex--;
+            //     tl.getChildren()[currentAnimationIndex].reverse(); 
+            // }
+        }
 
         // window.addEventListener('resize', checkHeights);
 
         mediaQuery.addEventListener('change', handleMediaChange);
-
+        
         handleMediaChange(mediaQuery);
         // document.querySelector('.pin-spacer').style.height = '500px';
-        // window.removeEventListener('resize', checkHeights);
+        window.addEventListener('wheel', handleScroll, { passive: false });
+
+        return () => {
+            window.removeEventListener('wheel', handleScroll);
+            mediaQuery.removeEventListener('change', handleMediaChange);
+            tl.kill();
+        };
     }, []);
 
     // initSmoothScroll(1600, 55)
@@ -436,26 +492,16 @@ function handleMediaChange(e) {
 
                                     <WayItem className='six way__item'>
                                         <WayItemContents>
-                                            <WayItemContent>
-                                                <WayItemTitle>Development Kickoff</WayItemTitle>
+                                        <WayItemContent>
+                                                <WayItemTitle>Initial Payment</WayItemTitle>
 
                                                 <WayItemText>
-                                                    Our dedicated developers are assigned to your
-                                                    project and begin by getting familiar with its
-                                                    specifics. This stage includes conducting
-                                                    customer interviews, gathering detailed
-                                                    insights, and drafting the technical
-                                                    requirements (specifications).
-                                                </WayItemText>
-                                            </WayItemContent>
-
-                                            <WayItemContent>
-                                                <WayItemTitle>Outcome:</WayItemTitle>
-
-                                                <WayItemText>
-                                                    A well-prepared team and a clear set of
-                                                    technical specifications to ensure a smooth
-                                                    development process.
+                                                    The project follows a monthly payment structure,
+                                                    with the total cost divided into equal
+                                                    installments based on the project duration. The
+                                                    first payment, covering two months, is made
+                                                    upfront. Starting from the third month, payments
+                                                    continue on a monthly basis.
                                                 </WayItemText>
                                             </WayItemContent>
                                         </WayItemContents>
