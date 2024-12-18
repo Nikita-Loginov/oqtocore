@@ -308,16 +308,16 @@ export default function Way() {
                     // stagger: 1,
                     pin: true,
                     onEnter: () => {
-                        // initSmoothScroll(1600, 15);
+                        initSmoothScroll(1600, 45);
                     },
                     onLeave: () => {
-                        // initSmoothScroll(1600, 130);
+                        initSmoothScroll(1600, 105);
                     },
                     onEnterBack: () => {
-                        // initSmoothScroll(1600, 15);
+                        initSmoothScroll(1600, 45);
                     },
                     onLeaveBack: () => {
-                        // initSmoothScroll(1600, 130);
+                        initSmoothScroll(1600, 105);
                     },
                 });
             }
