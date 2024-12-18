@@ -178,8 +178,8 @@ export default function News() {
                         min2x: dataImg.media_details?.sizes?.min2x?.source_url || '',
                     };
                 });
-                // setNewsImages(photos)
-                // setLoading(false)
+                setNewsImages(photos)
+                setLoading(false)
             } catch (error) {
                 console.error('Ошибка при загрузке новостей:', error);
             }
