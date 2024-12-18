@@ -192,7 +192,7 @@ const ServicesItem = styled.div`
         }
 
         ${ServicesItemContentBox} {
-            transform: translateY(-40px);
+            transform: translateY(-57px);
         }
 
         ${ServicesItemLink} {

@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 const WaySection = styled.section`
     background-color: rgb(43, 36, 255);
     padding: clamp(1.25rem, 0.8507rem + 1.5432vw, 2.5rem) 0 0 0;
-    height: 760px;
+    height: 85vh;
     overflow: hidden;
     position: relative;
 
@@ -92,6 +92,7 @@ const WayItem = styled.div`
 
     &:not(:first-of-type) {
         opacity: 0;
+        transform: translateY(20px);
     }
 
     @media (max-width: 900px) {
@@ -236,7 +237,7 @@ export default function Way() {
 
     useEffect(() => {
         if (isSmoothScrollLoaded) {
-            initSmoothScroll(1600, 130);
+            initSmoothScroll(1600, 100);
         }
     }, [isSmoothScrollLoaded]);
 
@@ -252,123 +253,42 @@ export default function Way() {
             //   });
             const tl = gsap.timeline();
 
-            tl.to('.services', { opacity: 0, ease: 'power1.inOut', duration: 20 })
+            tl
                 .to('.way__title', { opacity: 0, ease: 'power1.inOut', duration: 20})
                 .to('.way__box', { y: '-92', ease: 'power1.inOut', duration: 20 });
 
             tl.to('.animaton-decor', { y: '-207', ease: 'power1.inOut', duration: 20 })
-                .to('.one', { opacity: 0, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.two', { opacity: 1, ease: 'power1.inOut', duration: 20 }, '+=15');
+                .to('.one', { opacity: 0,y: 10, ease: 'power1.inOut', duration: 15 }, '<')
+                // .to('.one', { y: 0, ease: 'power1.inOut', duration: 15 }, '<')
+                .to('.two', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
 
             tl.to('.animaton-decor', { y: '-417', ease: 'power1.inOut', duration: 20 })
-                .to('.two', { opacity: 0, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.three', { opacity: 1, ease: 'power1.inOut', duration: 20 }, '+=15');
+                .to('.two', { opacity: 0,y: 10, ease: 'power1.inOut', duration: 15 }, '<')
+                .to('.three', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
 
             tl.to('.animaton-decor', { y: '-627', ease: 'power1.inOut', duration: 20 })
-                .to('.three', { opacity: 0, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.four', { opacity: 1, ease: 'power1.inOut', duration: 20 }, '+=15');
+                .to('.three', { opacity: 0,y: 10, ease: 'power1.inOut', duration: 15 }, '<')
+                .to('.four', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
 
             tl.to('.animaton-decor', { y: '-837', ease: 'power1.inOut', duration: 20 })
-                .to('.four', { opacity: 0, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.five', { opacity: 1, ease: 'power1.inOut', duration: 20 }, '+=15');
+                .to('.four', { opacity: 0,y: 10, ease: 'power1.inOut', duration: 15 }, '<')
+                .to('.five', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
 
             tl.to('.animaton-decor', { y: '-1047', ease: 'power1.inOut', duration: 20 })
-                .to('.five', { opacity: 0, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.six', { opacity: 1, ease: 'power1.inOut', duration: 20 }, '+=15');
+                .to('.five', { opacity: 0,y: 20, ease: 'power1.inOut', duration: 15 }, '<')
+                .to('.six', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
 
             tl.to('.animaton-decor', { y: '-1257', ease: 'power1.inOut', duration: 20 })
-                .to('.six', { opacity: 0, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.seven', { opacity: 1, ease: 'power1.inOut', duration: 20 }, '+=15');
+                .to('.six', { opacity: 0,y: 20, ease: 'power1.inOut', duration: 15 }, '<')
+                .to('.seven', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
 
             tl.to('.animaton-decor', { y: '-1467', ease: 'power1.inOut', duration: 20 })
-                .to('.seven', { opacity: 0, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.eight', { opacity: 1, ease: 'power1.inOut', duration: 20 }, '+=15');
+                .to('.seven', { opacity: 0,y: 20, ease: 'power1.inOut', duration: 15 }, '<')
+                .to('.eight', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
 
             tl.to('.animaton-decor', { y: '-1677', ease: 'power1.inOut', duration: 20 })
-                .to('.eight', { opacity: 0, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.night', { opacity: 1, ease: 'power1.inOut', duration: 20 }, '+=15');
-
-            // tl.to('.three', { opacity: 1, ease: 'power1.inOut', duration: 20 }).to(
-            //     '.animaton-decor',
-            //     { y: '-627', ease: 'power1.inOut', duration: 20 }
-            // ).to('.two', { opacity: 1, ease: 'power1.inOut', duration: 20 }, 15);
-
-            // tl.to('.services', { opacity: 0, ease: 'power1.inOut' })
-            //     .to('.way__title', { opacity: 0, ease: 'power1.inOut', duration: 20, delay: 0.1 })
-            //     .to('.way__box', { y: '-92', ease: 'power1.inOut', duration: 20 })
-            //     .to('.one', { opacity: 0, ease: 'power1.inOut', duration: 20 })
-            //     .to('.animaton-decor', { y: '-207', ease: 'power1.inOut', duration: 10 }, "<")
-            //     .to('.two', { opacity: 1, ease: 'power1.inOut', duration: 20, delay: 0.1 })
-            //     .to('.animaton-decor', { y: '-417', ease: 'power1.inOut', duration: 20, delay: 0.1  }, "<")
-            //     .to('.two', { opacity: 0, ease: 'power1.inOut', duration: 20 })
-            //     .to('.three', {
-            //         opacity: 1,
-            //         ease: 'power1.inOut',
-            //         duration: 20,
-            //         onStart: () => {
-            //             // gsap.to('.two', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
-            //         },
-            //     })
-            //     .to('.animaton-decor', { y: '-627', ease: 'power1.inOut', duration: 20 })
-            //     .to('.three', { opacity: 0, ease: 'power1.inOut', duration: 20 })
-            //     .to('.four', {
-            //         opacity: 1,
-            //         ease: 'power1.inOut',
-            //         duration: 20,
-            //         // onStart: () => {
-            //         //     gsap.to('.three', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
-            //         // },
-            //     })
-            //     .to('.animaton-decor', { y: '-837', ease: 'power1.inOut', duration: 20 })
-            //     .to('.four', { opacity: 0, ease: 'power1.inOut', duration: 20 })
-            //     .to('.five', {
-            //         opacity: 1,
-            //         ease: 'power1.inOut',
-            //         duration: 20,
-            //         // onStart: () => {
-            //         //     gsap.to('.four', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
-            //         // },
-            //     })
-            //     .to('.animaton-decor', { y: '-1047', ease: 'power1.inOut', duration: 20 })
-            //     .to('.five', { opacity: 0, ease: 'power1.inOut', duration: 20 })
-            //     .to('.six', {
-            //         opacity: 1,
-            //         ease: 'power1.inOut',
-            //         duration: 20,
-            //         // onStart: () => {
-            //         //     gsap.to('.five', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
-            //         // },
-            //     })
-            //     .to('.animaton-decor', { y: '-1257', ease: 'power1.inOut', duration: 20 })
-            //     .to('.six', { opacity: 0, ease: 'power1.inOut', duration: 20 })
-            //     .to('.seven', {
-            //         opacity: 1,
-            //         ease: 'power1.inOut',
-            //         duration: 20,
-            //         // onStart: () => {
-            //         //     gsap.to('.six', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
-            //         // },
-            //     })
-            //     .to('.animaton-decor', { y: '-1467', ease: 'power1.inOut', duration: 20 })
-            //     .to('.seven', { opacity: 0, ease: 'power1.inOut', duration: 20 })
-            //     .to('.eight', {
-            //         opacity: 1,
-            //         ease: 'power1.inOut',
-            //         duration: 20,
-            //         // onStart: () => {
-            //         //     gsap.to('.seven', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
-            //         // },
-            //     })
-            //     .to('.animaton-decor', { y: '-1677', ease: 'power1.inOut', duration: 20 })
-            //     .to('.eight', { opacity: 0, ease: 'power1.inOut', duration: 20 })
-            //     .to('.night', {
-            //         opacity: 1,
-            //         ease: 'power1.inOut',
-            //         duration: 20,
-            //         // onStart: () => {
-            //         //     gsap.to('.eight', { y: '-200%', ease: 'power1.inOut', delay: 0.1 });
-            //         // },
-            //     });
+                .to('.eight', { opacity: 0,y: 20,  ease: 'power1.inOut', duration: 15 }, '<')
+                .to('.night', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
 
             return tl;
         }
@@ -388,16 +308,16 @@ export default function Way() {
                     // stagger: 1,
                     pin: true,
                     onEnter: () => {
-                        initSmoothScroll(1600, 15);
+                        // initSmoothScroll(1600, 15);
                     },
                     onLeave: () => {
-                        initSmoothScroll(1600, 130);
+                        // initSmoothScroll(1600, 130);
                     },
                     onEnterBack: () => {
-                        initSmoothScroll(1600, 15);
+                        // initSmoothScroll(1600, 15);
                     },
                     onLeaveBack: () => {
-                        initSmoothScroll(1600, 130);
+                        // initSmoothScroll(1600, 130);
                     },
                 });
             }
