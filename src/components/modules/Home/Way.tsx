@@ -245,83 +245,75 @@ export default function Way() {
         // checkHeights()
         const mediaQuery = window.matchMedia('(max-width: 900px)');
 
+        let isPaused = false;
+
         function initAnimation() {
-            // ScrollSmoother.create({
-            //     smooth: 1,
-            //     effects: true,
-            //     smoothTouch: 0.1,
-            //   });
-            const tl = gsap.timeline();
-
+            const tl = gsap.timeline({ paused: true });
+        
             tl
-                .to('.way__title', { opacity: 0, ease: 'power1.inOut', duration: 20})
+                .to('.way__title', { opacity: 0, ease: 'power1.inOut', duration: 20 })
                 .to('.way__box', { y: '-92', ease: 'power1.inOut', duration: 20 });
+        
+            const elements = ['.one', '.two', '.three', '.four', '.five', '.six', '.seven', '.eight', '.night'];
+            const offsets = [-207, -417, -627, -837, -1047, -1257, -1467, -1677];
+        
+            elements.forEach((el, index) => {
+                
+                const delay = index * 10; 
 
-            tl.to('.animaton-decor', { y: '-207', ease: 'power1.inOut', duration: 20 })
-                .to('.one', { opacity: 0,y: 10, ease: 'power1.inOut', duration: 15 }, '<')
-                // .to('.one', { y: 0, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.two', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
+                if (index === elements.length - 1 ) {
 
-            tl.to('.animaton-decor', { y: '-417', ease: 'power1.inOut', duration: 20 })
-                .to('.two', { opacity: 0,y: 10, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.three', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
+                    tl.to('.animaton-decor', { y: offsets[index], ease: 'power1.inOut', duration: 20, delay: delay })
+                } else {
 
-            tl.to('.animaton-decor', { y: '-627', ease: 'power1.inOut', duration: 20 })
-                .to('.three', { opacity: 0,y: 10, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.four', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
-
-            tl.to('.animaton-decor', { y: '-837', ease: 'power1.inOut', duration: 20 })
-                .to('.four', { opacity: 0,y: 10, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.five', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
-
-            tl.to('.animaton-decor', { y: '-1047', ease: 'power1.inOut', duration: 20 })
-                .to('.five', { opacity: 0,y: 20, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.six', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
-
-            tl.to('.animaton-decor', { y: '-1257', ease: 'power1.inOut', duration: 20 })
-                .to('.six', { opacity: 0,y: 20, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.seven', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
-
-            tl.to('.animaton-decor', { y: '-1467', ease: 'power1.inOut', duration: 20 })
-                .to('.seven', { opacity: 0,y: 20, ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.eight', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
-
-            tl.to('.animaton-decor', { y: '-1677', ease: 'power1.inOut', duration: 20 })
-                .to('.eight', { opacity: 0,y: 20,  ease: 'power1.inOut', duration: 15 }, '<')
-                .to('.night', { opacity: 1,y: 0, ease: 'power1.inOut', duration: 20 }, '+=15');
-
+                    tl.to('.animaton-decor', { y: offsets[index], ease: 'power1.inOut', duration: 20, delay: delay })
+                    .to(el, { opacity: 0, y: 10, ease: 'power1.inOut', duration: 15 }, '<')
+                    .to(elements[index + 1], { opacity: 1, y: 0, ease: 'power1.inOut', duration: 20 }, '+=15 + ' + delay);
+                }
+            });
+        
             return tl;
         }
 
-        function handleMediaChange(e) {
-            if (e.matches) {
-                ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-            } else {
-                const tl = initAnimation();
-                ScrollTrigger.create({
-                    animation: tl,
-                    trigger: '.way',
-                    start: 'bottom bottom',
-                    end: 'bottom',
-                    toggleActions: 'play none none none',
-                    scrub: 1,
-                    // stagger: 1,
-                    pin: true,
-                    onEnter: () => {
-                        initSmoothScroll(1600, 45);
-                    },
-                    onLeave: () => {
-                        initSmoothScroll(1600, 105);
-                    },
-                    onEnterBack: () => {
-                        initSmoothScroll(1600, 45);
-                    },
-                    onLeaveBack: () => {
-                        initSmoothScroll(1600, 105);
-                    },
-                });
+function handleMediaChange(e) {
+    if (e.matches) {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    } else {
+        const tl = initAnimation();
+        
+        ScrollTrigger.create({
+            animation: tl,
+            trigger: '.way',
+            start: 'bottom bottom',
+            end: 'bottom',
+            toggleActions: 'play pause none none',
+            scrub: 1,
+            pin: true,
+            onEnter: () => {
+                if (isPaused) { 
+                    tl.resume();
+                    isPaused = false;
+                }
+                initSmoothScroll(1600, 45);
+            },
+            onLeave: () => {
+                isPaused = true;
+                initSmoothScroll(1600, 105);
+            },
+            onEnterBack: () => {
+                if (isPaused) {
+                    tl.resume();
+                    isPaused = false;
+                }
+                initSmoothScroll(1600, 45);
+            },
+            onLeaveBack: () => {
+                isPaused = true;
+                initSmoothScroll(1600, 105);
             }
-        }
+        });
+    }
+}
 
         // window.addEventListener('resize', checkHeights);
 
