@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
 import { createGlobalStyle } from 'styled-components';
 // import { Header, Footer } from '@/components/widgets';
@@ -133,6 +133,26 @@ export default function StyledComponentsRegistry({ children }: { children: React
         styledComponentsStyleSheet.instance.clearTag();
         return <>{styles}</>;
     });
+
+    useEffect(() => {
+        const preloadFonts = () => {
+            const fonts = [
+                '/fonts/Eina04-Regular.woff2',
+                '/fonts/Eina04-SemiBold.woff2',
+                '/fonts/Eina04-Bold.woff2'
+            ]
+            fonts.forEach(font => {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.href = font;
+                link.as = 'font';
+                link.type = 'font/woff2';
+                link.crossOrigin = 'anonymous';
+                document.head.appendChild(link);
+            })
+        };
+        preloadFonts();
+    }, []);
 
     if (typeof window !== 'undefined') return <>{children}</>;
 
