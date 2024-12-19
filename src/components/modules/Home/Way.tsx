@@ -246,8 +246,9 @@ export default function Way() {
         const mediaQuery = window.matchMedia('(max-width: 900px)');
 
         let isPaused = false;
-        let currentAnimationIndex = 0;
+        let currentIndex = 0;
         let tl = undefined;
+        let isAnimating = false;
 
         function initAnimation() {
             tl = gsap.timeline({ paused: true });
@@ -287,10 +288,10 @@ export default function Way() {
                         duration: 20,
                         delay: delay,
                     })
-                        .to(el, { opacity: 0, y: 10,  ease: 'power1.inOut', duration: 20 }, '<')
+                        .to(el, { opacity: 0, ease: 'power1.inOut', duration: 20 }, '<')
                         .to(
                             elements[index + 1],
-                            { opacity: 1, y: 0, ease: 'power1.inOut', duration: 20 },
+                            { opacity: 1, ease: 'power1.inOut', duration:  20},
                             '+=15 + ' + delay,
                         );
                 }
@@ -304,71 +305,47 @@ export default function Way() {
                 ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
             } else {
                 if (!tl) {
-                    initAnimation(); 
+                    initAnimation();
                 }
-
+        
                 ScrollTrigger.create({
                     animation: tl,
                     trigger: '.way',
                     start: 'bottom bottom',
-                    end: 'bottom',
-                    toggleActions: 'play pause none none',
-                    scrub: 1,
+                    end: 'bottom top',
+                    scrub: 0,
                     pin: true,
                     onEnter: () => {
-                        if (isPaused) {
-                            tl.resume();
-                            isPaused = false;
+                        if (!isAnimating) {
+                            isAnimating = true;
+                            tl.play(); // Запускаем анимацию
+                            tl.eventCallback('onComplete', () => {
+                                isAnimating = false; // Завершаем анимацию
+                            });
                         }
-                        // initSmoothScroll(1600, 180);
-                    },
-                    onLeave: () => {
-                        isPaused = true;
-                        // initSmoothScroll(1600, 105);
-                    },
-                    onEnterBack: () => {
-                        if (isPaused) {
-                            tl.resume();
-                            isPaused = false;
-                        }
-                        // initSmoothScroll(1600, 180);
                     },
                     onLeaveBack: () => {
-                        isPaused = true;
-                        // initSmoothScroll(1600, 105);
+                        if (!isAnimating) {
+                            isAnimating = true;
+                            tl.reverse(); // Запускаем анимацию назад
+                            tl.eventCallback('onComplete', () => {
+                                isAnimating = false; // Завершаем анимацию
+                            });
+                        }
                     },
                 });
             }
         }
 
-        function handleScroll(e) {
-            // if (currentAnimationIndex < tl.getChildren().length) {
-            //     const animation = tl.getChildren()[currentAnimationIndex];
-            //     animation.play();
-            //     currentAnimationIndex++;
-            // } else {
-            //     currentAnimationIndex = 0; 
-            // }
-            // console.log(currentAnimationIndex)
-            console.log('колесииик раз')
-            // e.preventDefault();
-        
-            // const delta = e.deltaY;
 
-            // if (delta > 0 && currentAnimationIndex < tl.getChildren().length) {
-            //     const animation = tl.getChildren()[currentAnimationIndex];
-            //     animation.play();
-            //     currentAnimationIndex++;
-            // } else if (delta < 0 && currentAnimationIndex > 0) {
-            //     currentAnimationIndex--;
-            //     tl.getChildren()[currentAnimationIndex].reverse(); 
-            // }
+        function handleScroll(e) {
+            console.log('колесииик раз');
         }
 
         // window.addEventListener('resize', checkHeights);
 
         mediaQuery.addEventListener('change', handleMediaChange);
-        
+
         handleMediaChange(mediaQuery);
         // document.querySelector('.pin-spacer').style.height = '500px';
         window.addEventListener('wheel', handleScroll, { passive: false });
@@ -492,16 +469,24 @@ export default function Way() {
 
                                     <WayItem className='six way__item'>
                                         <WayItemContents>
-                                        <WayItemContent>
-                                                <WayItemTitle>Initial Payment</WayItemTitle>
+                                            <WayItemContent>
+                                                <WayItemTitle>Development Kickoff</WayItemTitle>
 
                                                 <WayItemText>
-                                                    The project follows a monthly payment structure,
-                                                    with the total cost divided into equal
-                                                    installments based on the project duration. The
-                                                    first payment, covering two months, is made
-                                                    upfront. Starting from the third month, payments
-                                                    continue on a monthly basis.
+                                                    Our dedicated developers are assigned to your
+                                                    project and begin by getting familiar with its
+                                                    specifics. This stage includes conducting
+                                                    customer interviews, gathering detailed
+                                                    insights, and drafting the technical
+                                                    requirements (specifications).
+                                                </WayItemText>
+                                            </WayItemContent>
+
+                                            <WayItemContent>
+                                                <WayItemTitle>Outcome: </WayItemTitle>
+
+                                                <WayItemText>
+                                                A well-prepared team and a clear set of technical specifications to ensure a smooth development process.
                                                 </WayItemText>
                                             </WayItemContent>
                                         </WayItemContents>
