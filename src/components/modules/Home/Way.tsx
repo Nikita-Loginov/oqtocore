@@ -338,8 +338,11 @@ export default function Way() {
 
     useEffect(() => {
         handleResize();
-        // checkHeights();
-        window.addEventListener('resize', handleResize);
+        checkHeights();
+        window.addEventListener('resize', () => {
+            handleResize();
+            checkHeights();
+        });
     }, []);
 
     return (
