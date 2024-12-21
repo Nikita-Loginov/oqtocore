@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import dynamic from 'next/dynamic'
 import { useInView } from 'react-intersection-observer';
 import Top from '@/components/modules/Home/Top';
 import { Services, Stories, Header, Footer } from '@/components/widgets';
@@ -15,10 +16,10 @@ import Way from '@/components/modules/Home/Way';
 //         'OQTACORE builds APPs that have basic functionality to better work on the idea, spot specific needs within a target audience, and test the Client’s market fit.',
 // };
 
-// const ServicesSection = dynamic(() => import('@/components/widgets'), {
-//     loading: () => <div></div>,
-//     ssr: false,
-// });
+const WaySection = dynamic(
+    () => import('@/components/modules/Home/Way'), {
+    ssr: false,
+});
 
 export default function Home() {
     const { ref, inView } = useInView({
@@ -47,7 +48,7 @@ export default function Home() {
 
                 <Services />
 
-                <Way />
+                <WaySection />
 
                 <Experience />
 
