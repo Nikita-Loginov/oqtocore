@@ -47,11 +47,10 @@ const WayTitle = styled.h2`
     font-size: clamp(1.25rem, 0.8507rem + 1.5432vw, 2.5rem);
     font-weight: 700;
     line-height: 1.17;
-    opacity:0;
     transition: all 0.5s;
 
-    &.active {
-        opacity:1;
+    @media (max-width: 900px) {
+        opacity: 1;
     }
 `;
 
@@ -65,16 +64,16 @@ const WayLines = styled.div`
     position: absolute;
     width: 4px;
     background-color: #fff;
-    height: calc(210px * 9);
+    height: calc(210px * 8);
     display: grid;
-    grid-template-rows: repeat(9, 210px);
+    grid-template-rows: repeat(8, 210px);
     transition: all 0.5s;
     top: 0px;
     left: 5px;
     transform: translateY(6px);
 
     @media (max-width: 900px) {
-        display:none;
+        display: none;
     }
 `;
 
@@ -146,9 +145,8 @@ const WayItem = styled.div`
     // transform:tra
     transition: all 0.2s;
 
-    &.active {
+    &:first-of-type {
         opacity: 1;
-        transition: all 0.5s;
     }
 
     @media (max-width: 900px) {
@@ -194,7 +192,7 @@ const WayItem = styled.div`
         }
 
         &:last-of-type:after {
-            display:none;
+            display: none;
         }
     }
 `;
@@ -239,23 +237,14 @@ const WayItemText = styled.p`
 `;
 
 export default function Way() {
-    const mediaQuery = window.matchMedia('(max-width: 900px)');
+    // const mediaQuery = window.matchMedia('(max-width: 900px)');
     let smoothScroll;
-    let tl;
-    let animationItems = undefined;
-    let animationLinesBox = undefined;
-    let animationTitle = undefined;
-    let lengthArray = undefined;
     const [isSmoothScrollLoaded, setIsSmoothScrollLoaded] = useState(false);
-    let currentIndex = 0;
-    let currentTopLine = 0;
-    let isAnimating = false;
-    let isCountScrollY = false;
-    let isAnimationTitle = false;
-    let currentScrollY;
-    let arrNumbers = [2];
-
     let isScrolling;
+    let blocks = [];
+    let title = undefined;
+    let scrollTrigger = null;
+    let currentBlockIndex = 0;
 
     const handleScriptLoad = () => {
         setIsSmoothScrollLoaded(true);
@@ -263,152 +252,73 @@ export default function Way() {
 
     function initSmoothScroll() {
         smoothScroll = new (window as any).SmoothScroll({
-            stepSize: 80,
+            stepSize: 100,
             keyboardSupport: true,
-            arrowScroll: 80,
+            arrowScroll: 100,
+            touchpadSupport: true,
         });
     }
 
-    function initAnimation() {
-        tl = gsap.timeline({ paused: true });
+    function handleResize() {
+        console.log(blocks);
+        const isLargeScreen = window.matchMedia('(min-width: 900px)').matches;
+        if (isLargeScreen) {
+            if (!scrollTrigger) {
+                scrollTrigger = ScrollTrigger.create({
+                    trigger: '.way',
+                    pin: true,
+                    start: 'bottom bottom',
+                    end: `+=${blocks.length * 100}`,
+                    scrub: 1,
+                    onUpdate: (self) => {
+                        const scrollY = self.progress * blocks.length;
+                        const newBlockIndex = Math.floor(scrollY);
 
-        const offsets = new Array(lengthArray).fill('example');
+                        gsap.to(title, {
+                            opacity: newBlockIndex === 0 ? 1 : 0,
+                            duration: 0,
+                            ease: 'power1.inOut',
+                        });
 
-        // tl.to('.way__title', {
-        //     opacity: 0,
-        //     ease: 'power1.inOut',
-        // });
-
-        offsets.forEach((el, index) => {
-            tl.to('.animaton-decor', {
-                y: 210 * index,
-                ease: 'power1.inOut',
-            });
-        });
-
-        return tl;
-    }
-
-    function infoScroll() {
-        if (isAnimating) return;
-
-        arrNumbers.push(window.scrollY - currentScrollY);
-
-        if (
-            (arrNumbers[0] > 0 && arrNumbers[arrNumbers.length - 1] < 0) ||
-            (arrNumbers[0] < 0 && arrNumbers[arrNumbers.length - 1] > 0)
-        ) {
-            arrNumbers = [];
-            arrNumbers.push(window.scrollY - currentScrollY);
-            const diff = window.scrollY - currentScrollY;
-            handleScroll(diff);
-        }
-
-        if (!isCountScrollY) {
-            currentScrollY = window.scrollY;
-            isCountScrollY = true;
-            return;
-        }
-        if (Math.abs(window.scrollY - currentScrollY) >= 80) {
-            isScrolling = window.scrollY;
-            isCountScrollY = false;
-            const diff = window.scrollY - currentScrollY;
-            handleScroll(diff);
-        }
-    }
-
-    function handleScroll(diff) {
-        if (isAnimating) return;
-
-        if (diff > 0) {
-            currentIndex += 1;
-
-            if (currentIndex === 1 && !isAnimationTitle) {
-                animationItems[0].classList.remove('active');
-                isAnimationTitle = true;
-                currentIndex = 0
-                return 
-            }
-
-        } else if (diff < 0) {
-            currentIndex -= 1;
-
-            console.log(currentIndex)
-
-            if (currentIndex === 0) {
-                currentTopLine = 0;
-                animationLinesBox.style.top = currentTopLine + 'px';
-                return 
-            } else if (currentIndex === -1 ) {
-                animationItems[0].classList.add('active');
-                animationItems[1].classList.add('active');
-                currentIndex = 0;
-                isAnimationTitle = false;
-                return 
-            }
-        }
-
-        // console.log(currentIndex)
-
-        currentIndex = Math.max(0, Math.min(animationItems.length - 1, currentIndex));
-
-        currentTopLine = -210 * currentIndex;
-
-        animationItems.forEach((item) => {
-            item.classList.remove('active');
-        });
-
-
-        animationItems[currentIndex].classList.add('active');
-        animationLinesBox.style.top = currentTopLine + 'px';
-    }
-
-    function handleMediaChange(e) {
-        if (e.matches) {
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-            isAnimating = false;
-        } else {
-            if (!tl) {
-                initAnimation();
-            }
-
-            ScrollTrigger.create({
-                animation: tl,
-                trigger: '.way',
-                start: 'bottom bottom',
-                end: 'bottom top',
-                scrub: 0,
-                pin: true,
-                // delay: 170,
-                onEnter: () => {
-                    if (!(window as any).scrollEventAdded) {
-                        window.addEventListener('scroll', infoScroll);
-                        (window as any).scrollEventAdded = true;
-                    }
-                    isAnimating = false;
-                },
-                onLeave: () => {
-                    isAnimating = true;
-                },
-                onEnterBack: () => {
-                    if (!(window as any).scrollEventAdded) {
-                        if (currentIndex === 0) {
-                            console.log('fsfsd')
+                        if (newBlockIndex !== currentBlockIndex) {
+                            if (newBlockIndex < blocks.length) {
+                                gsap.to(blocks[currentBlockIndex], { opacity: 0, duration: 0.2 });
+                                currentBlockIndex = newBlockIndex;
+                                gsap.to(blocks[currentBlockIndex], { opacity: 1, duration: 0.5 });
+                            }
+                            const top = -210 * currentBlockIndex;
+                            const linears = document.querySelector('.way__lines') as HTMLElement;
+                            linears.style.top = top + 'px';
                         }
-                        window.addEventListener('scroll', infoScroll);
-                        (window as any).scrollEventAdded = true;
-                    }
-                    isAnimating = false;
-                },
-                onLeaveBack: () => {
-                    isAnimating = true;
-                },
-            });
-
-            tl.eventCallback('onComplete', () => {
-                isAnimating = false;
-            });
+                    },
+                });
+            }
+        } else {
+            if (scrollTrigger) {
+                scrollTrigger.kill();
+                scrollTrigger = null;
+            }
         }
+    }
+
+    function checkHeights() {
+        blocks.forEach((item) => {
+            let maxHeight = -1;
+            const wayItemContentBox = item.querySelector('.way__item-contents') as HTMLElement;
+            const wayItemContent = wayItemContentBox.querySelectorAll('.way__item-content');
+
+            if (window.innerWidth < 900) {
+                wayItemContentBox.style.height = 'auto';
+            } else {
+                if (wayItemContent.length >= 2) {
+                    wayItemContent.forEach((itemContent) => {
+                        itemContent.setAttribute('style', 'align-self: start; margin-top: auto;');
+                        maxHeight = Math.max(maxHeight, (itemContent as HTMLElement).clientHeight);
+                    });
+                    wayItemContentBox.style.height = maxHeight + 'px';
+                }
+            }
+        });
     }
 
     useEffect(() => {
@@ -418,52 +328,18 @@ export default function Way() {
     }, [isSmoothScrollLoaded]);
 
     useEffect(() => {
-        animationItems = document.querySelectorAll('.animation-item');
-        animationLinesBox = document.querySelector('.animation-lines') as HTMLElement;
-        lengthArray = animationItems.length + 1;
-        mediaQuery.addEventListener('change', handleMediaChange);
-
-        handleMediaChange(mediaQuery);
+        blocks = Array.from(document.querySelectorAll('.way__item'));
+        title = document.querySelector('.way__title');
     }, []);
 
     useEffect(() => {
-        let currentAnimationBlockPosition;
-        setTimeout(() => {
-            currentAnimationBlockPosition = document.querySelector('.way').getBoundingClientRect().top;
-            if (currentAnimationBlockPosition < 0) {
-                currentIndex = animationItems.length
-            }
-        }, 1000)
-    }, [])
-
-    // useEffect(() => {
-    //     const checkHeights = () => {
-    //         const wayItems = document.querySelectorAll('.way__item');
-    //         console.log(wayItems);
-
-    //         wayItems.forEach((item) => {
-    //             let maxHeight = -1;
-    //             const wayItemContentBox = item.querySelector('.way__item-contents') as HTMLElement;
-    //             const wayItemContent = wayItemContentBox.querySelectorAll('.way__item-content');
-
-    //             if (window.innerWidth < 900) {
-    //                 wayItemContentBox.style.height = 'auto';
-    //             } else {
-    //                 if (wayItemContent.length >= 2) {
-    //                     wayItemContent.forEach((itemContent) => {
-    //                         itemContent.setAttribute('style', 'align-self: start; margin-top: auto;');
-    //                         maxHeight = Math.max(maxHeight, (itemContent as HTMLElement).clientHeight);
-    //                     });
-    //                     wayItemContentBox.style.height = maxHeight + 'px';
-    //                 }
-    //             }
-    //         });
-    //     };
-
-    //     checkHeights()
-
-    //     // window.addEventListener('resize', checkHeights);
-    // })
+        handleResize();
+        checkHeights();
+        window.addEventListener('resize', () => {
+            handleResize();
+            checkHeights();
+        });
+    }, []);
 
     return (
         <>
@@ -471,18 +347,10 @@ export default function Way() {
                 <Container>
                     <div className='way__inner'>
                         <WayContent>
-                            <WayTitle className='way__title animation-item active'>Your way with us</WayTitle>
+                            <WayTitle className='way__title'>Your way with us</WayTitle>
 
                             <WayAnimationBox className='way__box'>
-                                <WayAnimationDecor className='animaton-decor'>
-                                    <img
-                                        src='./icons/animation-scroll.svg'
-                                        alt=''
-                                    />
-                                </WayAnimationDecor>
-
-                                <WayLines className='animation-lines'>
-                                    <WayLine></WayLine>
+                                <WayLines className='way__lines'>
                                     <WayLine></WayLine>
                                     <WayLine></WayLine>
                                     <WayLine></WayLine>
@@ -494,17 +362,17 @@ export default function Way() {
                                 </WayLines>
 
                                 <WayItems>
-                                    <WayItem className='animation-item active'>
+                                    <WayItem className='way__item'>
                                         <WayItemContents className='way__item-contents'>
-                                            <WayItemContent>
+                                            <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>First met</WayItemTitle>
                                             </WayItemContent>
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='animation-item'>
+                                    <WayItem className='way__item'>
                                         <WayItemContents className='way__item-contents'>
-                                            <WayItemContent>
+                                            <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>Estimate pricing</WayItemTitle>
 
                                                 <WayItemText>
@@ -514,7 +382,7 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='animation-item'>
+                                    <WayItem className='way__item'>
                                         <WayItemContents className='way__item-contents'>
                                             <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>Details discussion</WayItemTitle>
@@ -540,9 +408,9 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='animation-item'>
-                                        <WayItemContents>
-                                            <WayItemContent>
+                                    <WayItem className='way__item'>
+                                        <WayItemContents className='way__item-contents'>
+                                            <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>
                                                     Proposal and Roadmap Development
                                                 </WayItemTitle>
@@ -556,7 +424,7 @@ export default function Way() {
                                                 </WayItemText>
                                             </WayItemContent>
 
-                                            <WayItemContent>
+                                            <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>Outcome:</WayItemTitle>
 
                                                 <WayItemText>
@@ -568,9 +436,9 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='animation-item'>
-                                        <WayItemContents>
-                                            <WayItemContent>
+                                    <WayItem className='way__item'>
+                                        <WayItemContents className='way__item-contents'>
+                                            <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>Initial Payment</WayItemTitle>
 
                                                 <WayItemText>
@@ -585,9 +453,9 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='animation-item'>
-                                        <WayItemContents>
-                                            <WayItemContent>
+                                    <WayItem className='way__item'>
+                                        <WayItemContents className='way__item-contents'>
+                                            <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>Development Kickoff</WayItemTitle>
 
                                                 <WayItemText>
@@ -600,7 +468,7 @@ export default function Way() {
                                                 </WayItemText>
                                             </WayItemContent>
 
-                                            <WayItemContent>
+                                            <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>Outcome: </WayItemTitle>
 
                                                 <WayItemText>
@@ -612,9 +480,9 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='animation-item'>
-                                        <WayItemContents>
-                                            <WayItemContent>
+                                    <WayItem className='way__item'>
+                                        <WayItemContents className='way__item-contents'>
+                                            <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>
                                                     Detailed Technical Specification Preparation
                                                 </WayItemTitle>
@@ -629,7 +497,7 @@ export default function Way() {
                                                 </WayItemText>
                                             </WayItemContent>
 
-                                            <WayItemContent>
+                                            <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>Outcome:</WayItemTitle>
 
                                                 <WayItemText>
@@ -641,9 +509,9 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='animation-item'>
-                                        <WayItemContents>
-                                            <WayItemContent>
+                                    <WayItem className='way__item'>
+                                        <WayItemContents className='way__item-contents'>
+                                            <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>MVP Launch</WayItemTitle>
 
                                                 <WayItemText>
@@ -655,7 +523,7 @@ export default function Way() {
                                                 </WayItemText>
                                             </WayItemContent>
 
-                                            <WayItemContent>
+                                            <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>Outcome:</WayItemTitle>
 
                                                 <WayItemText>
@@ -667,9 +535,9 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='animation-item'>
-                                        <WayItemContents>
-                                            <WayItemContent>
+                                    <WayItem className='way__item'>
+                                        <WayItemContents className='way__item-contents'>
+                                            <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>
                                                     Technical Specification Revision (Pivot
                                                     Opportunity)
@@ -685,7 +553,7 @@ export default function Way() {
                                                 </WayItemText>
                                             </WayItemContent>
 
-                                            <WayItemContent>
+                                            <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>Outcome:</WayItemTitle>
 
                                                 <WayItemText>

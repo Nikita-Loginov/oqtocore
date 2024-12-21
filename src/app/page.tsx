@@ -48,7 +48,7 @@ export default function Home() {
 
                 <Services />
 
-                <WaySection />
+                <Way />
 
                 <Experience />
 
