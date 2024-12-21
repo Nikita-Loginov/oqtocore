@@ -200,9 +200,16 @@ const ServicesItem = styled.div`
             visibility: visible;
         }
 
+        @media (max-width: 767px) {
+            ${ServicesItemContentBox} {
+                transform: translateY(-47px);
+            }
+        }
+
         @media (max-width: 640px) {
             ${ServicesItemContentBox} {
             transform: translateY(0px);
+            }
         }
     }
 `;

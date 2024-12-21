@@ -19,7 +19,6 @@ const ExperienceInner = styled.div`
 `;
 
 const ExperienceTitle = styled.h2`
-    text-transform: uppercase;
     font-size: clamp(1.25rem, 0.8494rem + 1.5444vw, 2.5rem);
     font-weight: 700;
     line-height: 117%;
@@ -56,7 +55,6 @@ const ExperienceItemTitle = styled.h3`
     font-size: clamp(1rem, 0.6194rem + 1.4672vw, 2.1875rem);;
     font-weight: 700;
     line-height: 1.37;
-    text-transform: uppercase;
 `;
 
 const ExperienceItemText = styled.p`

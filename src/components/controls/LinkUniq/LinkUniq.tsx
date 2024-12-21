@@ -14,17 +14,24 @@ const LinkDecor = styled.span`
     transition: all 0.5s;
 
     img {
-        width: 16px;
-        height: 16px;
+        width: 16px !important;
+        height: 16px !important;
+        bottom: auto !important;
+        transition: all 0.5s;
+        display: flex;
+        left: auto !important;
+        align-items: center;
+        justify-content: center;
         transition: all 0.5s;
     }
 
     &:before {
         position: absolute;
         content: '';
-        width: 17px;
-        height: 17px;
+        width: 16px;
+        height: 16px;
         background-image: url(./icons/arrow-down.svg);
+        background-repeat: no-repeat;
         transform: translateY(-30px);
         transition: all 0.5s;
     }

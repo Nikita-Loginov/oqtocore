@@ -57,6 +57,7 @@ const LinkDecor = styled.span`
         width: 17px;
         height: 17px;
         background-image: url(./icons/arrow-up-right.svg);
+        background-repeat: no-repeat;
         transform: translate(-24px, 24px);
         transition: all 0.5s;
     }

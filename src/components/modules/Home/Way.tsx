@@ -1,10 +1,9 @@
 'use client';
 
-import { useEffect, useState, forwardRef } from 'react';
+import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-// import ScrollSmoother from 'gsap/ScrollSmoother'
 import styled from 'styled-components';
 import { Container } from '@/components/widgets';
 
@@ -48,15 +47,72 @@ const WayTitle = styled.h2`
     font-size: clamp(1.25rem, 0.8507rem + 1.5432vw, 2.5rem);
     font-weight: 700;
     line-height: 1.17;
+    opacity:0;
+    transition: all 0.5s;
+
+    &.active {
+        opacity:1;
+    }
 `;
 
 const WayAnimationBox = styled.div`
     display: flex;
     gap: 12px;
+    position: relative;
+`;
+
+const WayLines = styled.div`
+    position: absolute;
+    width: 4px;
+    background-color: #fff;
+    height: calc(210px * 9);
+    display: grid;
+    grid-template-rows: repeat(9, 210px);
+    transition: all 0.5s;
+    top: 0px;
+    left: 5px;
+    transform: translateY(6px);
+
+    @media (max-width: 900px) {
+        display:none;
+    }
+`;
+
+const WayLine = styled.div`
+    position: relative;
+    top: -5px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        background-color: #fff;
+        border-radius: 50%;
+        bottom: -27px;
+        left: -10.5px;
+    }
+
+    &:first-of-type {
+        &:after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: #fff;
+            border-radius: 50%;
+            top: 3px;
+            left: -10.5px;
+        }
+    }
 `;
 
 const WayAnimationDecor = styled.div`
-    transform: translateY(4px);
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    opacity: 0;
+    top: 0;
 
     @media (max-width: 900px) {
         img {
@@ -72,6 +128,7 @@ const WayItems = styled.div`
     overflow: hidden;
     position: relative;
     min-width: 100%;
+    padding-left: 36px;
 
     @media (max-width: 900px) {
         height: auto;
@@ -85,14 +142,13 @@ const WayItem = styled.div`
     min-height: 210px;
     position: absolute;
     width: fit-content;
+    opacity: 0;
+    // transform:tra
+    transition: all 0.2s;
 
-    &:first-of-type {
-        top: 0;
-    }
-
-    &:not(:first-of-type) {
-        opacity: 0;
-        // transform: translateY(20px);
+    &.active {
+        opacity: 1;
+        transition: all 0.5s;
     }
 
     @media (max-width: 900px) {
@@ -120,8 +176,8 @@ const WayItem = styled.div`
             height: 24px;
             background-color: #fff;
             border-radius: 50%;
-            top: 3px;
-            left: -35.8px;
+            top: 2px;
+            left: -28.8px;
             @media (max-width: 430px) {
                 top: 0;
             }
@@ -134,7 +190,11 @@ const WayItem = styled.div`
             height: 100%;
             background-color: #fff;
             top: 3px;
-            left: -25.8px;
+            left: -18.8px;
+        }
+
+        &:last-of-type:after {
+            display:none;
         }
     }
 `;
@@ -179,32 +239,202 @@ const WayItemText = styled.p`
 `;
 
 export default function Way() {
-    const [isSmoothScrollLoaded, setIsSmoothScrollLoaded] = useState(false);
+    const mediaQuery = window.matchMedia('(max-width: 900px)');
     let smoothScroll;
+    let tl;
+    let animationItems = undefined;
+    let animationLinesBox = undefined;
+    let animationTitle = undefined;
+    let lengthArray = undefined;
+    const [isSmoothScrollLoaded, setIsSmoothScrollLoaded] = useState(false);
+    let currentIndex = 0;
+    let currentTopLine = 0;
+    let isAnimating = false;
+    let isCountScrollY = false;
+    let isAnimationTitle = false;
+    let currentScrollY;
+    let arrNumbers = [2];
+
+    let isScrolling;
 
     const handleScriptLoad = () => {
         setIsSmoothScrollLoaded(true);
     };
 
-    function initSmoothScroll(animationTime, animationStepSize) {
-        // if (smoothScroll) {
-        //     console.log(smoothScroll)
-        //     smoothScroll.destroy();
-        // }
-
+    function initSmoothScroll() {
         smoothScroll = new (window as any).SmoothScroll({
-            animationTime: animationTime,
-            stepSize: animationStepSize,
-            accelerationDelta: 1,
-            accelerationMax: 1,
+            stepSize: 80,
             keyboardSupport: true,
-            arrowScroll: animationStepSize,
-            pulseAlgorithm: true,
-            pulseScale: 4,
-            pulseNormalize: 1,
-            touchpadSupport: true,
+            arrowScroll: 80,
         });
     }
+
+    function initAnimation() {
+        tl = gsap.timeline({ paused: true });
+
+        const offsets = new Array(lengthArray).fill('example');
+
+        // tl.to('.way__title', {
+        //     opacity: 0,
+        //     ease: 'power1.inOut',
+        // });
+
+        offsets.forEach((el, index) => {
+            tl.to('.animaton-decor', {
+                y: 210 * index,
+                ease: 'power1.inOut',
+            });
+        });
+
+        return tl;
+    }
+
+    function infoScroll() {
+        if (isAnimating) return;
+
+        arrNumbers.push(window.scrollY - currentScrollY);
+
+        if (
+            (arrNumbers[0] > 0 && arrNumbers[arrNumbers.length - 1] < 0) ||
+            (arrNumbers[0] < 0 && arrNumbers[arrNumbers.length - 1] > 0)
+        ) {
+            arrNumbers = [];
+            arrNumbers.push(window.scrollY - currentScrollY);
+            const diff = window.scrollY - currentScrollY;
+            handleScroll(diff);
+        }
+
+        if (!isCountScrollY) {
+            currentScrollY = window.scrollY;
+            isCountScrollY = true;
+            return;
+        }
+        if (Math.abs(window.scrollY - currentScrollY) >= 80) {
+            isScrolling = window.scrollY;
+            isCountScrollY = false;
+            const diff = window.scrollY - currentScrollY;
+            handleScroll(diff);
+        }
+    }
+
+    function handleScroll(diff) {
+        if (isAnimating) return;
+
+        if (diff > 0) {
+            currentIndex += 1;
+
+            if (currentIndex === 1 && !isAnimationTitle) {
+                animationItems[0].classList.remove('active');
+                isAnimationTitle = true;
+                currentIndex = 0
+                return 
+            }
+
+        } else if (diff < 0) {
+            currentIndex -= 1;
+
+            console.log(currentIndex)
+
+            if (currentIndex === 0) {
+                currentTopLine = 0;
+                animationLinesBox.style.top = currentTopLine + 'px';
+                return 
+            } else if (currentIndex === -1 ) {
+                animationItems[0].classList.add('active');
+                animationItems[1].classList.add('active');
+                currentIndex = 0;
+                isAnimationTitle = false;
+                return 
+            }
+        }
+
+        // console.log(currentIndex)
+
+        currentIndex = Math.max(0, Math.min(animationItems.length - 1, currentIndex));
+
+        currentTopLine = -210 * currentIndex;
+
+        animationItems.forEach((item) => {
+            item.classList.remove('active');
+        });
+
+
+        animationItems[currentIndex].classList.add('active');
+        animationLinesBox.style.top = currentTopLine + 'px';
+    }
+
+    function handleMediaChange(e) {
+        if (e.matches) {
+            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+            isAnimating = false;
+        } else {
+            if (!tl) {
+                initAnimation();
+            }
+
+            ScrollTrigger.create({
+                animation: tl,
+                trigger: '.way',
+                start: 'bottom bottom',
+                end: 'bottom top',
+                scrub: 0,
+                pin: true,
+                // delay: 170,
+                onEnter: () => {
+                    if (!(window as any).scrollEventAdded) {
+                        window.addEventListener('scroll', infoScroll);
+                        (window as any).scrollEventAdded = true;
+                    }
+                    isAnimating = false;
+                },
+                onLeave: () => {
+                    isAnimating = true;
+                },
+                onEnterBack: () => {
+                    if (!(window as any).scrollEventAdded) {
+                        if (currentIndex === 0) {
+                            console.log('fsfsd')
+                        }
+                        window.addEventListener('scroll', infoScroll);
+                        (window as any).scrollEventAdded = true;
+                    }
+                    isAnimating = false;
+                },
+                onLeaveBack: () => {
+                    isAnimating = true;
+                },
+            });
+
+            tl.eventCallback('onComplete', () => {
+                isAnimating = false;
+            });
+        }
+    }
+
+    useEffect(() => {
+        if (isSmoothScrollLoaded) {
+            initSmoothScroll();
+        }
+    }, [isSmoothScrollLoaded]);
+
+    useEffect(() => {
+        animationItems = document.querySelectorAll('.animation-item');
+        animationLinesBox = document.querySelector('.animation-lines') as HTMLElement;
+        lengthArray = animationItems.length + 1;
+        mediaQuery.addEventListener('change', handleMediaChange);
+
+        handleMediaChange(mediaQuery);
+    }, []);
+
+    useEffect(() => {
+        let currentAnimationBlockPosition;
+        setTimeout(() => {
+            currentAnimationBlockPosition = document.querySelector('.way').getBoundingClientRect().top;
+            if (currentAnimationBlockPosition < 0) {
+                currentIndex = animationItems.length
+            }
+        }, 1000)
+    }, [])
 
     // useEffect(() => {
     //     const checkHeights = () => {
@@ -230,134 +460,10 @@ export default function Way() {
     //         });
     //     };
 
-    //     // checkHeights()
+    //     checkHeights()
 
     //     // window.addEventListener('resize', checkHeights);
     // })
-
-    // useEffect(() => {
-    //     if (isSmoothScrollLoaded) {
-    //         initSmoothScroll(1600, 100);
-    //     }
-    // }, [isSmoothScrollLoaded]);
-
-    useEffect(() => {
-        // checkHeights()
-        const mediaQuery = window.matchMedia('(max-width: 900px)');
-
-        let isPaused = false;
-        let currentIndex = 0;
-        let tl = undefined;
-        let isAnimating = false;
-
-        function initAnimation() {
-            tl = gsap.timeline({ paused: true });
-
-            tl.to('.way__title', { opacity: 0, ease: 'power1.inOut', duration: 20 }).to(
-                '.way__box',
-                { y: '-92', ease: 'power1.inOut', duration: 20 },
-            );
-
-            const elements = [
-                '.one',
-                '.two',
-                '.three',
-                '.four',
-                '.five',
-                '.six',
-                '.seven',
-                '.eight',
-                '.night',
-            ];
-            const offsets = [-207, -417, -627, -837, -1047, -1257, -1467, -1677];
-
-            elements.forEach((el, index) => {
-                const delay = 70;
-
-                if (index === elements.length - 1) {
-                    tl.to('.animaton-decor', {
-                        y: offsets[index],
-                        ease: 'power1.inOut',
-                        duration: 20,
-                        delay: delay,
-                    });
-                } else {
-                    tl.to('.animaton-decor', {
-                        y: offsets[index],
-                        ease: 'power1.inOut',
-                        duration: 20,
-                        delay: delay,
-                    })
-                        .to(el, { opacity: 0, ease: 'power1.inOut', duration: 20 }, '<')
-                        .to(
-                            elements[index + 1],
-                            { opacity: 1, ease: 'power1.inOut', duration:  20},
-                            '+=15 + ' + delay,
-                        );
-                }
-            });
-
-            return tl;
-        }
-
-        function handleMediaChange(e) {
-            if (e.matches) {
-                ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-            } else {
-                if (!tl) {
-                    initAnimation();
-                }
-        
-                ScrollTrigger.create({
-                    animation: tl,
-                    trigger: '.way',
-                    start: 'bottom bottom',
-                    end: 'bottom top',
-                    scrub: 0,
-                    pin: true,
-                    onEnter: () => {
-                        if (!isAnimating) {
-                            isAnimating = true;
-                            tl.play(); // Запускаем анимацию
-                            tl.eventCallback('onComplete', () => {
-                                isAnimating = false; // Завершаем анимацию
-                            });
-                        }
-                    },
-                    onLeaveBack: () => {
-                        if (!isAnimating) {
-                            isAnimating = true;
-                            tl.reverse(); // Запускаем анимацию назад
-                            tl.eventCallback('onComplete', () => {
-                                isAnimating = false; // Завершаем анимацию
-                            });
-                        }
-                    },
-                });
-            }
-        }
-
-
-        function handleScroll(e) {
-            console.log('колесииик раз');
-        }
-
-        // window.addEventListener('resize', checkHeights);
-
-        mediaQuery.addEventListener('change', handleMediaChange);
-
-        handleMediaChange(mediaQuery);
-        // document.querySelector('.pin-spacer').style.height = '500px';
-        window.addEventListener('wheel', handleScroll, { passive: false });
-
-        return () => {
-            window.removeEventListener('wheel', handleScroll);
-            mediaQuery.removeEventListener('change', handleMediaChange);
-            tl.kill();
-        };
-    }, []);
-
-    // initSmoothScroll(1600, 55)
 
     return (
         <>
@@ -365,7 +471,7 @@ export default function Way() {
                 <Container>
                     <div className='way__inner'>
                         <WayContent>
-                            <WayTitle className='way__title'>Your way with us</WayTitle>
+                            <WayTitle className='way__title animation-item active'>Your way with us</WayTitle>
 
                             <WayAnimationBox className='way__box'>
                                 <WayAnimationDecor className='animaton-decor'>
@@ -375,8 +481,20 @@ export default function Way() {
                                     />
                                 </WayAnimationDecor>
 
+                                <WayLines className='animation-lines'>
+                                    <WayLine></WayLine>
+                                    <WayLine></WayLine>
+                                    <WayLine></WayLine>
+                                    <WayLine></WayLine>
+                                    <WayLine></WayLine>
+                                    <WayLine></WayLine>
+                                    <WayLine></WayLine>
+                                    <WayLine></WayLine>
+                                    <WayLine></WayLine>
+                                </WayLines>
+
                                 <WayItems>
-                                    <WayItem className='one way__item'>
+                                    <WayItem className='animation-item active'>
                                         <WayItemContents className='way__item-contents'>
                                             <WayItemContent>
                                                 <WayItemTitle>First met</WayItemTitle>
@@ -384,7 +502,7 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='two way__item'>
+                                    <WayItem className='animation-item'>
                                         <WayItemContents className='way__item-contents'>
                                             <WayItemContent>
                                                 <WayItemTitle>Estimate pricing</WayItemTitle>
@@ -396,7 +514,7 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='three way__item'>
+                                    <WayItem className='animation-item'>
                                         <WayItemContents className='way__item-contents'>
                                             <WayItemContent className='way__item-content'>
                                                 <WayItemTitle>Details discussion</WayItemTitle>
@@ -422,7 +540,7 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='four way__item'>
+                                    <WayItem className='animation-item'>
                                         <WayItemContents>
                                             <WayItemContent>
                                                 <WayItemTitle>
@@ -450,7 +568,7 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='five way__item'>
+                                    <WayItem className='animation-item'>
                                         <WayItemContents>
                                             <WayItemContent>
                                                 <WayItemTitle>Initial Payment</WayItemTitle>
@@ -467,7 +585,7 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='six way__item'>
+                                    <WayItem className='animation-item'>
                                         <WayItemContents>
                                             <WayItemContent>
                                                 <WayItemTitle>Development Kickoff</WayItemTitle>
@@ -486,13 +604,15 @@ export default function Way() {
                                                 <WayItemTitle>Outcome: </WayItemTitle>
 
                                                 <WayItemText>
-                                                A well-prepared team and a clear set of technical specifications to ensure a smooth development process.
+                                                    A well-prepared team and a clear set of
+                                                    technical specifications to ensure a smooth
+                                                    development process.
                                                 </WayItemText>
                                             </WayItemContent>
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='seven way__item'>
+                                    <WayItem className='animation-item'>
                                         <WayItemContents>
                                             <WayItemContent>
                                                 <WayItemTitle>
@@ -521,7 +641,7 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='eight way__item'>
+                                    <WayItem className='animation-item'>
                                         <WayItemContents>
                                             <WayItemContent>
                                                 <WayItemTitle>MVP Launch</WayItemTitle>
@@ -547,7 +667,7 @@ export default function Way() {
                                         </WayItemContents>
                                     </WayItem>
 
-                                    <WayItem className='night way__item'>
+                                    <WayItem className='animation-item'>
                                         <WayItemContents>
                                             <WayItemContent>
                                                 <WayItemTitle>
@@ -555,24 +675,24 @@ export default function Way() {
                                                     Opportunity)
                                                 </WayItemTitle>
 
-                                                <p className='way__item-text'>
+                                                <WayItemText>
                                                     We offer a unique opportunity to revise the
                                                     technical specification and shift the project's
                                                     direction at no additional cost. As
                                                     result-focused partner, we understand the
                                                     importance of flexibility in adapting to new
                                                     insights and changing priorities.
-                                                </p>
+                                                </WayItemText>
                                             </WayItemContent>
 
                                             <WayItemContent>
                                                 <WayItemTitle>Outcome:</WayItemTitle>
 
-                                                <p className='way__item-text'>
+                                                <WayItemText>
                                                     A refined technical specification aligned with
                                                     your updated goals, ensuring the project remains
                                                     on the right track for success.
-                                                </p>
+                                                </WayItemText>
                                             </WayItemContent>
                                         </WayItemContents>
                                     </WayItem>
