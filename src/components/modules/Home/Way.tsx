@@ -138,7 +138,7 @@ const WayItems = styled.div`
 
 const WayItem = styled.div`
     display: flex;
-    min-height: 210px;
+    // min-height: 210px;
     position: absolute;
     width: fit-content;
     opacity: 0;
@@ -259,9 +259,13 @@ export default function Way() {
         });
     }
 
+    blocks.forEach((block, index) => {
+        gsap.set(block, { opacity: index === 0 ? 1 : 0 });
+    });
+
     function handleResize() {
-        console.log(blocks);
         const isLargeScreen = window.matchMedia('(min-width: 900px)').matches;
+
         if (isLargeScreen) {
             if (!scrollTrigger) {
                 scrollTrigger = ScrollTrigger.create({
@@ -282,9 +286,9 @@ export default function Way() {
 
                         if (newBlockIndex !== currentBlockIndex) {
                             if (newBlockIndex < blocks.length) {
-                                gsap.to(blocks[currentBlockIndex], { opacity: 0, duration: 0.2 });
+                                gsap.to(blocks[currentBlockIndex], { opacity: 0, duration: 0});
                                 currentBlockIndex = newBlockIndex;
-                                gsap.to(blocks[currentBlockIndex], { opacity: 1, duration: 0.5 });
+                                gsap.to(blocks[currentBlockIndex], { opacity: 1, duration: 0});
                             }
                             const top = -210 * currentBlockIndex;
                             const linears = document.querySelector('.way__lines') as HTMLElement;
@@ -334,11 +338,8 @@ export default function Way() {
 
     useEffect(() => {
         handleResize();
-        checkHeights();
-        window.addEventListener('resize', () => {
-            handleResize();
-            checkHeights();
-        });
+        // checkHeights();
+        window.addEventListener('resize', handleResize);
     }, []);
 
     return (
