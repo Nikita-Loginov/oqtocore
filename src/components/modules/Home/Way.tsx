@@ -24,6 +24,10 @@ const WaySection = styled.section`
         }
     }
 
+    @media(min-height: 1000px) {
+        height: 55vh;
+    }
+
     &:before {
         position: absolute;
         content: '';
@@ -265,6 +269,7 @@ export default function Way() {
 
     function handleResize() {
         const isLargeScreen = window.matchMedia('(min-width: 900px)').matches;
+        const isTallScreen = window.innerHeight > 1000;
 
         if (isLargeScreen) {
             if (!scrollTrigger) {
@@ -277,6 +282,10 @@ export default function Way() {
                     onUpdate: (self) => {
                         const scrollY = self.progress * blocks.length;
                         const newBlockIndex = Math.floor(scrollY);
+
+                        if (isTallScreen) {
+                            gsap.to('#services', { duration: 0.5, opacity: 0 });
+                        }
 
                         gsap.to(title, {
                             opacity: newBlockIndex === 0 ? 1 : 0,
@@ -294,8 +303,16 @@ export default function Way() {
                             const linears = document.querySelector('.way__lines') as HTMLElement;
                             linears.style.top = top + 'px';
                         }
+
+                        if (newBlockIndex === 0) {
+                            gsap.to('#services', { duration: 0.5, opacity: 1 });
+                        }
                     },
                 });
+
+                // setTimeout(() => {
+                //     ScrollTrigger.refresh();
+                // }, 3000);
             }
         } else {
             if (scrollTrigger) {

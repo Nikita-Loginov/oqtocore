@@ -32,6 +32,7 @@ const LinkDecor = styled.span`
         height: 16px;
         background-image: url(./icons/arrow-down.svg);
         background-repeat: no-repeat;
+        background-position: center;
         transform: translateY(-30px);
         transition: all 0.5s;
     }
