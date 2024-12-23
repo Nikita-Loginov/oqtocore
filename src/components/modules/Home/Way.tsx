@@ -132,7 +132,7 @@ const WayItems = styled.div`
     @media (max-width: 900px) {
         height: auto;
         overflow: visible;
-        padding-left: 18px;
+        padding-left: 32px;
     }
 `;
 
@@ -175,7 +175,7 @@ const WayItem = styled.div`
             background-color: #fff;
             border-radius: 50%;
             top: 2px;
-            left: -28.8px;
+            left: -32px;
             @media (max-width: 430px) {
                 top: 0;
             }
@@ -188,7 +188,7 @@ const WayItem = styled.div`
             height: 100%;
             background-color: #fff;
             top: 3px;
-            left: -18.8px;
+            left: -21.8px;
         }
 
         &:last-of-type:after {
@@ -279,9 +279,7 @@ export default function Way() {
                         const scrollY = self.progress * blocks.length;
                         const newBlockIndex = Math.floor(scrollY);
 
-                        if (isTallScreen) {
-                            gsap.to('.way', { duration: 0.5, height: "50vh" });
-                        }
+                        gsap.to('#services', { duration: 0.5, opacity: 0 });
 
                         gsap.to(title, {
                             opacity: newBlockIndex === 0 ? 1 : 0,
@@ -294,25 +292,30 @@ export default function Way() {
                                 gsap.to(blocks[currentBlockIndex], { opacity: 0, duration: 0 });
                                 currentBlockIndex = newBlockIndex;
                                 gsap.to(blocks[currentBlockIndex], { opacity: 1, duration: 0 });
+
+                                if (newBlockIndex === blocks.length - 3) {
+                                    gsap.to('.way', { duration: 1, height: "75vh"});
+                                } else if (newBlockIndex === blocks.length - 2) {
+                                    gsap.to('.way', { duration: 1, height: "65vh"});
+                                } else if (newBlockIndex === blocks.length - 1) {
+                                    gsap.to('.way', { duration: 1, height: "55vh"});
+                                }
                             }
                             const top = -210 * currentBlockIndex;
                             const linears = document.querySelector('.way__lines') as HTMLElement;
                             linears.style.top = top + 'px';
                         }
 
-                        // if (newBlockIndex === blocks.length - 3) {
-                        //     gsap.to('.way', { duration: 3, height: "50vh"});
+                        // if (newBlockIndex === blocks.length - 1) {
+                        //     gsap.to('.way', { duration: 1, height: "85vh" });
                         // }
+            
 
                         if (newBlockIndex === 0) {
                             gsap.to('#services', { duration: 0.5, opacity: 1 });
                         }
                     },
                 });
-
-                // setTimeout(() => {
-                //     ScrollTrigger.refresh();
-                // }, 3000);
             }
         } else {
             if (scrollTrigger) {
