@@ -24,7 +24,7 @@ const WaySection = styled.section`
         }
     }
 
-    @media(min-height: 1000px) {
+    @media (min-height: 1000px) {
         height: 55vh;
     }
 
@@ -277,7 +277,7 @@ export default function Way() {
                     trigger: '.way',
                     pin: true,
                     start: 'bottom bottom',
-                    end: `+=${blocks.length * 100}`,
+                    end: `+=${blocks.length * 300}`,
                     scrub: 1,
                     onUpdate: (self) => {
                         const scrollY = self.progress * blocks.length;
@@ -295,9 +295,9 @@ export default function Way() {
 
                         if (newBlockIndex !== currentBlockIndex) {
                             if (newBlockIndex < blocks.length) {
-                                gsap.to(blocks[currentBlockIndex], { opacity: 0, duration: 0});
+                                gsap.to(blocks[currentBlockIndex], { opacity: 0, duration: 0 });
                                 currentBlockIndex = newBlockIndex;
-                                gsap.to(blocks[currentBlockIndex], { opacity: 1, duration: 0});
+                                gsap.to(blocks[currentBlockIndex], { opacity: 1, duration: 0 });
                             }
                             const top = -210 * currentBlockIndex;
                             const linears = document.querySelector('.way__lines') as HTMLElement;
