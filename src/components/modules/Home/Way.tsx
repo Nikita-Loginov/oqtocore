@@ -24,10 +24,6 @@ const WaySection = styled.section`
         }
     }
 
-    @media (min-height: 1000px) {
-        height: 55vh;
-    }
-
     &:before {
         position: absolute;
         content: '';
@@ -284,7 +280,7 @@ export default function Way() {
                         const newBlockIndex = Math.floor(scrollY);
 
                         if (isTallScreen) {
-                            gsap.to('#services', { duration: 0.5, opacity: 0 });
+                            gsap.to('.way', { duration: 0.5, height: "50vh" });
                         }
 
                         gsap.to(title, {
@@ -303,6 +299,10 @@ export default function Way() {
                             const linears = document.querySelector('.way__lines') as HTMLElement;
                             linears.style.top = top + 'px';
                         }
+
+                        // if (newBlockIndex === blocks.length - 3) {
+                        //     gsap.to('.way', { duration: 3, height: "50vh"});
+                        // }
 
                         if (newBlockIndex === 0) {
                             gsap.to('#services', { duration: 0.5, opacity: 1 });

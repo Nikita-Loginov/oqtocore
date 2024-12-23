@@ -9,6 +9,7 @@ import Social from '@/components/shared/Social/Social';
 const HeaderBox = styled.header`
     padding: 20px 0;
     position: fixed;
+    -webkit-backdrop-filter: blur(35.3px);
     width: 100%;
     backdrop-filter: blur(35.3px);
     background: rgba(255, 255, 255, 0.01);
