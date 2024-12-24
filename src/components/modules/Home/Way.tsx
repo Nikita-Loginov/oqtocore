@@ -266,6 +266,7 @@ export default function Way() {
     function handleResize() {
         const isLargeScreen = window.matchMedia('(min-width: 900px)').matches;
         const isTallScreen = window.innerHeight > 1000;
+        let lastScrollY = window.scrollY;
 
         if (isLargeScreen) {
             if (!scrollTrigger) {
@@ -273,7 +274,7 @@ export default function Way() {
                     trigger: '.way',
                     pin: true,
                     start: 'bottom bottom',
-                    end: `+=${blocks.length * 300}`,
+                    end: `+=${blocks.length * 600}`,
                     scrub: 1,
                     onUpdate: (self) => {
                         const scrollY = self.progress * blocks.length;
@@ -287,29 +288,58 @@ export default function Way() {
                             ease: 'power1.inOut',
                         });
 
+                        const isScrollingDown = window.scrollY > lastScrollY;
+                        lastScrollY = window.scrollY; 
+
                         if (newBlockIndex !== currentBlockIndex) {
+                            // console.log(self.progress < currentBlockIndex / blocks.length)
+                            if (!isScrollingDown) {
+                                if (currentBlockIndex === blocks.length - 1) {
+                                    gsap.to('.way', { duration: 1, height: '85vh' });
+                                    console.log('fsdfsd');
+                                } else if (currentBlockIndex === blocks.length - 2) {
+                                    gsap.to('.way', { duration: 1, height: '75vh' });
+                                } else if (currentBlockIndex === blocks.length - 3) {
+                                    gsap.to('.way', { duration: 1, height: '65vh' });
+                                } else if (currentBlockIndex === 3) {
+                                    gsap.to('.way', { duration: 5, height: '85vh' });
+                                }
+                            }
+
                             if (newBlockIndex < blocks.length) {
                                 gsap.to(blocks[currentBlockIndex], { opacity: 0, duration: 0 });
                                 currentBlockIndex = newBlockIndex;
                                 gsap.to(blocks[currentBlockIndex], { opacity: 1, duration: 0 });
-
-                                if (newBlockIndex === blocks.length - 3) {
-                                    gsap.to('.way', { duration: 1, height: "75vh"});
-                                } else if (newBlockIndex === blocks.length - 2) {
-                                    gsap.to('.way', { duration: 1, height: "65vh"});
-                                } else if (newBlockIndex === blocks.length - 1) {
-                                    gsap.to('.way', { duration: 1, height: "55vh"});
+                                console.log(isScrollingDown);
+                                if (isScrollingDown) {
+                                    if (newBlockIndex === blocks.length - 3) {
+                                        gsap.to('.way', { duration: 1, height: '75vh' });
+                                    } else if (newBlockIndex === blocks.length - 2) {
+                                        console.log('55555555555');
+                                        gsap.to('.way', { duration: 1, height: '65vh' });
+                                    } else if (newBlockIndex === blocks.length - 1) {
+                                        gsap.to('.way', { duration: 5, height: '85vh' });
+                                    }
                                 }
                             }
+
                             const top = -210 * currentBlockIndex;
                             const linears = document.querySelector('.way__lines') as HTMLElement;
                             linears.style.top = top + 'px';
                         }
-
-                        // if (newBlockIndex === blocks.length - 1) {
-                        //     gsap.to('.way', { duration: 1, height: "85vh" });
+                        // console.log(self.progress < currentBlockIndex / blocks.length)
+                        // if (self.progress < currentBlockIndex / blocks.length) {
+                        //     console.log(self.progress < currentBlockIndex / blocks.length)
+                        //     if (currentBlockIndex === blocks.length - 1) {
+                        //         gsap.to('.way', { duration: 1, height: '85vh' });
+                        //     } else if (currentBlockIndex === blocks.length - 2) {
+                        //         gsap.to('.way', { duration: 1, height: '65vh' });
+                        //     } else if (currentBlockIndex === blocks.length - 3) {
+                        //         gsap.to('.way', { duration: 1, height: '75vh' });
+                        //     } else if (currentBlockIndex === 0) {
+                        //         gsap.to('.way', { duration: 1, height: '85vh' });
+                        //     }
                         // }
-            
 
                         if (newBlockIndex === 0) {
                             gsap.to('#services', { duration: 0.5, opacity: 1 });

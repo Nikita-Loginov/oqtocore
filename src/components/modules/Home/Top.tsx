@@ -82,7 +82,7 @@ const TopGallaxy = styled.div`
         width: 100%;
         height: 100%;
         inset: 0;
-        opacity: 0;
+        // opacity: 0;
         transition: all 0.5s;
 
         @media (max-width: 767px) {
@@ -96,34 +96,35 @@ const TopGallaxy = styled.div`
             object-position: center;
             width: auto;
         }
+
+        @media (max-width: 400px) {
+            left: -275px;
+            object-position: center;
+            width: auto;
+        }
     }
 `;
 
 export default function Top() {
-    // const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     // const scriptUrl = useMemo(() => './js/lib/3d-gallaxy.js', []);
 
-    // useEffect(() => {
-    //     const script = document.createElement('script');
-    //     script.src = scriptUrl;
-    //     script.type = 'module';
-    //     script.async = true;
-    //     script.onload = () => {
-    //         const lilGuiElement = document.querySelector('.lil-gui') as HTMLElement;
-    //         if (lilGuiElement) {
-    //             lilGuiElement.style.display = 'none';
-    //         }
-    //         // setLoading(false);
-    //     };
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = './js/lib/3d-gallaxy.js';
+        script.type = 'module';
+        script.async = true;
+        script.onload = () => {
+            setLoading(false);
+        };
 
-    //     document.body.appendChild(script);
+        document.body.appendChild(script);
 
-    //     return () => {
-    //         document.body.removeChild(script);
-    //     };
-    // }, [scriptUrl]);
-
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
 
     return (
         <>
@@ -148,9 +149,8 @@ export default function Top() {
                         alt='Loading...'
                     /> */}
                     <TopGallaxy>
-                    <canvas className="webgl"></canvas>
-                    {/* <source srcSet='./images/top/gallaxy.webp 2x' /> */}
-                    {/* {loading ? (
+                        <canvas className='webgl'></canvas>
+                        {loading && (
                             <picture>
                                 <source srcSet='./images/top/preloadChar2x.webp 2x' />
                                 <img
@@ -158,22 +158,27 @@ export default function Top() {
                                     alt='Loading...'
                                 />
                             </picture>
+                        )}
+
+                        {/* <source srcSet='./images/top/gallaxy.webp 2x' /> */}
+                        {/* {loading ? (
+                            
                         ) :  null} */}
                     </TopGallaxy>
                 </Container>
             </TopBox>
 
-            <Script
+            {/* <Script
                 src='./js/lib/3d-gallaxy.js'
                 async
                 type='module'
                 // onLoad={() => {
                 //     const lilGuiElement = document.querySelector('.lil-gui') as HTMLElement;
                 //     if (lilGuiElement) {
-                //         lilGuiElement.style.display = 'none';
+                //         lilGuiElement.style.opacity = '0';
                 //     }
                 // }}
-            />
+            /> */}
         </>
     );
 }
