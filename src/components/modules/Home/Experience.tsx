@@ -3,7 +3,12 @@ import styled from 'styled-components';
 import { Container } from '@/components/widgets';
 
 const ExperienceBox = styled.section`
-    padding: clamp(5rem, 1.7954rem + 12.3552vw, 15rem) 0 clamp(7.5rem, 5.0965rem + 9.2664vw, 15rem);
+    // padding: clamp(5rem, 1.7954rem + 12.3552vw, 15rem) 0 clamp(7.5rem, 5.0965rem + 9.2664vw, 15rem);
+    padding: 0 0 clamp(7.5rem, 5.0965rem + 9.2664vw, 15rem);
+
+    @media (max-width: 900px) {
+        padding: clamp(5rem, 1.7954rem + 12.3552vw, 15rem) 0 clamp(7.5rem, 5.0965rem + 9.2664vw, 15rem);
+    }
 `;
 
 const ExperienceInner = styled.div`

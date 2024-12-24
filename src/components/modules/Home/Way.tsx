@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Script from 'next/script';
+// import Script from 'next/script';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import styled from 'styled-components';
@@ -9,15 +9,30 @@ import { Container } from '@/components/widgets';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const WaySection = styled.section`
-    background-color: rgb(43, 36, 255);
-    padding: clamp(1.25rem, 0.8507rem + 1.5432vw, 2.5rem) 0 0 0;
-    height: 85vh;
-    overflow: hidden;
+const WayAnimation = styled.section`
     position: relative;
+    height: 85vh;
+    padding: clamp(1.25rem, 0.8507rem + 1.5432vw, 2.5rem) 0 0 0;
 
     @media (max-width: 900px) {
         height: auto;
+    }
+`;
+
+const WaySection = styled.div`
+    background-color: rgb(43, 36, 255);
+    padding: clamp(1.25rem, 0.8507rem + 1.5432vw, 2.5rem) 0 0 0;
+    overflow: hidden;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+
+    @media (max-width: 900px) {
+        height: auto;
+        position:static;
 
         &:before {
             display: none;
@@ -238,26 +253,12 @@ const WayItemText = styled.p`
 
 export default function Way() {
     // const mediaQuery = window.matchMedia('(max-width: 900px)');
-    let smoothScroll;
     const [isSmoothScrollLoaded, setIsSmoothScrollLoaded] = useState(false);
     let isScrolling;
     let blocks = [];
     let title = undefined;
     let scrollTrigger = null;
     let currentBlockIndex = 0;
-
-    const handleScriptLoad = () => {
-        setIsSmoothScrollLoaded(true);
-    };
-
-    function initSmoothScroll() {
-        smoothScroll = new (window as any).SmoothScroll({
-            stepSize: 100,
-            keyboardSupport: true,
-            arrowScroll: 100,
-            touchpadSupport: true,
-        });
-    }
 
     blocks.forEach((block, index) => {
         gsap.set(block, { opacity: index === 0 ? 1 : 0 });
@@ -271,54 +272,64 @@ export default function Way() {
         if (isLargeScreen) {
             if (!scrollTrigger) {
                 scrollTrigger = ScrollTrigger.create({
-                    trigger: '.way',
+                    trigger: '.way-animaton',
                     pin: true,
                     start: 'bottom bottom',
-                    end: `+=${blocks.length * 600}`,
+                    end: `+=${blocks.length * 900}`,
                     scrub: 1,
                     onUpdate: (self) => {
                         const scrollY = self.progress * blocks.length;
                         const newBlockIndex = Math.floor(scrollY);
 
-                        gsap.to('#services', { duration: 0.5, opacity: 0 });
-
-                        gsap.to(title, {
-                            opacity: newBlockIndex === 0 ? 1 : 0,
-                            duration: 0,
-                            ease: 'power1.inOut',
-                        });
-
                         const isScrollingDown = window.scrollY > lastScrollY;
-                        lastScrollY = window.scrollY; 
+                        lastScrollY = window.scrollY;
 
                         if (newBlockIndex !== currentBlockIndex) {
-                            // console.log(self.progress < currentBlockIndex / blocks.length)
-                            if (!isScrollingDown) {
-                                if (currentBlockIndex === blocks.length - 1) {
-                                    gsap.to('.way', { duration: 1, height: '85vh' });
-                                    console.log('fsdfsd');
-                                } else if (currentBlockIndex === blocks.length - 2) {
-                                    gsap.to('.way', { duration: 1, height: '75vh' });
-                                } else if (currentBlockIndex === blocks.length - 3) {
-                                    gsap.to('.way', { duration: 1, height: '65vh' });
-                                } else if (currentBlockIndex === 3) {
-                                    gsap.to('.way', { duration: 5, height: '85vh' });
-                                }
-                            }
-
                             if (newBlockIndex < blocks.length) {
                                 gsap.to(blocks[currentBlockIndex], { opacity: 0, duration: 0 });
+
                                 currentBlockIndex = newBlockIndex;
+                                
                                 gsap.to(blocks[currentBlockIndex], { opacity: 1, duration: 0 });
-                                console.log(isScrollingDown);
+
                                 if (isScrollingDown) {
                                     if (newBlockIndex === blocks.length - 3) {
-                                        gsap.to('.way', { duration: 1, height: '75vh' });
+                                        gsap.to('.way', {
+                                            height: "85vh",
+                                            duration: 0.5,
+                                        })
+                                        scrollTrigger.refresh()
                                     } else if (newBlockIndex === blocks.length - 2) {
-                                        console.log('55555555555');
-                                        gsap.to('.way', { duration: 1, height: '65vh' });
+                                        gsap.to('.way', {
+                                            height: "75vh",
+                                            duration: 0.5,
+                                        }),
+                                        gsap.to('.way-animaton', {height: "75vh",
+                                            duration: 0.5,})
+                                        scrollTrigger.refresh()
                                     } else if (newBlockIndex === blocks.length - 1) {
-                                        gsap.to('.way', { duration: 5, height: '85vh' });
+                                        gsap.to('.way', {
+                                            height: "65vh",
+                                            duration: 0.5,
+                                        });
+                                        scrollTrigger.refresh()
+                                    }
+                                } else  {
+                                    if (newBlockIndex === blocks.length - 3) {
+                                        gsap.to('.way', {
+                                            height: "85vh",
+                                            duration: 0.5,
+                                        })
+                                    } else if (newBlockIndex === blocks.length - 2) {
+                                        gsap.to('.way', {
+                                            height: "75vh",
+                                            duration: 0.5,
+                                        });
+                                    } else if (newBlockIndex === blocks.length - 1) {
+                                        gsap.to('.way', {
+                                            height: "65vh",
+                                            duration: 0.5,
+                                        });
                                     }
                                 }
                             }
@@ -327,19 +338,14 @@ export default function Way() {
                             const linears = document.querySelector('.way__lines') as HTMLElement;
                             linears.style.top = top + 'px';
                         }
-                        // console.log(self.progress < currentBlockIndex / blocks.length)
-                        // if (self.progress < currentBlockIndex / blocks.length) {
-                        //     console.log(self.progress < currentBlockIndex / blocks.length)
-                        //     if (currentBlockIndex === blocks.length - 1) {
-                        //         gsap.to('.way', { duration: 1, height: '85vh' });
-                        //     } else if (currentBlockIndex === blocks.length - 2) {
-                        //         gsap.to('.way', { duration: 1, height: '65vh' });
-                        //     } else if (currentBlockIndex === blocks.length - 3) {
-                        //         gsap.to('.way', { duration: 1, height: '75vh' });
-                        //     } else if (currentBlockIndex === 0) {
-                        //         gsap.to('.way', { duration: 1, height: '85vh' });
-                        //     }
-                        // }
+
+                        gsap.to('#services', { duration: 0.5, opacity: 0 });
+
+                        gsap.to(title, {
+                            opacity: newBlockIndex === 0 ? 1 : 0,
+                            duration: 0,
+                            ease: 'power1.inOut',
+                        });
 
                         if (newBlockIndex === 0) {
                             gsap.to('#services', { duration: 0.5, opacity: 1 });
@@ -376,12 +382,6 @@ export default function Way() {
     }
 
     useEffect(() => {
-        if (isSmoothScrollLoaded) {
-            initSmoothScroll();
-        }
-    }, [isSmoothScrollLoaded]);
-
-    useEffect(() => {
         blocks = Array.from(document.querySelectorAll('.way__item'));
         title = document.querySelector('.way__title');
     }, []);
@@ -397,241 +397,238 @@ export default function Way() {
 
     return (
         <>
-            <WaySection className='way'>
-                <Container>
-                    <div className='way__inner'>
-                        <WayContent>
-                            <WayTitle className='way__title'>Your way with us</WayTitle>
+            <WayAnimation className='way-animaton'>
+                <WaySection className='way'>
+                    <Container>
+                        <div className='way__inner'>
+                            <WayContent>
+                                <WayTitle className='way__title'>Your way with us</WayTitle>
 
-                            <WayAnimationBox className='way__box'>
-                                <WayLines className='way__lines'>
-                                    <WayLine></WayLine>
-                                    <WayLine></WayLine>
-                                    <WayLine></WayLine>
-                                    <WayLine></WayLine>
-                                    <WayLine></WayLine>
-                                    <WayLine></WayLine>
-                                    <WayLine></WayLine>
-                                    <WayLine></WayLine>
-                                </WayLines>
+                                <WayAnimationBox className='way__box'>
+                                    <WayLines className='way__lines'>
+                                        <WayLine></WayLine>
+                                        <WayLine></WayLine>
+                                        <WayLine></WayLine>
+                                        <WayLine></WayLine>
+                                        <WayLine></WayLine>
+                                        <WayLine></WayLine>
+                                        <WayLine></WayLine>
+                                        <WayLine></WayLine>
+                                    </WayLines>
 
-                                <WayItems>
-                                    <WayItem className='way__item'>
-                                        <WayItemContents className='way__item-contents'>
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>First met</WayItemTitle>
-                                            </WayItemContent>
-                                        </WayItemContents>
-                                    </WayItem>
+                                    <WayItems>
+                                        <WayItem className='way__item'>
+                                            <WayItemContents className='way__item-contents'>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>First met</WayItemTitle>
+                                                </WayItemContent>
+                                            </WayItemContents>
+                                        </WayItem>
 
-                                    <WayItem className='way__item'>
-                                        <WayItemContents className='way__item-contents'>
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>Estimate pricing</WayItemTitle>
+                                        <WayItem className='way__item'>
+                                            <WayItemContents className='way__item-contents'>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>Estimate pricing</WayItemTitle>
 
-                                                <WayItemText>
-                                                    Should be some description here
-                                                </WayItemText>
-                                            </WayItemContent>
-                                        </WayItemContents>
-                                    </WayItem>
+                                                    <WayItemText>
+                                                        Should be some description here
+                                                    </WayItemText>
+                                                </WayItemContent>
+                                            </WayItemContents>
+                                        </WayItem>
 
-                                    <WayItem className='way__item'>
-                                        <WayItemContents className='way__item-contents'>
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>Details discussion</WayItemTitle>
+                                        <WayItem className='way__item'>
+                                            <WayItemContents className='way__item-contents'>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>Details discussion</WayItemTitle>
 
-                                                <WayItemText>
-                                                    We begin by clarifying your requirements and
-                                                    understanding your budget target. Our architect
-                                                    will guide you through the cost estimation for
-                                                    each feature right on call, ensuring
-                                                    transparency and feasibility.
-                                                </WayItemText>
-                                            </WayItemContent>
+                                                    <WayItemText>
+                                                        We begin by clarifying your requirements and
+                                                        understanding your budget target. Our
+                                                        architect will guide you through the cost
+                                                        estimation for each feature right on call,
+                                                        ensuring transparency and feasibility.
+                                                    </WayItemText>
+                                                </WayItemContent>
 
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>Outcome:</WayItemTitle>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>Outcome:</WayItemTitle>
 
-                                                <WayItemText>
-                                                    A detailed feature list paired with your budget
-                                                    preferences, giving us a clear direction for the
-                                                    project.
-                                                </WayItemText>
-                                            </WayItemContent>
-                                        </WayItemContents>
-                                    </WayItem>
+                                                    <WayItemText>
+                                                        A detailed feature list paired with your
+                                                        budget preferences, giving us a clear
+                                                        direction for the project.
+                                                    </WayItemText>
+                                                </WayItemContent>
+                                            </WayItemContents>
+                                        </WayItem>
 
-                                    <WayItem className='way__item'>
-                                        <WayItemContents className='way__item-contents'>
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>
-                                                    Proposal and Roadmap Development
-                                                </WayItemTitle>
+                                        <WayItem className='way__item'>
+                                            <WayItemContents className='way__item-contents'>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>
+                                                        Proposal and Roadmap Development
+                                                    </WayItemTitle>
 
-                                                <WayItemText>
-                                                    We create a comprehensive commercial proposal
-                                                    and a high-level project timeline. This roadmap
-                                                    incorporates your preferences, desired features,
-                                                    and estimated delivery timeframes, providing a
-                                                    clear view of the project's structure.
-                                                </WayItemText>
-                                            </WayItemContent>
+                                                    <WayItemText>
+                                                        We create a comprehensive commercial
+                                                        proposal and a high-level project timeline.
+                                                        This roadmap incorporates your preferences,
+                                                        desired features, and estimated delivery
+                                                        timeframes, providing a clear view of the
+                                                        project's structure.
+                                                    </WayItemText>
+                                                </WayItemContent>
 
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>Outcome:</WayItemTitle>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>Outcome:</WayItemTitle>
 
-                                                <WayItemText>
-                                                    A detailed proposal outlining the total project
-                                                    cost and a roadmap tailored to your goals and
-                                                    deadlines.
-                                                </WayItemText>
-                                            </WayItemContent>
-                                        </WayItemContents>
-                                    </WayItem>
+                                                    <WayItemText>
+                                                        A detailed proposal outlining the total
+                                                        project cost and a roadmap tailored to your
+                                                        goals and deadlines.
+                                                    </WayItemText>
+                                                </WayItemContent>
+                                            </WayItemContents>
+                                        </WayItem>
 
-                                    <WayItem className='way__item'>
-                                        <WayItemContents className='way__item-contents'>
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>Initial Payment</WayItemTitle>
+                                        <WayItem className='way__item'>
+                                            <WayItemContents className='way__item-contents'>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>Initial Payment</WayItemTitle>
 
-                                                <WayItemText>
-                                                    The project follows a monthly payment structure,
-                                                    with the total cost divided into equal
-                                                    installments based on the project duration. The
-                                                    first payment, covering two months, is made
-                                                    upfront. Starting from the third month, payments
-                                                    continue on a monthly basis.
-                                                </WayItemText>
-                                            </WayItemContent>
-                                        </WayItemContents>
-                                    </WayItem>
+                                                    <WayItemText>
+                                                        The project follows a monthly payment
+                                                        structure, with the total cost divided into
+                                                        equal installments based on the project
+                                                        duration. The first payment, covering two
+                                                        months, is made upfront. Starting from the
+                                                        third month, payments continue on a monthly
+                                                        basis.
+                                                    </WayItemText>
+                                                </WayItemContent>
+                                            </WayItemContents>
+                                        </WayItem>
 
-                                    <WayItem className='way__item'>
-                                        <WayItemContents className='way__item-contents'>
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>Development Kickoff</WayItemTitle>
+                                        <WayItem className='way__item'>
+                                            <WayItemContents className='way__item-contents'>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>Development Kickoff</WayItemTitle>
 
-                                                <WayItemText>
-                                                    Our dedicated developers are assigned to your
-                                                    project and begin by getting familiar with its
-                                                    specifics. This stage includes conducting
-                                                    customer interviews, gathering detailed
-                                                    insights, and drafting the technical
-                                                    requirements (specifications).
-                                                </WayItemText>
-                                            </WayItemContent>
+                                                    <WayItemText>
+                                                        Our dedicated developers are assigned to
+                                                        your project and begin by getting familiar
+                                                        with its specifics. This stage includes
+                                                        conducting customer interviews, gathering
+                                                        detailed insights, and drafting the
+                                                        technical requirements (specifications).
+                                                    </WayItemText>
+                                                </WayItemContent>
 
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>Outcome: </WayItemTitle>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>Outcome: </WayItemTitle>
 
-                                                <WayItemText>
-                                                    A well-prepared team and a clear set of
-                                                    technical specifications to ensure a smooth
-                                                    development process.
-                                                </WayItemText>
-                                            </WayItemContent>
-                                        </WayItemContents>
-                                    </WayItem>
+                                                    <WayItemText>
+                                                        A well-prepared team and a clear set of
+                                                        technical specifications to ensure a smooth
+                                                        development process.
+                                                    </WayItemText>
+                                                </WayItemContent>
+                                            </WayItemContents>
+                                        </WayItem>
 
-                                    <WayItem className='way__item'>
-                                        <WayItemContents className='way__item-contents'>
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>
-                                                    Detailed Technical Specification Preparation
-                                                </WayItemTitle>
+                                        <WayItem className='way__item'>
+                                            <WayItemContents className='way__item-contents'>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>
+                                                        Detailed Technical Specification Preparation
+                                                    </WayItemTitle>
 
-                                                <WayItemText>
-                                                    We create a comprehensive and highly detailed
-                                                    technical specification, outlining every aspect
-                                                    of the project. This document serves as a
-                                                    blueprint for development, ensuring clarity and
-                                                    alignment on all technical and functional
-                                                    requirements.
-                                                </WayItemText>
-                                            </WayItemContent>
+                                                    <WayItemText>
+                                                        We create a comprehensive and highly
+                                                        detailed technical specification, outlining
+                                                        every aspect of the project. This document
+                                                        serves as a blueprint for development,
+                                                        ensuring clarity and alignment on all
+                                                        technical and functional requirements.
+                                                    </WayItemText>
+                                                </WayItemContent>
 
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>Outcome:</WayItemTitle>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>Outcome:</WayItemTitle>
 
-                                                <WayItemText>
-                                                    A finalized, in-depth technical specification
-                                                    that guides the development process and
-                                                    minimizes misunderstandings.
-                                                </WayItemText>
-                                            </WayItemContent>
-                                        </WayItemContents>
-                                    </WayItem>
+                                                    <WayItemText>
+                                                        A finalized, in-depth technical
+                                                        specification that guides the development
+                                                        process and minimizes misunderstandings.
+                                                    </WayItemText>
+                                                </WayItemContent>
+                                            </WayItemContents>
+                                        </WayItem>
 
-                                    <WayItem className='way__item'>
-                                        <WayItemContents className='way__item-contents'>
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>MVP Launch</WayItemTitle>
+                                        <WayItem className='way__item'>
+                                            <WayItemContents className='way__item-contents'>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>MVP Launch</WayItemTitle>
 
-                                                <WayItemText>
-                                                    The first production release of your product is
-                                                    delivered. This version is ready for promotion,
-                                                    user metrics measurement, and business model
-                                                    validation, serving as a solid foundation for
-                                                    future iterations.
-                                                </WayItemText>
-                                            </WayItemContent>
+                                                    <WayItemText>
+                                                        The first production release of your product
+                                                        is delivered. This version is ready for
+                                                        promotion, user metrics measurement, and
+                                                        business model validation, serving as a
+                                                        solid foundation for future iterations.
+                                                    </WayItemText>
+                                                </WayItemContent>
 
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>Outcome:</WayItemTitle>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>Outcome:</WayItemTitle>
 
-                                                <WayItemText>
-                                                    A functional MVP that enables real-world testing
-                                                    and provides actionable insights for scaling and
-                                                    refinement.
-                                                </WayItemText>
-                                            </WayItemContent>
-                                        </WayItemContents>
-                                    </WayItem>
+                                                    <WayItemText>
+                                                        A functional MVP that enables real-world
+                                                        testing and provides actionable insights for
+                                                        scaling and refinement.
+                                                    </WayItemText>
+                                                </WayItemContent>
+                                            </WayItemContents>
+                                        </WayItem>
 
-                                    <WayItem className='way__item'>
-                                        <WayItemContents className='way__item-contents'>
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>
-                                                    Technical Specification Revision (Pivot
-                                                    Opportunity)
-                                                </WayItemTitle>
+                                        <WayItem className='way__item'>
+                                            <WayItemContents className='way__item-contents'>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>
+                                                        Technical Specification Revision (Pivot
+                                                        Opportunity)
+                                                    </WayItemTitle>
 
-                                                <WayItemText>
-                                                    We offer a unique opportunity to revise the
-                                                    technical specification and shift the project's
-                                                    direction at no additional cost. As
-                                                    result-focused partner, we understand the
-                                                    importance of flexibility in adapting to new
-                                                    insights and changing priorities.
-                                                </WayItemText>
-                                            </WayItemContent>
+                                                    <WayItemText>
+                                                        We offer a unique opportunity to revise the
+                                                        technical specification and shift the
+                                                        project's direction at no additional cost.
+                                                        As result-focused partner, we understand the
+                                                        importance of flexibility in adapting to new
+                                                        insights and changing priorities.
+                                                    </WayItemText>
+                                                </WayItemContent>
 
-                                            <WayItemContent className='way__item-content'>
-                                                <WayItemTitle>Outcome:</WayItemTitle>
+                                                <WayItemContent className='way__item-content'>
+                                                    <WayItemTitle>Outcome:</WayItemTitle>
 
-                                                <WayItemText>
-                                                    A refined technical specification aligned with
-                                                    your updated goals, ensuring the project remains
-                                                    on the right track for success.
-                                                </WayItemText>
-                                            </WayItemContent>
-                                        </WayItemContents>
-                                    </WayItem>
-                                </WayItems>
-                            </WayAnimationBox>
-                        </WayContent>
-                    </div>
-                </Container>
-            </WaySection>
-
-            <Script
-                src='./js/lib/smoothScroll.js'
-                integrity='sha256-huW7yWl7tNfP7lGk46XE+Sp0nCotjzYodhVKlwaNeco='
-                crossOrigin='anonymous'
-                async
-                onLoad={handleScriptLoad}
-            />
+                                                    <WayItemText>
+                                                        A refined technical specification aligned
+                                                        with your updated goals, ensuring the
+                                                        project remains on the right track for
+                                                        success.
+                                                    </WayItemText>
+                                                </WayItemContent>
+                                            </WayItemContents>
+                                        </WayItem>
+                                    </WayItems>
+                                </WayAnimationBox>
+                            </WayContent>
+                        </div>
+                    </Container>
+                </WaySection>
+            </WayAnimation>
         </>
     );
 }

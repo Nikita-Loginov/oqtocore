@@ -1,6 +1,8 @@
 'use client';
 import React from 'react';
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic'
+import Script from 'next/script';
 import { useInView } from 'react-intersection-observer';
 import Top from '@/components/modules/Home/Top';
 import { Services, Stories, Header, Footer } from '@/components/widgets';
@@ -26,6 +28,29 @@ export default function Home() {
         rootMargin: '100px 0px 0px 0px',
         triggerOnce: false,
     });
+    const [isSmoothScrollLoaded, setIsSmoothScrollLoaded] = useState(false);
+
+    let smoothScroll;
+
+     function handleScriptLoad () {
+        setIsSmoothScrollLoaded(true);
+    };
+
+    
+    // function initSmoothScroll() {
+    //     smoothScroll = new (window as any).SmoothScroll({
+    //         stepSize: 100,
+    //         keyboardSupport: true,
+    //         arrowScroll: 100,
+    //         touchpadSupport: true,
+    //     });
+    // }
+
+    // useEffect(() => {
+    //     if (isSmoothScrollLoaded) {
+    //         initSmoothScroll();
+    //     }
+    // }, [isSmoothScrollLoaded]);
 
     React.useEffect(() => {
         const header = document.querySelector('.header');
@@ -58,6 +83,14 @@ export default function Home() {
             </main>
 
             <Footer />
+
+            <Script
+                src='./js/lib/smoothScroll.js'
+                integrity='sha256-huW7yWl7tNfP7lGk46XE+Sp0nCotjzYodhVKlwaNeco='
+                crossOrigin='anonymous'
+                async
+                onLoad={handleScriptLoad}
+            />
         </>
     );
 }
