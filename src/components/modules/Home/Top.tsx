@@ -152,9 +152,9 @@ export default function Top() {
                         <canvas className='webgl'></canvas>
                         {loading && (
                             <picture>
-                                <source srcSet='./images/top/preloadChar2x.webp 2x' />
+                                <source srcSet='./images/top/preloaderChar.webp 2x' />
                                 <img
-                                    src='./images/top/preloader.webp'
+                                    src='./images/top/preloaderChar.webp'
                                     alt='Loading...'
                                 />
                             </picture>

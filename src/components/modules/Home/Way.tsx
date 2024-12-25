@@ -244,7 +244,7 @@ const WayItemTitle = styled.h3`
 `;
 
 const WayItemText = styled.p`
-    font-weight: 600;
+    font-weight: 400;
 
     @media (max-width: 900px) {
         color: #a9a6ff;
@@ -273,10 +273,10 @@ export default function Way() {
         if (!isTallScreen && isLargeScreen) {
             const experienceBlock = document.querySelector('.experience') as HTMLElement;
             experienceBlock.style.padding = 'clamp(5rem, 1.7954rem + 12.3552vw, 15rem) 0';
-            speedAnimation = blocks.length * 300
+            speedAnimation = blocks.length * 300;
         }
 
-        console.log(speedAnimation)
+        console.log(speedAnimation);
 
         if (isLargeScreen) {
             if (!scrollTrigger) {
@@ -303,10 +303,6 @@ export default function Way() {
 
                                 if (isTallScreen) {
                                     // gsap.to('.experience', {
-                                    //     opacity: 0,
-                                    //     duration: 0,
-                                    // })
-                                    // gsap.to('.experience', {
                                     //     y: -200,
                                     //     opacity: 1,
                                     //     duration: 0.5,
@@ -328,13 +324,13 @@ export default function Way() {
                                                 height: '70vh',
                                                 duration: 0.5,
                                             }),
-                                            scrollTrigger.refresh();
+                                                scrollTrigger.refresh();
                                         } else if (newBlockIndex === blocks.length - 1) {
                                             gsap.to('.way', {
                                                 height: '55vh',
                                                 duration: 0.5,
                                             });
-                                            
+
                                             scrollTrigger.refresh();
                                         }
                                     } else {
@@ -349,16 +345,15 @@ export default function Way() {
                                                 height: '75vh',
                                                 duration: 0.5,
                                             });
-                                            // gsap.to('.experience', {
-                                            //     opacity: 0,
-                                            //     duration: 0,
-                                            // })
+
                                             scrollTrigger.refresh();
                                         } else if (newBlockIndex === blocks.length - 1) {
                                             gsap.to('.way', {
                                                 height: '70vh',
                                                 duration: 2,
                                             });
+
+                                        
                                             scrollTrigger.refresh();
                                         }
                                     }
@@ -392,25 +387,25 @@ export default function Way() {
         }
     }
 
-    function checkHeights() {
-        blocks.forEach((item) => {
-            let maxHeight = -1;
-            const wayItemContentBox = item.querySelector('.way__item-contents') as HTMLElement;
-            const wayItemContent = wayItemContentBox.querySelectorAll('.way__item-content');
+    // function checkHeights() {
+    //     blocks.forEach((item) => {
+    //         let maxHeight = -1;
+    //         const wayItemContentBox = item.querySelector('.way__item-contents') as HTMLElement;
+    //         const wayItemContent = wayItemContentBox.querySelectorAll('.way__item-content');
 
-            if (window.innerWidth < 900) {
-                wayItemContentBox.style.height = 'auto';
-            } else {
-                if (wayItemContent.length >= 2) {
-                    wayItemContent.forEach((itemContent) => {
-                        itemContent.setAttribute('style', 'align-self: start; margin-top: auto;');
-                        maxHeight = Math.max(maxHeight, (itemContent as HTMLElement).clientHeight);
-                    });
-                    wayItemContentBox.style.height = maxHeight + 'px';
-                }
-            }
-        });
-    }
+    //         if (window.innerWidth < 900) {
+    //             wayItemContentBox.style.height = 'auto';
+    //         } else {
+    //             if (wayItemContent.length >= 2) {
+    //                 wayItemContent.forEach((itemContent) => {
+    //                     itemContent.setAttribute('style', 'align-self: start; margin-top: auto;');
+    //                     maxHeight = Math.max(maxHeight, (itemContent as HTMLElement).clientHeight);
+    //                 });
+    //                 wayItemContentBox.style.height = maxHeight + 'px';
+    //             }
+    //         }
+    //     });
+    // }
 
     useEffect(() => {
         blocks = Array.from(document.querySelectorAll('.way__item'));
@@ -419,10 +414,10 @@ export default function Way() {
 
     useEffect(() => {
         handleResize();
-        checkHeights();
+        // checkHeights();
         window.addEventListener('resize', () => {
             handleResize();
-            checkHeights();
+            // checkHeights();
         });
     }, []);
 
@@ -462,7 +457,9 @@ export default function Way() {
                                                     <WayItemTitle>Estimate pricing</WayItemTitle>
 
                                                     <WayItemText>
-                                                        Should be some description here
+                                                        Client schedules the call We start with
+                                                        discussing your needs and counting estimate
+                                                        project pricing
                                                     </WayItemText>
                                                 </WayItemContent>
                                             </WayItemContents>

@@ -61,7 +61,7 @@ const HeaderList = styled.ul`
 const HeaderLinkInfo = styled.a`
     line-height: 1.35;
     font-weight: 600;
-    font-size: 14px;
+    font-size: clamp(0.875rem, -0.5742rem + 1.3559vw, 1.375rem);
     color: #fff;
     transition: all 0.5s;
 
