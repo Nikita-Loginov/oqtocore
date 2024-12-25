@@ -272,7 +272,7 @@ export default function Way() {
 
         if (!isTallScreen && isLargeScreen) {
             const experienceBlock = document.querySelector('.experience') as HTMLElement;
-            experienceBlock.style.paddingTop = 'clamp(5rem, 1.7954rem + 12.3552vw, 15rem)';
+            experienceBlock.style.padding = 'clamp(5rem, 1.7954rem + 12.3552vw, 15rem) 0';
             speedAnimation = blocks.length * 300
         }
 
@@ -302,28 +302,39 @@ export default function Way() {
                                 gsap.to(blocks[currentBlockIndex], { opacity: 1, duration: 0 });
 
                                 if (isTallScreen) {
+                                    // gsap.to('.experience', {
+                                    //     opacity: 0,
+                                    //     duration: 0,
+                                    // })
+                                    // gsap.to('.experience', {
+                                    //     y: -200,
+                                    //     opacity: 1,
+                                    //     duration: 0.5,
+                                    // });
                                     if (isScrollingDown) {
                                         if (newBlockIndex === blocks.length - 3) {
                                             gsap.to('.way', {
                                                 height: '85vh',
                                                 duration: 0.5,
                                             });
+                                            // gsap.to('.experience', {
+                                            //     y: -200,
+                                            //     opacity: 1,
+                                            //     duration: 0.5,
+                                            // });
                                             scrollTrigger.refresh();
                                         } else if (newBlockIndex === blocks.length - 2) {
                                             gsap.to('.way', {
-                                                height: '65vh',
+                                                height: '70vh',
                                                 duration: 0.5,
                                             }),
-                                                gsap.to('.way-animaton', {
-                                                    height: '75vh',
-                                                    duration: 0.5,
-                                                });
                                             scrollTrigger.refresh();
                                         } else if (newBlockIndex === blocks.length - 1) {
                                             gsap.to('.way', {
-                                                height: '50vh',
+                                                height: '55vh',
                                                 duration: 0.5,
                                             });
+                                            
                                             scrollTrigger.refresh();
                                         }
                                     } else {
@@ -332,16 +343,23 @@ export default function Way() {
                                                 height: '85vh',
                                                 duration: 0.5,
                                             });
+                                            scrollTrigger.refresh();
                                         } else if (newBlockIndex === blocks.length - 2) {
                                             gsap.to('.way', {
                                                 height: '75vh',
                                                 duration: 0.5,
                                             });
+                                            // gsap.to('.experience', {
+                                            //     opacity: 0,
+                                            //     duration: 0,
+                                            // })
+                                            scrollTrigger.refresh();
                                         } else if (newBlockIndex === blocks.length - 1) {
                                             gsap.to('.way', {
-                                                height: '50vh',
-                                                duration: 0.5,
+                                                height: '70vh',
+                                                duration: 2,
                                             });
+                                            scrollTrigger.refresh();
                                         }
                                     }
                                 }

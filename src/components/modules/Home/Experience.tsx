@@ -9,6 +9,10 @@ const ExperienceBox = styled.section`
     @media (max-width: 900px) {
         padding: clamp(5rem, 1.7954rem + 12.3552vw, 15rem) 0 clamp(7.5rem, 5.0965rem + 9.2664vw, 15rem);
     }
+
+    @media(min-width: 901px) and (min-height: 1000px) {
+        margin-top: -100px;
+    }
 `;
 
 const ExperienceInner = styled.div`
