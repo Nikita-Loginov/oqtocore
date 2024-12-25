@@ -37,20 +37,22 @@ export default function Home() {
     };
 
     
-    // function initSmoothScroll() {
-    //     smoothScroll = new (window as any).SmoothScroll({
-    //         stepSize: 100,
-    //         keyboardSupport: true,
-    //         arrowScroll: 100,
-    //         touchpadSupport: true,
-    //     });
-    // }
+    function initSmoothScroll() {
+        smoothScroll = new (window as any).SmoothScroll({
+            stepSize: 100,
+            keyboardSupport: true,
+            arrowScroll: 100,
+            touchpadSupport: true,
+        });
 
-    // useEffect(() => {
-    //     if (isSmoothScrollLoaded) {
-    //         initSmoothScroll();
-    //     }
-    // }, [isSmoothScrollLoaded]);
+        console.log(smoothScroll)
+    }
+
+    useEffect(() => {
+        if (isSmoothScrollLoaded) {
+            initSmoothScroll();
+        }
+    }, [isSmoothScrollLoaded]);
 
     React.useEffect(() => {
         const header = document.querySelector('.header');

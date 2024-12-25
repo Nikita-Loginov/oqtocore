@@ -69,7 +69,7 @@ const ExperienceItemText = styled.p`
 
 export default function Experience() {
     return (
-        <ExperienceBox>
+        <ExperienceBox className='experience'>
             <Container>
                 <ExperienceInner>
                     <ExperienceTitle>Experience</ExperienceTitle>
