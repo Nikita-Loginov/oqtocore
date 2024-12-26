@@ -11,7 +11,7 @@ const ExperienceBox = styled.section`
     }
 
     @media(min-width: 901px) and (min-height: 1000px) {
-        margin-top: -120px;
+        // margin-top: -220px;
     }
 `;
 

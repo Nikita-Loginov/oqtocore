@@ -76,32 +76,33 @@ const TopGallaxy = styled.div`
 
     img {
         object-fit: cover;
-        object-position: right;
+        object-position: center;
         position: absolute;
         object-fit: cover;
         width: 100%;
         height: 100%;
         inset: 0;
         // opacity: 0;
+        top: 95px;
         transition: all 0.5s;
 
-        @media (max-width: 767px) {
-            left: -179px;
-            object-position: center;
-            width: auto;
-        }
+        // @media (max-width: 767px) {
+        //     left: -179px;
+        //     object-position: center;
+        //     width: auto;
+        // }
 
-        @media (max-width: 650px) {
-            left: -250px;
-            object-position: center;
-            width: auto;
-        }
+        // @media (max-width: 650px) {
+        //     left: -250px;
+        //     object-position: center;
+        //     width: auto;
+        // }
 
-        @media (max-width: 400px) {
-            left: -275px;
-            object-position: center;
-            width: auto;
-        }
+        // @media (max-width: 400px) {
+        //     left: -275px;
+        //     object-position: center;
+        //     width: auto;
+        // }
     }
 `;
 
@@ -152,9 +153,9 @@ export default function Top() {
                         <canvas className='webgl'></canvas>
                         {loading && (
                             <picture>
-                                <source srcSet='./images/top/preloaderChar.webp 2x' />
+                                {/* <source srcSet='./images/top/preloaderChar.webp 2x' /> */}
                                 <img
-                                    src='./images/top/preloaderChar.webp'
+                                    src='./images/top/preloaderChar.png'
                                     alt='Loading...'
                                 />
                             </picture>
