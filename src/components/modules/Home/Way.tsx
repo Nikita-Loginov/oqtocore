@@ -281,7 +281,7 @@ export default function Way() {
       experienceBlock.style.padding =
         "clamp(5rem, 1.7954rem + 12.3552vw, 15rem) 0";
       speedAnimation = blocks.length * 300;
-      currentStartAnimation = '0';
+      currentStartAnimation = 0;
       currentTrigerBlock = '.way-animaton'
     }
 
