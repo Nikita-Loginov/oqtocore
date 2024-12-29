@@ -43,7 +43,7 @@ export default function Home() {
       touchpadSupport: true,
     });
 
-    console.log(smoothScroll);
+    // console.log(smoothScroll);
   }
 
   useEffect(() => {
@@ -72,9 +72,13 @@ export default function Home() {
 
         <Services />
 
-        <Way />
+        <div className="animation-block">
+            <Way />
 
-        <Experience />
+            <Experience />
+        </div>
+
+        
 
         <Stories />
 
