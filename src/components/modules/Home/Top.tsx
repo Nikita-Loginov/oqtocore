@@ -1,9 +1,15 @@
 'use client';
 import { useEffect, useState, useMemo } from 'react';
 import Script from 'next/script';
+import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import LinkUniq from '@/components/controls/LinkUniq/LinkUniq';
 import { Container } from '@/components/widgets';
+
+const Galaxy = dynamic(() => import('@/components/widgets/Galaxy/Galaxy'), {
+    ssr: false,
+    loading: () => <></>
+});
 
 const TopBox = styled.section`
     padding: clamp(6.5625rem, 4.4595rem + 8.1081vw, 13.125rem) 0
@@ -108,24 +114,27 @@ const TopGallaxy = styled.div`
 
 export default function Top() {
     const [loading, setLoading] = useState(true);
+    const handleSetClient = () => {
+        setLoading(true);
+      };
 
     // const scriptUrl = useMemo(() => './js/lib/3d-gallaxy.js', []);
 
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = './js/lib/3d-gallaxy.js';
-        script.type = 'module';
-        script.async = true;
-        script.onload = () => {
-            setLoading(false);
-        };
+    // useEffect(() => {
+    //     const script = document.createElement('script');
+    //     script.src = './js/lib/3d-gallaxy.js';
+    //     script.type = 'module';
+    //     script.async = true;
+    //     script.onload = () => {
+    //         setLoading(false);
+    //     };
 
-        document.body.appendChild(script);
+    //     document.body.appendChild(script);
 
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
+    //     return () => {
+    //         document.body.removeChild(script);
+    //     };
+    // }, []);
 
     return (
         <>
@@ -150,10 +159,10 @@ export default function Top() {
                         alt='Loading...'
                     /> */}
                     <TopGallaxy>
-                        <canvas className='webgl'></canvas>
+                        <Galaxy onClientReady={handleSetClient}></Galaxy>
+                        {/* <canvas className='webgl'></canvas> */}
                         {loading && (
                             <picture>
-                                {/* <source srcSet='./images/top/preloaderChar.webp 2x' /> */}
                                 <img
                                     src='./images/top/preloaderChar.png'
                                     alt='Loading...'
