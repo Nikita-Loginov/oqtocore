@@ -51,6 +51,7 @@ export default function RootLayout({
                 src: url('/fonts/Eina04-Regular.woff2') format('woff2');
                 font-weight: 400;
                 font-style: normal;
+                font-display: swap;
             }
 
             @font-face {
@@ -58,6 +59,7 @@ export default function RootLayout({
                 src: url('/fonts/Eina04-SemiBold.woff2') format('woff2');
                 font-weight: 600;
                 font-style: normal;
+                font-display: swap;
             }
 
             @font-face {
@@ -65,6 +67,7 @@ export default function RootLayout({
                 src: url('/fonts/Eina04-Bold.woff2') format('woff2');
                 font-weight: 700;
                 font-style: normal;
+                font-display: swap;
             }`}
           </style>
         </head>

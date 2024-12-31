@@ -222,7 +222,7 @@ const WayItemContents = styled.div`
 `;
 
 const WayItemContent = styled.div`
-  max-width: 370px;
+  max-width: 380px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -243,7 +243,7 @@ const WayItemTitle = styled.h3`
 `;
 
 const WayItemText = styled.p`
-  font-weight: 400;
+  font-weight: 600;
 
   @media (max-width: 900px) {
     color: #a9a6ff;
@@ -487,7 +487,7 @@ export default function Way() {
                           <WayItemTitle>Estimate pricing</WayItemTitle>
 
                           <WayItemText>
-                            Client schedules the call We start with discussing
+                            Client schedules the call. We start with discussing
                             your needs and counting estimate project pricing
                           </WayItemText>
                         </WayItemContent>
@@ -500,11 +500,7 @@ export default function Way() {
                           <WayItemTitle>Details discussion</WayItemTitle>
 
                           <WayItemText>
-                            We begin by clarifying your requirements and
-                            understanding your budget target. Our architect will
-                            guide you through the cost estimation for each
-                            feature right on call, ensuring transparency and
-                            feasibility.
+                          Then, we’ll clarify your requirements and understand your budget target. Our architect will guide you through the cost estimation for each feature right on call, ensuring transparency and feasibility.
                           </WayItemText>
                         </WayItemContent>
 
@@ -512,9 +508,7 @@ export default function Way() {
                           <WayItemTitle>Outcome:</WayItemTitle>
 
                           <WayItemText>
-                            A detailed feature list paired with your budget
-                            preferences, giving us a clear direction for the
-                            project.
+                            A detailed feature list paired with your budget preferences, giving us a clear direction for the project.
                           </WayItemText>
                         </WayItemContent>
                       </WayItemContents>
@@ -553,12 +547,7 @@ export default function Way() {
                           <WayItemTitle>Initial Payment</WayItemTitle>
 
                           <WayItemText>
-                            The project follows a monthly payment structure,
-                            with the total cost divided into equal installments
-                            based on the project duration. The first payment,
-                            covering two months, is made upfront. Starting from
-                            the third month, payments continue on a monthly
-                            basis.
+                            The project follows a monthly payment structure, with the total cost divided into equal installments based on the project duration. The first payment, covering two months, is made upfront. Starting from the third month, payments continue on a monthly basis.
                           </WayItemText>
                         </WayItemContent>
                       </WayItemContents>
@@ -664,9 +653,7 @@ export default function Way() {
                           <WayItemTitle>Outcome:</WayItemTitle>
 
                           <WayItemText>
-                            A refined technical specification aligned with your
-                            updated goals, ensuring the project remains on the
-                            right track for success.
+                            A refined technical specification aligned with your updated goals, ensuring the project remains on the right track for success.
                           </WayItemText>
                         </WayItemContent>
                       </WayItemContents>

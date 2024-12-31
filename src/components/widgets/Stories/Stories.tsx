@@ -60,6 +60,7 @@ const StoriesInner = styled.div`
 const StoriesBox = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     gap: 20px;
     border: 2px solid rgb(55, 55, 55);
     border-radius: 60px;
@@ -227,6 +228,8 @@ export const Stories: React.FC = () => {
                                 src='./images/stories/gtm.png'
                                 srcSet='./images/stories/gtm2x.png 2x'
                                 alt=''
+                                // width={"100%"}
+                                height={"100%"}
                             />
                         </picture>
                     </StoriesBox>
@@ -249,6 +252,8 @@ export const Stories: React.FC = () => {
                                 src='./images/stories/runes.png'
                                 srcSet='./images/stories/runes2x.png 2x'
                                 alt=''
+                                // width={"100%"}
+                                height={"100%"}
                             />
                         </picture>
 

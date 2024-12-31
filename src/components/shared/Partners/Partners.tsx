@@ -118,6 +118,7 @@ const Partners = forwardRef<HTMLDivElement, PartnersProps>((props, ref) => {
                                 key={index}
                                 alt={item.alt}
                                 loading='lazy'
+                                width={"100%"}
                             />
                         ))}
                     </PartnersItem>
@@ -129,6 +130,7 @@ const Partners = forwardRef<HTMLDivElement, PartnersProps>((props, ref) => {
                                 key={index}
                                 alt={item.alt}
                                 loading='lazy'
+                                width={"100%"}
                             />
                         ))}
                     </PartnersItem>
