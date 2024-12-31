@@ -7,7 +7,6 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import styled from "styled-components";
 import { Container } from "@/components/widgets";
 
-gsap.registerPlugin(ScrollTrigger);
 
 const WayAnimation = styled.section`
   position: relative;
@@ -259,6 +258,7 @@ export default function Way() {
   let title = undefined;
   let scrollTrigger = null;
   let currentBlockIndex = 0;
+  gsap.registerPlugin(ScrollTrigger);
 
   blocks.forEach((block, index) => {
     gsap.set(block, { opacity: index === 0 ? 1 : 0 });
@@ -285,7 +285,7 @@ export default function Way() {
       currentTrigerBlock = '.way-animaton'
     }
 
-    console.log(currentStartAnimation)
+    // console.log(currentStartAnimation)
 
 
     if (isLargeScreen) {

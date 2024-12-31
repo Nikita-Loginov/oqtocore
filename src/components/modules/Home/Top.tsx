@@ -1,6 +1,5 @@
 'use client';
-import { useEffect, useState, useMemo } from 'react';
-import Script from 'next/script';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import LinkUniq from '@/components/controls/LinkUniq/LinkUniq';
@@ -118,23 +117,6 @@ export default function Top() {
         setLoading(true);
       };
 
-    // const scriptUrl = useMemo(() => './js/lib/3d-gallaxy.js', []);
-
-    // useEffect(() => {
-    //     const script = document.createElement('script');
-    //     script.src = './js/lib/3d-gallaxy.js';
-    //     script.type = 'module';
-    //     script.async = true;
-    //     script.onload = () => {
-    //         setLoading(false);
-    //     };
-
-    //     document.body.appendChild(script);
-
-    //     return () => {
-    //         document.body.removeChild(script);
-    //     };
-    // }, []);
 
     return (
         <>
@@ -153,14 +135,10 @@ export default function Top() {
                             linkUrl='/#services'
                         ></LinkUniq>
                     </TopInner>
-                    {/* <canvas id="starfield"></canvas> */}
-                    {/* <img
-                        src='./images/top/gallaxy.webp'
-                        alt='Loading...'
-                    /> */}
+
                     <TopGallaxy>
                         <Galaxy onClientReady={handleSetClient}></Galaxy>
-                        {/* <canvas className='webgl'></canvas> */}
+
                         {loading && (
                             <picture>
                                 <img
@@ -170,25 +148,9 @@ export default function Top() {
                             </picture>
                         )}
 
-                        {/* <source srcSet='./images/top/gallaxy.webp 2x' /> */}
-                        {/* {loading ? (
-                            
-                        ) :  null} */}
                     </TopGallaxy>
                 </Container>
             </TopBox>
-
-            {/* <Script
-                src='./js/lib/3d-gallaxy.js'
-                async
-                type='module'
-                // onLoad={() => {
-                //     const lilGuiElement = document.querySelector('.lil-gui') as HTMLElement;
-                //     if (lilGuiElement) {
-                //         lilGuiElement.style.opacity = '0';
-                //     }
-                // }}
-            /> */}
         </>
     );
 }

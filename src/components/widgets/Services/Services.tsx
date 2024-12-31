@@ -227,7 +227,7 @@ export const Services: React.FC = () => {
                                 <ServicesItemContentBox>
                                     <img
                                         src='./images/services/development.svg'
-                                        alt=''
+                                        alt='development'
                                         loading='lazy'
                                     />
 
@@ -245,7 +245,7 @@ export const Services: React.FC = () => {
                                 <ServicesItemContentBox>
                                     <img
                                         src='./images/services/writing.svg'
-                                        alt=''
+                                        alt='writing'
                                         loading='lazy'
                                     />
 
@@ -263,7 +263,7 @@ export const Services: React.FC = () => {
                                 <ServicesItemContentBox>
                                     <img
                                         src='./images/services/design.svg'
-                                        alt=''
+                                        alt='design'
                                         loading='lazy'
                                     />
 
@@ -283,7 +283,7 @@ export const Services: React.FC = () => {
                                 <ServicesItemContentBox>
                                     <img
                                         src='./images/services/smallDevelopment.svg'
-                                        alt=''
+                                        alt='smallDevelopment'
                                         loading='lazy'
                                     />
 
@@ -303,7 +303,7 @@ export const Services: React.FC = () => {
                                 <ServicesItemContentBox>
                                     <img
                                         src='./images/services/blockchain.svg'
-                                        alt=''
+                                        alt='blockchain'
                                         loading='lazy'
                                     />
                                     <ServicesItemTitle>Blockchain Development</ServicesItemTitle>

@@ -82,7 +82,7 @@ export default function Link<LinkProps>({ children, iconName, linkUrl, className
                     width='16'
                     height='16'
                     src={`./icons/${iconName}.svg`}
-                    alt=''
+                    alt={iconName}
                     style={style}
                     loading='lazy'
                 />
