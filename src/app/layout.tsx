@@ -6,7 +6,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <>
             <html>
-            <head>
+            <head lang='en'>
                 <title>Oqtacore</title>
                 <link
                     rel="preload"

@@ -45,7 +45,7 @@ export default function Social() {
     return (
         <SocialBox>
             <SociaLink>
-                <SocialItem href='https://www.linkedin.com/company/oqtacore'>
+                <SocialItem href='https://www.linkedin.com/company/oqtacore' aria-label="Перейти на наш linkedin">
                     <svg
                         width='24'
                         height='24'
@@ -73,7 +73,7 @@ export default function Social() {
             </SociaLink>
 
             <SociaLink>
-                <SocialItem href='t.me/oqtacore_cto'>
+                <SocialItem href='t.me/oqtacore_cto' aria-label="Перейти на наш telegram">
                     <svg
                         width='24'
                         height='24'
@@ -103,7 +103,7 @@ export default function Social() {
             </SociaLink>
 
             <SociaLink>
-                <SocialItem href='x.com/oqtacore_devs'>
+                <SocialItem href='x.com/oqtacore_devs' aria-label="Перейти на наш x.com">
                     <svg
                         width='24'
                         height='24'

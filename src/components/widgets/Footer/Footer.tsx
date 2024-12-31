@@ -194,6 +194,7 @@ export const Footer: React.FC = () => {
                                     <FooterLinkItem
                                         className='footer__link-item-ext'
                                         href='/services'
+                                        aria-label="Перейти на страницу Services"
                                     >
                                         <FooterLinkText>Services</FooterLinkText>
                                     </FooterLinkItem>
@@ -203,6 +204,7 @@ export const Footer: React.FC = () => {
                                     <FooterLinkItem
                                         className='footer__link-item-ext'
                                         href='/cases'
+                                        aria-label="Перейти на страницу Case studies"
                                     >
                                         <FooterLinkText>Case studies</FooterLinkText>
                                     </FooterLinkItem>
@@ -212,6 +214,7 @@ export const Footer: React.FC = () => {
                                     <FooterLinkItem
                                         className='footer__link-item-ext'
                                         href='/about'
+                                        aria-label="Перейти на страницу About"
                                     >
                                         <FooterLinkText>About us</FooterLinkText>
                                     </FooterLinkItem>
@@ -221,6 +224,7 @@ export const Footer: React.FC = () => {
                                     <FooterLinkItem
                                         className='footer__link-item-ext'
                                         href='/blog'
+                                        aria-label="Перейти на страницу Blog"
                                     >
                                         <FooterLinkText>Blog</FooterLinkText>
                                     </FooterLinkItem>
