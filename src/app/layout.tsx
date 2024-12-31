@@ -44,6 +44,29 @@ export default function RootLayout({
             type="font/woff2"
             crossOrigin="anonymous"
           />
+          <style>
+            {`
+            @font-face {
+                font-family: 'Eina';
+                src: url('/fonts/Eina04-Regular.woff2') format('woff2');
+                font-weight: 400;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'Eina';
+                src: url('/fonts/Eina04-SemiBold.woff2') format('woff2');
+                font-weight: 600;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'Eina';
+                src: url('/fonts/Eina04-Bold.woff2') format('woff2');
+                font-weight: 700;
+                font-style: normal;
+            }`}
+          </style>
         </head>
         <body>
           <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
