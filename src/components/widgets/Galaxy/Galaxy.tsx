@@ -200,7 +200,7 @@ const Galaxy: React.FC<GalaxyProps> = React.memo(({ onClientReady }) => {
         },0)
 
         
-    }, [onClientReady])
+    }, [loaded])
 
 
     return (
