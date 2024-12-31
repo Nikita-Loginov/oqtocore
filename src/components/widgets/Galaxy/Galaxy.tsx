@@ -11,9 +11,11 @@ interface GalaxyProps {
     onClientReady: () => void;
 }
 const Galaxy: React.FC<GalaxyProps> = React.memo(({ onClientReady }) => {
-    
+    let loaded = false;
     // const [isClient, setIsClient] = useState(false);
     useEffect(() => {
+        if(loaded)
+            return;
         setTimeout(()=>{
         // const gui = new dat.GUI()
 
@@ -185,6 +187,7 @@ const Galaxy: React.FC<GalaxyProps> = React.memo(({ onClientReady }) => {
          */
         generateGalaxy()
             .then(()=>{
+                loaded = true
                 if (onClientReady) {
                     onClientReady(); // Вызываем переданный коллбэк
                 }
