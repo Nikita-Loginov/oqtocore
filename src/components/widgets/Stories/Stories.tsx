@@ -129,6 +129,7 @@ const StoriesItemText = styled.p`
 
 const StoriesImg = styled.img`
     max-width: 896px;
+    width:auto !important;
     max-height: 642px;
     border-radius: 40px;
 
@@ -228,7 +229,7 @@ export const Stories: React.FC = () => {
                                 src='./images/stories/gtm.png'
                                 srcSet='./images/stories/gtm2x.png 2x'
                                 alt=''
-                                // width={"100%"}
+                                width={"100%"}
                                 height={"100%"}
                             />
                         </picture>
@@ -252,7 +253,7 @@ export const Stories: React.FC = () => {
                                 src='./images/stories/runes.png'
                                 srcSet='./images/stories/runes2x.png 2x'
                                 alt=''
-                                // width={"100%"}
+                                width={"100%"}
                                 height={"100%"}
                             />
                         </picture>
