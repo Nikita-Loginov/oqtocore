@@ -124,7 +124,8 @@ export default function Top() {
                 <Container>
                     <TopInner>
                         <TopContent>
-                            <TopTitle>Web3 Development Powerhouse & Marketing Solutionhub</TopTitle>
+                            <TopTitle>Web3 Development Powerhouse 
+                            & all-in-one Solutionhub</TopTitle>
 
                             <TopText>Let’s build something beyond ordinary together</TopText>
                         </TopContent>
