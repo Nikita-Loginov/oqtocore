@@ -23,6 +23,17 @@ export default function Home() {
   });
   const [isSmoothScrollLoaded, setIsSmoothScrollLoaded] = useState(false);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 300);
+
+    return () => clearTimeout(timer); 
+  }, []);
+
   let smoothScroll;
 
   function handleScriptLoad() {

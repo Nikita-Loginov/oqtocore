@@ -141,7 +141,7 @@ const Galaxy: React.FC<GalaxyProps> = React.memo(({ onClientReady }) => {
         const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
         camera.position.x = 3
         camera.position.y = 3
-        camera.position.z = 3
+        camera.position.z = 5
         scene.add(camera)
 
         // Controls

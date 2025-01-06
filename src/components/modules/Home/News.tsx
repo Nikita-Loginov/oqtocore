@@ -175,7 +175,7 @@ export default function News() {
                 const photos = imagesData.map((dataImg) => {
                     return {
                         min: dataImg.media_details?.sizes?.min?.source_url || '',
-                        min2x: dataImg.media_details?.sizes?.min2x?.source_url || '',
+                        min2x: dataImg.media_details?.sizes?.min2x?.source_url || dataImg.media_details?.sizes?.min?.source_url,
                     };
                 });
                 setNewsImages(photos)
@@ -209,7 +209,7 @@ export default function News() {
                                                 <source srcSet={`${newsImages[index]?.min2x} 2x`} />
                                                 <img
                                                     loading='lazy'
-                                                    src={`${newsImages[index]?.min} 2x`}
+                                                    src={`${newsImages[index]?.min}`}
                                                     alt=''
                                                 />
                                             </picture>
