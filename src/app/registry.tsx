@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
 import { createGlobalStyle } from 'styled-components';
-// import { Header, Footer } from '@/components/widgets';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
@@ -120,9 +119,8 @@ export default function StyledComponentsRegistry({ children }: { children: React
         <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
             <GlobalStyle />
 
-            {/* <Header /> */}
             {children}
-            {/* <Footer /> */}
+
         </StyleSheetManager>
     );
 }

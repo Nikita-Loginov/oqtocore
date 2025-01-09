@@ -47,8 +47,6 @@ export default function Home() {
       arrowScroll: 100,
       touchpadSupport: true,
     });
-
-    // console.log(smoothScroll);
   }
 
   useEffect(() => {

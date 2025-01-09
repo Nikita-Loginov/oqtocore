@@ -18,11 +18,13 @@ const NewsInner = styled.div`
     
     .news-link {
         align-self: self-start;
+        padding: 0 12px;
     }
 
     @media (max-width: 500px) {
         .news-link {
             width: 100%;
+            justify-content: space-between;
         }
     }
 `;
@@ -181,7 +183,7 @@ export default function News() {
                 setNewsImages(photos)
                 setLoading(false)
             } catch (error) {
-                console.error('Ошибка при загрузке новостей:', error);
+                console.error('Error when turning on news:', error);
             }
         };
 
@@ -192,7 +194,6 @@ export default function News() {
         <NewsSection>
             <Container>
                 <NewsInner>
-                    {/* <Skeleton /> */}
                     <NewsTitle>Learn something new in our blog</NewsTitle>
 
                     <NewsItems>
@@ -223,9 +224,6 @@ export default function News() {
                                             />
                                         </NewsItemImgDecor>
 
-                                        {/* <NewsItemImgTitle
-                                        dangerouslySetInnerHTML={{ __html: item?.title?.rendered }}
-                                    ></NewsItemImgTitle> */}
                                     </NewsItemImg>
 
                                     <NewsItemInfo className='news__item-info'>

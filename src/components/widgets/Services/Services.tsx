@@ -13,9 +13,14 @@ const ServicesInner = styled.div`
     align-items: flex-start;
     gap: 40px;
 
+    .services-link {
+         padding: 0 12px;
+    }
+
     @media (max-width: 500px) {
         .services-link {
             width: 100%;
+            justify-content: space-between;
         }
     }
 `;
@@ -234,7 +239,7 @@ export const Services: React.FC = () => {
                                     <ServicesItemTitle>End-to-end Development</ServicesItemTitle>
                                 </ServicesItemContentBox>
 
-                                <ServicesItemLink href='/end-to-end-development'>
+                                <ServicesItemLink href='/end-to-end-development' target='_blank'>
                                     Read More
                                 </ServicesItemLink>
                             </ServicesItemContent>
@@ -252,7 +257,7 @@ export const Services: React.FC = () => {
                                     <ServicesItemTitle>Whitepaper Writing</ServicesItemTitle>
                                 </ServicesItemContentBox>
 
-                                <ServicesItemLink href='/whitepaper-writing'>
+                                <ServicesItemLink href='/whitepaper-writing' target='_blank'>
                                     Read More
                                 </ServicesItemLink>
                             </ServicesItemContent>
@@ -272,7 +277,7 @@ export const Services: React.FC = () => {
                                     </ServicesItemTitle>
                                 </ServicesItemContentBox>
 
-                                <ServicesItemLink href='/software-design'>
+                                <ServicesItemLink href='/software-design' target='_blank'>
                                     Read More
                                 </ServicesItemLink>
                             </ServicesItemContent>
@@ -292,7 +297,7 @@ export const Services: React.FC = () => {
                                     </ServicesItemTitle>
                                 </ServicesItemContentBox>
 
-                                <ServicesItemLink href='/smart-contract-development'>
+                                <ServicesItemLink href='/smart-contract-development' target='_blank'>
                                     Read More
                                 </ServicesItemLink>
                             </ServicesItemContent>
@@ -309,7 +314,7 @@ export const Services: React.FC = () => {
                                     <ServicesItemTitle>Blockchain Development</ServicesItemTitle>
                                 </ServicesItemContentBox>
 
-                                <ServicesItemLink href='/blockchain-development'>
+                                <ServicesItemLink href='/blockchain-development' target='_blank'>
                                     Read More
                                 </ServicesItemLink>
                             </ServicesItemContent>

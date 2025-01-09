@@ -225,18 +225,18 @@ export const Header: React.FC = () => {
                         <HeaderMenuInfo>
                             <HeaderList>
                                 <li className='header__link'>
-                                    <HeaderLinkInfo href='/services' aria-label="Перейти на страницу Services">Services</HeaderLinkInfo>
+                                    <HeaderLinkInfo href='/services' target='_blank' aria-label="Перейти на страницу Services">Services</HeaderLinkInfo>
                                 </li>
 
                                 <li className='header__link'>
-                                    <HeaderLinkInfo href='/cases' aria-label="Перейти на страницу Case studies">Case studies</HeaderLinkInfo>
+                                    <HeaderLinkInfo href='/cases' target='_blank' aria-label="Перейти на страницу Case studies">Case studies</HeaderLinkInfo>
                                 </li>
 
                                 <li className='header__link'>
-                                    <HeaderLinkInfo href='/about' aria-label="Перейти на страницу About us">About us</HeaderLinkInfo>
+                                    <HeaderLinkInfo href='/about'target='_blank' aria-label="Перейти на страницу About us">About us</HeaderLinkInfo>
                                 </li>
                                 <li className='header__link'>
-                                    <HeaderLinkInfo href='/blog' aria-label="Перейти на страницу Blog">Blog</HeaderLinkInfo>
+                                    <HeaderLinkInfo href='/blog' target='_blank' aria-label="Перейти на страницу Blog">Blog</HeaderLinkInfo>
                                 </li>
                             </HeaderList>
 

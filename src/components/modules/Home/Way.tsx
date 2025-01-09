@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-// import Script from 'next/script';
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import styled from "styled-components";
 import { Container } from "@/components/widgets";
-
 
 const WayAnimation = styled.section`
   position: relative;
@@ -64,7 +62,7 @@ const WayTitle = styled.h2`
   transition: all 0.5s;
 
   @media (max-width: 900px) {
-    opacity: 1;
+    opacity: 1 !important;
   }
 `;
 
@@ -251,9 +249,7 @@ const WayItemText = styled.p`
 `;
 
 export default function Way() {
-  // const mediaQuery = window.matchMedia('(max-width: 900px)');
   const [isSmoothScrollLoaded, setIsSmoothScrollLoaded] = useState(false);
-  let isScrolling;
   let blocks = [];
   let title = undefined;
   let scrollTrigger = null;
@@ -267,12 +263,12 @@ export default function Way() {
   function handleResize() {
     const isLargeScreen = window.matchMedia("(min-width: 900px)").matches;
     const isTallScreen = window.innerHeight > 1000;
-    const windowWidth = window.innerWidth
+    const windowWidth = window.innerWidth;
     let lastScrollY = window.scrollY;
     let speedAnimation;
     // let bottom = `${clamp(7.5rem, 5.0965rem + 9.2664vw, 15rem)}`;
     let currentStartAnimation = 240;
-    let currentTrigerBlock = '.animation-block'
+    let currentTrigerBlock = ".animation-block";
 
     if (!isTallScreen && isLargeScreen) {
       const experienceBlock = document.querySelector(
@@ -282,11 +278,8 @@ export default function Way() {
         "clamp(5rem, 1.7954rem + 12.3552vw, 15rem) 0";
       speedAnimation = blocks.length * 300;
       currentStartAnimation = 0;
-      currentTrigerBlock = '.way-animaton'
+      currentTrigerBlock = ".way-animaton";
     }
-
-    // console.log(currentStartAnimation)
-
 
     if (isLargeScreen) {
       if (!scrollTrigger) {
@@ -312,22 +305,12 @@ export default function Way() {
                 gsap.to(blocks[currentBlockIndex], { opacity: 1, duration: 0 });
 
                 if (isTallScreen) {
-                  // gsap.to('.experience', {
-                  //     y: -200,
-                  //     opacity: 1,
-                  //     duration: 0.5,
-                  // });
                   if (isScrollingDown) {
                     if (newBlockIndex === blocks.length - 3) {
                       gsap.to(".way", {
                         height: "85vh",
                         duration: 0.5,
                       });
-                      // gsap.to('.experience', {
-                      //     y: -200,
-                      //     opacity: 1,
-                      //     duration: 0.5,
-                      // });
                       scrollTrigger.refresh();
                     } else if (newBlockIndex === blocks.length - 2) {
                       gsap.to(".way", {
@@ -339,50 +322,37 @@ export default function Way() {
                       gsap.to(".way", {
                         height: "55vh",
                         duration: 0.5,
-                      })
+                      }),
+                        scrollTrigger.refresh();
 
-                      gsap.to('.experience', {
-                      opacity: 1,
-                      duration: 0.5,
-                  });
-
-                      // gsap.to('.experience', {
-                      //   y : 0,
-                      //   duration: 0.5
-                      // })
-
-                      // scrollTrigger.refresh();
+                      gsap.to(".experience", {
+                        opacity: 1,
+                        duration: 0.5,
+                      });
                     }
                   } else {
-                    gsap.to('.experience', {
+                    gsap.to(".experience", {
                       opacity: 0,
-                      duration: 0.1,})
+                      duration: 0.1,
+                    });
                     if (newBlockIndex === blocks.length - 3) {
                       gsap.to(".way", {
                         height: "85vh",
                         duration: 0.5,
                       });
-                      // scrollTrigger.refresh();
+                      scrollTrigger.refresh();
                     } else if (newBlockIndex === blocks.length - 2) {
                       gsap.to(".way", {
                         height: "75vh",
                         duration: 0.5,
                       });
-
-                      // gsap.to('.experience', {
-                      //   y : -100,
-                      //   duration: 0.5
-                      // })
-
-
-                      // scrollTrigger.refresh();
+                      scrollTrigger.refresh();
                     } else if (newBlockIndex === blocks.length - 1) {
                       gsap.to(".way", {
                         height: "70vh",
                         duration: 2,
                       });
-
-                      // scrollTrigger.refresh();
+                      scrollTrigger.refresh();
                     }
                   }
                 }
@@ -395,17 +365,12 @@ export default function Way() {
               linears.style.top = top + "px";
             }
 
-            // gsap.to('#services', { duration: 0.5, opacity: 0 });
-
             gsap.to(title, {
               opacity: newBlockIndex === 0 ? 1 : 0,
               duration: 0,
               ease: "power1.inOut",
             });
-
-            // if (newBlockIndex === 0) {
-            //     gsap.to('#services', { duration: 0.5, opacity: 1 });
-            // }
+            // scrollTrigger.refresh();
           },
         });
       }
@@ -413,29 +378,10 @@ export default function Way() {
       if (scrollTrigger) {
         scrollTrigger.kill();
         scrollTrigger = null;
+        scrollTrigger.refresh();
       }
     }
   }
-
-  // function checkHeights() {
-  //     blocks.forEach((item) => {
-  //         let maxHeight = -1;
-  //         const wayItemContentBox = item.querySelector('.way__item-contents') as HTMLElement;
-  //         const wayItemContent = wayItemContentBox.querySelectorAll('.way__item-content');
-
-  //         if (window.innerWidth < 900) {
-  //             wayItemContentBox.style.height = 'auto';
-  //         } else {
-  //             if (wayItemContent.length >= 2) {
-  //                 wayItemContent.forEach((itemContent) => {
-  //                     itemContent.setAttribute('style', 'align-self: start; margin-top: auto;');
-  //                     maxHeight = Math.max(maxHeight, (itemContent as HTMLElement).clientHeight);
-  //                 });
-  //                 wayItemContentBox.style.height = maxHeight + 'px';
-  //             }
-  //         }
-  //     });
-  // }
 
   useEffect(() => {
     blocks = Array.from(document.querySelectorAll(".way__item"));
@@ -444,10 +390,9 @@ export default function Way() {
 
   useEffect(() => {
     handleResize();
-    // checkHeights();
+
     window.addEventListener("resize", () => {
       handleResize();
-      // checkHeights();
     });
   }, []);
 
@@ -500,7 +445,10 @@ export default function Way() {
                           <WayItemTitle>Details discussion</WayItemTitle>
 
                           <WayItemText>
-                          Then, we’ll clarify your requirements and understand your budget target. Our architect will guide you through the cost estimation for each feature right on call, ensuring transparency and feasibility.
+                            Then, we’ll clarify your requirements and understand
+                            your budget target. Our architect will guide you
+                            through the cost estimation for each feature right
+                            on call, ensuring transparency and feasibility.
                           </WayItemText>
                         </WayItemContent>
 
@@ -508,7 +456,9 @@ export default function Way() {
                           <WayItemTitle>Outcome:</WayItemTitle>
 
                           <WayItemText>
-                            A detailed feature list paired with your budget preferences, giving us a clear direction for the project.
+                            A detailed feature list paired with your budget
+                            preferences, giving us a clear direction for the
+                            project.
                           </WayItemText>
                         </WayItemContent>
                       </WayItemContents>
@@ -547,7 +497,12 @@ export default function Way() {
                           <WayItemTitle>Initial Payment</WayItemTitle>
 
                           <WayItemText>
-                            The project follows a monthly payment structure, with the total cost divided into equal installments based on the project duration. The first payment, covering two months, is made upfront. Starting from the third month, payments continue on a monthly basis.
+                            The project follows a monthly payment structure,
+                            with the total cost divided into equal installments
+                            based on the project duration. The first payment,
+                            covering two months, is made upfront. Starting from
+                            the third month, payments continue on a monthly
+                            basis.
                           </WayItemText>
                         </WayItemContent>
                       </WayItemContents>
@@ -653,7 +608,9 @@ export default function Way() {
                           <WayItemTitle>Outcome:</WayItemTitle>
 
                           <WayItemText>
-                            A refined technical specification aligned with your updated goals, ensuring the project remains on the right track for success.
+                            A refined technical specification aligned with your
+                            updated goals, ensuring the project remains on the
+                            right track for success.
                           </WayItemText>
                         </WayItemContent>
                       </WayItemContents>
