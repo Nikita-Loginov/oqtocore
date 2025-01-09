@@ -113,7 +113,7 @@ const TopGallaxy = styled.div`
 
 export default function Top() {
     const [loading, setLoading] = useState(true);
-    const [loadingPage, setLoadingPage] = useState(true);
+    const [isLoaded, setLoadingPage] = useState(true);
     const handleSetClient = () => {
         setLoading(true);
       };
@@ -149,7 +149,7 @@ export default function Top() {
                     </TopInner>
 
                     <TopGallaxy>
-                        {!loadingPage ? <Galaxy onClientReady={handleSetClient}></Galaxy> : <></>}
+                    {isLoaded ? <Galaxy onClientReady={handleSetClient}></Galaxy> : <></>}
                         
 
                         {loading && (
