@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import LinkUniq from '@/components/controls/LinkUniq/LinkUniq';
@@ -113,10 +113,21 @@ const TopGallaxy = styled.div`
 
 export default function Top() {
     const [loading, setLoading] = useState(true);
+    const [loadingPage, setLoadingPage] = useState(true);
     const handleSetClient = () => {
         setLoading(true);
       };
+    useEffect(() => {
+        const handleLoad = () => {
+            setLoadingPage(false);
+        };
 
+        window.onload = handleLoad;
+
+        return () => {
+            window.onload = null;
+        };
+    }, []);
 
     return (
         <>
@@ -138,7 +149,8 @@ export default function Top() {
                     </TopInner>
 
                     <TopGallaxy>
-                        <Galaxy onClientReady={handleSetClient}></Galaxy>
+                        {isLoaded ? <Galaxy onClientReady={handleSetClient}></Galaxy> : <></>}
+                        
 
                         {loading && (
                             <picture>
