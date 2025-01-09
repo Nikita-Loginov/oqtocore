@@ -149,7 +149,7 @@ export default function Top() {
                     </TopInner>
 
                     <TopGallaxy>
-                        {isLoaded ? <Galaxy onClientReady={handleSetClient}></Galaxy> : <></>}
+                        {!loadingPage ? <Galaxy onClientReady={handleSetClient}></Galaxy> : <></>}
                         
 
                         {loading && (
