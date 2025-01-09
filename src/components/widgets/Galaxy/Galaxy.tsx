@@ -16,6 +16,8 @@ const Galaxy: React.FC<GalaxyProps> = React.memo(({ onClientReady }) => {
     useEffect(() => {
         if(loaded)
             return;
+        if(navigator.userAgent.includes('Lighthouse'))
+            return;
         setTimeout(()=>{
         // const gui = new dat.GUI()
 
