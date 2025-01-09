@@ -55,7 +55,7 @@ const PartnersItem = styled.div`
     display: flex;
     flex-shrink: 0;
     gap: ${gapValue};
-    animation: ${scrollParnners} 30s linear infinite;
+    animation: ${scrollParnners} 40s linear infinite;
 `;
 
 interface PartnersProps extends React.HTMLProps<HTMLDivElement> {}
