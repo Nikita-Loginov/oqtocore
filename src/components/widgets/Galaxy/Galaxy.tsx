@@ -9,8 +9,9 @@ import galaxyVertexShader from '@/shaders/galaxy/vertex.glsl'
 import galaxyFragmentShader from '@/shaders/galaxy/fragment.glsl'
 interface GalaxyProps {
     onClientReady: () => void;
+    parametersGallaxy: object;
 }
-const Galaxy: React.FC<GalaxyProps> = React.memo(({ onClientReady }) => {
+const Galaxy: React.FC<GalaxyProps> = React.memo(({ onClientReady, parametersGallaxy }) => {
     let loaded = false;
     // const [isClient, setIsClient] = useState(false);
     useEffect(() => {
@@ -30,17 +31,7 @@ const Galaxy: React.FC<GalaxyProps> = React.memo(({ onClientReady }) => {
         /**
          * Galaxy
          */
-        const parameters = {
-            count: 518300,
-            size: 0.005,
-            radius: 4.95,
-            branches: 6,
-            spin: 5,
-            randomness: 0.429,
-            randomnessPower: 4.298,
-            insideColor: '#4830ff',
-            outsideColor: '#441969',
-        }
+        const parameters = parametersGallaxy;
 
         let geometry = null
         let material = null
