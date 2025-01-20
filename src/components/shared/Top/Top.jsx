@@ -117,6 +117,7 @@ export default function Top({infoTop, styleWidthContent}) {
   const handleSetClient = () => {
     setLoading(true);
   };
+  
   useEffect(() => {
     const handleLoad = () => {
       setLoadingPage(false);

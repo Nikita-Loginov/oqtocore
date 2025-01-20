@@ -30,6 +30,69 @@ const infoTop = {
   },
 };
 
+const preloaderTextStories = true;
+
+const infoStoriesItem = [
+  {
+    id: 1,
+    title: 'GTM',
+    items: [
+      {
+        title: 'Who:',
+        text: 'GameTrade Market is one of the first NFT gaming item marketplaces, focused on ease of use for gamers and professional traders.'
+      },
+      {
+        title: 'What we did:',
+        text: 'Created a hybrid of social networks and a trading platform, as this is how we envision trade in future virtual metaverses.'
+      },
+      {
+        title: 'Why it matters:',
+        text: 'The project started in 2021 during the initial boom of blockchain games. Our client needed to create an MVP for GameTrade in very tight deadlines in an ever-changing landscape of blockchain. We have succeeded with releasing the MVP in just 2 quarters.'
+      },
+      {
+        title: 'Tech stack:',
+        text: 'AWS, MySQL, ASP .Net MVC, React'
+      },
+    ],
+    img: {
+      top: false,
+      imgSrc: {
+        webp: './images/stories/gtm.webp',
+        webp2x: './images/stories/gtm2x.webp',
+      }
+    }
+  },
+  {
+    id: 2,
+    title: 'Runes',
+    items: [
+      {
+        title: 'Who:',
+        text: 'GameTrade Market is one of the first NFT gaming item marketplaces, focused on ease of use for gamers and professional traders.'
+      },
+      {
+        title: 'What we did:',
+        text: 'Created a hybrid of social networks and a trading platform, as this is how we envision trade in future virtual metaverses.'
+      },
+      {
+        title: 'Why it matters:',
+        text: 'The project started in 2021 during the initial boom of blockchain games. Our client needed to create an MVP for GameTrade in very tight deadlines in an ever-changing landscape of blockchain. We have succeeded with releasing the MVP in just 2 quarters.'
+      },
+      {
+        title: 'Tech stack:',
+        text: 'AWS, MySQL, ASP .Net MVC, React'
+      },
+    ],
+    img: {
+      top: true,
+      imgSrc: {
+        webp: './images/stories/runes.webp',
+        webp2x: './images/stories/runes2x.webp',
+      }
+    }
+  }
+]
+
 export default function Home() {
   const { ref, inView } = useInView({
     rootMargin: "100px 0px 0px 0px",
@@ -95,7 +158,7 @@ export default function Home() {
           <Experience />
         </div>
 
-        <Stories />
+        <Stories info={infoStoriesItem} preloaderTextStories={preloaderTextStories}/>
 
         <News />
       </main>
