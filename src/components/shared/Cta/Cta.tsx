@@ -4,7 +4,7 @@ import { Container } from "@/components/widgets";
 import Button from "@/components/controls/Button/Button";
 
 const CtaSEction = styled.section`
-  padding: clamp(7.5rem, 6.6988rem + 3.0888vw, 10rem) 0;
+  padding: clamp(5rem, 4.1988rem + 3.0888vw, 7.5rem) 0 40px;
 `;
 
 const CtaInner = styled.div`
@@ -47,7 +47,7 @@ export default function Cta({ info }) {
             <CtaText>{info.text}</CtaText>
           </CtaContent>
 
-          <Button iconName="comment" linkText="Contact us" />
+          <Button iconName="comment" linkText="Contact us" positionIconFirstHover="24px, -24px" positionIconSecond="-24px, 24px" onClick={{}}/>
         </CtaInner>
       </Container>
     </CtaSEction>

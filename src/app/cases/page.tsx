@@ -237,6 +237,8 @@ const infoStoriesItem = [
   }
 ]
 
+const countVisibleItems = 3;
+
 const ctaInfo = {
   title: 'And many more are already on the way',
   text: 'Looking forward to work with us, but want the project to stay confidential? Our NDA will start from first call. Just ask for it.'
@@ -259,10 +261,10 @@ export default function Home() {
     <>
       <Header />
 
-      <main className="main">
-        <Top infoTop={infoTop} styleWidthContent={{maxWidth:"1150px"}}/>
+      <main className="main cases-page">
+        {/* <Top infoTop={infoTop} styleWidthContent={{maxWidth:"1150px"}}/> */}
 
-        <Stories info={infoStoriesItem} preloaderTextStories={preloaderTextStories}/>
+        <Stories info={infoStoriesItem} preloaderTextStories={preloaderTextStories} countVisibleItems={countVisibleItems}/>
 
         <Cta info={ctaInfo}/>
       </main>

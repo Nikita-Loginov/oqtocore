@@ -24,5 +24,16 @@
             gap: 0;
         }
     }
+    &.cases-page {
+        @media(max-width:500px) {
+            .button-box {
+                button {
+                    gap: 24px;
+                    background-color: transparent;
+                }
+            }
+        }
+
+    }
 }
 

@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Container } from "@/components/widgets";
-import Link from "@/components/controls/Link/Link";
+import Button from "@/components/controls/Button/Button";
 import StoriesItemBox from "./parts/SroriesItemBox";
 
 const StoriesSection = styled.section`
@@ -59,14 +59,20 @@ const StoriesInner = styled.div`
   z-index: 10;
 `;
 
+const ButtonBox = styled.div`
+    margin-top:clamp(2.5rem, 1.6988rem + 3.0888vw, 5rem);
+    display: flex;
+    justify-content: center;
+`
+
 interface InfoItem {
   title: string;
   text: string;
-  list?: string[]; 
+  list?: string[];
 }
 
 interface StoriesProps {
-  info: { 
+  info: {
     id: number;
     title: string;
     items: InfoItem[];
@@ -79,21 +85,47 @@ interface StoriesProps {
     };
   }[];
   preloaderTextStories: boolean;
+  countVisibleItems: number;
 }
 
+export const Stories: React.FC<StoriesProps> = ({
+  info,
+  preloaderTextStories,
+  countVisibleItems,
+}) => {
+  const [countVisible, setCountVisible] = useState(countVisibleItems);
+  const [items, setItems] = useState(info.slice(0, countVisible));
 
+  function moreStories() {
+    const newCountVisible = info.length;
 
-export const Stories: React.FC<StoriesProps> = ({ info, preloaderTextStories }) => {
+    setItems(info.slice(0, newCountVisible));
+    setCountVisible(newCountVisible);
+  }
   return (
     <StoriesSection
       className={`${preloaderTextStories && "preloader-text"} stories`}
     >
       <Container>
         <StoriesInner className="stories__inner">
-          {info.map((box) => (
+          {items.map((box) => (
             <StoriesItemBox key={box.id} content={box} />
           ))}
         </StoriesInner>
+
+        {items.length === info.length ? (
+          ""
+        ) : (
+          <ButtonBox className="button-box">
+            <Button
+              iconName="arrow-down"
+              linkText="See More"
+              onClick={moreStories}
+              positionIconFirstHover="0, 40px"
+              positionIconSecond='0, -40px'
+            />
+          </ButtonBox>
+        )}
       </Container>
     </StoriesSection>
   );

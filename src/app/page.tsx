@@ -93,6 +93,8 @@ const infoStoriesItem = [
   }
 ]
 
+const countVisibleItems = infoStoriesItem.length;
+
 export default function Home() {
   const { ref, inView } = useInView({
     rootMargin: "100px 0px 0px 0px",
@@ -158,7 +160,7 @@ export default function Home() {
           <Experience />
         </div>
 
-        <Stories info={infoStoriesItem} preloaderTextStories={preloaderTextStories}/>
+        <Stories info={infoStoriesItem} preloaderTextStories={preloaderTextStories} countVisibleItems={countVisibleItems}/>
 
         <News />
       </main>
