@@ -59,7 +59,31 @@ const StoriesInner = styled.div`
   z-index: 10;
 `;
 
-export const Stories: React.FC = ({ info, preloaderTextStories }) => {
+interface InfoItem {
+  title: string;
+  text: string;
+  list?: string[]; 
+}
+
+interface StoriesProps {
+  info: { 
+    id: number;
+    title: string;
+    items: InfoItem[];
+    img: {
+      top: boolean;
+      imgSrc: {
+        webp: string;
+        webp2x: string;
+      };
+    };
+  }[];
+  preloaderTextStories: boolean;
+}
+
+
+
+export const Stories: React.FC<StoriesProps> = ({ info, preloaderTextStories }) => {
   return (
     <StoriesSection
       className={`${preloaderTextStories && "preloader-text"} stories`}
