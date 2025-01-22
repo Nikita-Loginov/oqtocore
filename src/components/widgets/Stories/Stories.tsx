@@ -61,9 +61,11 @@ const StoriesInner = styled.div`
 
 export const Stories: React.FC = ({ info, preloaderTextStories }) => {
   return (
-    <StoriesSection className={`${preloaderTextStories && "preloader-text"}`}>
+    <StoriesSection
+      className={`${preloaderTextStories && "preloader-text"} stories`}
+    >
       <Container>
-        <StoriesInner>
+        <StoriesInner className="stories__inner">
           {info.map((box) => (
             <StoriesItemBox key={box.id} content={box} />
           ))}

@@ -38,6 +38,11 @@ const StoriesContent = styled.div`
 
   @media (max-width: 767px) {
     max-width: 100%;
+    display: contents;
+
+    .stories-link {
+       order:10;
+    }
   }
 
   @media (max-width: 500px) {
@@ -98,7 +103,7 @@ const StoriesItemLink = styled.li`
 
 const StoriesImg = styled.img`
   max-width: 896px;
-  // width: auto !important;
+  width: auto !important;
   max-height: 642px;
   border-radius: 40px;
 
@@ -122,7 +127,7 @@ const StoriesImg = styled.img`
 export default function StoriesItemBox({ content }) {
   return (
     <StoriesBox
-      className={`stories-box-img-${content.img.top ? "top" : "bottom"}`}
+      className={`stories-box-img-${content.img.top ? "top" : "bottom"} stories__box`}
     >
       <StoriesContent>
         <StoriesTitle>{content.title}</StoriesTitle>
