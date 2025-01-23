@@ -1,39 +1,54 @@
 .stories > div {
-    max-width: 100%;
-    padding: 0;
+  max-width: 100%;
+  padding: 0;
 }
 
 .main {
-    .stories {
-        &__box {
-            justify-content: center;
-            gap: clamp(1.25rem, 0.0483rem + 4.6332vw, 5rem);
-            padding: clamp(1.25rem, -0.7529rem + 7.722vw, 7.5rem) clamp(1.25rem, 0.8494rem + 1.5444vw, 2.5rem);
-            border-radius: 0;
-            border-left: none;
-            border-right: none;
-            border-top: none;
-            border-bottom: 2px solid rgb(55, 55, 55);
+  .stories {
+    &__box {
+      justify-content: center;
+      gap: clamp(1.25rem, 0.0483rem + 4.6332vw, 5rem);
+      padding: clamp(1.25rem, -0.7529rem + 7.722vw, 7.5rem)
+        clamp(1.25rem, 0.8494rem + 1.5444vw, 2.5rem);
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-bottom: 2px solid rgb(55, 55, 55);
 
-            &:first-of-type {
-                border-top: 2px solid rgb(55, 55, 55);
-            }
-        }
-
-        &__inner {
-            gap: 0;
-        }
+      &:first-of-type {
+        border-top: 2px solid rgb(55, 55, 55);
+      }
     }
-    &.cases-page {
-        @media(max-width:500px) {
-            .button-box {
-                button {
-                    gap: 24px;
-                    background-color: transparent;
-                }
-            }
-        }
 
+    &__inner {
+      gap: 0;
     }
+  }
+  &.cases-page {
+    @media (max-width: 500px) {
+      .button-box {
+        button {
+          gap: 24px;
+          background-color: transparent;
+        }
+      }
+    }
+
+    .contact-modal {
+      .button-uniq {
+        background-color: rgb(43, 36, 255);
+        align-self: center;
+        gap: 110px;
+
+        &:after {
+            background-color: transparent;
+        }
+      }
+
+      .button-decor {
+        background-color: #010101;
+      }
+    }
+  }
 }
-

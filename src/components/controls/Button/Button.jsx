@@ -120,10 +120,10 @@ export default function Button({
   positionIconSecond,
 }){
   return (
-    <ButtonBox type="button" onClick={onClick} position-first-hover={positionIconFirstHover}>
+    <ButtonBox className="button-uniq" type="button" onClick={onClick} position-first-hover={positionIconFirstHover}>
       <ButtonText>{linkText}</ButtonText>
 
-      <ButtonDecor icon={`./icons/${iconName}.svg`} position-before-icon={positionIconSecond}>
+      <ButtonDecor className="button-decor" icon={`./icons/${iconName}.svg`} position-before-icon={positionIconSecond}>
         <img  src={`./icons/${iconName}.svg`} alt={linkText} loading="lazy" />
       </ButtonDecor>
     </ButtonBox>
