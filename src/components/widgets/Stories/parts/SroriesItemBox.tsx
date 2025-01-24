@@ -2,17 +2,27 @@ import Link from "@/components/controls/Link/Link";
 import styled from "styled-components";
 
 const StoriesBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
   border: 2px solid rgb(55, 55, 55);
   border-radius: 60px;
   background: rgb(1, 1, 1);
   padding: clamp(1.25rem, 0.0483rem + 4.6332vw, 5rem);
+`;
+
+const SroriesContentBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 1710px;
+  // padding: 0 40px;
+  margin: 0 auto;
 
   &.stories-box-img-top {
     flex-direction: row-reverse;
+  }
+
+  @media (max-width: 1023px) {
+      // padding:0 15px;
   }
 
   @media (max-width: 767px) {
@@ -41,7 +51,7 @@ const StoriesContent = styled.div`
     display: contents;
 
     .stories-link {
-       order:10;
+      order: 10;
     }
   }
 
@@ -102,17 +112,13 @@ const StoriesItemLink = styled.li`
 `;
 
 const StoriesImg = styled.img`
-  max-width: 896px;
+  max-width: clamp(27.5rem, -123.8339rem + 168.2657vw, 56rem);
   width: auto !important;
   max-height: 642px;
   border-radius: 40px;
 
   @media (max-width: 1439px) {
-    max-width: 440px;
-  }
-
-  @media (max-width: 900px) {
-    max-width: 340px;
+    max-width: clamp(21.25rem, 10.814rem + 18.5529vw, 27.5rem);
   }
 
   @media (max-width: 767px) {
@@ -127,56 +133,62 @@ const StoriesImg = styled.img`
 export default function StoriesItemBox({ content }) {
   return (
     <StoriesBox
-      className={`stories-box-img-${content.img.top ? "top" : "bottom"} stories__box`}
+      className={`stories-box-img-${
+        content.img.top ? "top" : "bottom"
+      } stories__box`}
     >
-      <StoriesContent>
-        <StoriesTitle>{content.title}</StoriesTitle>
+      <SroriesContentBox
+        className={`stories-box-img-${content.img.top ? "top" : "bottom"} stories__content-box`}
+      >
+        <StoriesContent>
+          <StoriesTitle>{content.title}</StoriesTitle>
 
-        <StoriesItems>
-          {content.items.map((item) => (
-            <StoriesItem key={item.title}>
-              <StoriesItemTitle>{item.title}</StoriesItemTitle>
+          <StoriesItems>
+            {content.items.map((item) => (
+              <StoriesItem key={item.title}>
+                <StoriesItemTitle>{item.title}</StoriesItemTitle>
 
-              <StoriesItemTextBox>
-                <StoriesItemText>{item.text}</StoriesItemText>
+                <StoriesItemTextBox>
+                  <StoriesItemText>{item.text}</StoriesItemText>
 
-                <StoriesItemList>
-                  {item.list &&
-                    item.list.map((linkText) => 
-                      <StoriesItemLink key={linkText}>
-                        {linkText}
-                      </StoriesItemLink>
-                    )}
-                </StoriesItemList>
-              </StoriesItemTextBox>
-            </StoriesItem>
-          ))}
-        </StoriesItems>
+                  <StoriesItemList>
+                    {item.list &&
+                      item.list.map((linkText) => (
+                        <StoriesItemLink key={linkText}>
+                          {linkText}
+                        </StoriesItemLink>
+                      ))}
+                  </StoriesItemList>
+                </StoriesItemTextBox>
+              </StoriesItem>
+            ))}
+          </StoriesItems>
 
-        <Link
-          linkUrl="/cases/gametrade-market"
-          iconName="arrow-up-right"
-          className="stories-link"
-          style={{}}
-        >
-          full case
-        </Link>
-      </StoriesContent>
+          <Link
+            linkUrl="/cases/gametrade-market"
+            iconName="arrow-up-right"
+            className="stories-link"
+            style={{}}
+          >
+            full case
+          </Link>
+        </StoriesContent>
 
-      <picture>
-        <source srcSet={content.img.imgSrc.webp} type="image/webp" />
+        <picture>
+          <source srcSet={content.img.imgSrc.webp} type="image/webp" />
 
-        <source srcSet={`${content.img.imgSrc.webp} 2x`} type="image/webp" />
+          <source srcSet={`${content.img.imgSrc.webp} 2x`} type="image/webp" />
 
-        <StoriesImg
-          loading="lazy"
-          src={content.img.imgSrc.webp}
-          srcSet={`${content.img.imgSrc.webp} 2x`}
-          alt={content.title}
-          width={"100%"}
-          height={"100%"}
-        />
-      </picture>
+          <StoriesImg
+            loading="lazy"
+            src={content.img.imgSrc.webp}
+            srcSet={`${content.img.imgSrc.webp} 2x`}
+            alt={content.title}
+            width={"100%"}
+            height={"100%"}
+          />
+        </picture>
+      </SroriesContentBox>
     </StoriesBox>
   );
 }
