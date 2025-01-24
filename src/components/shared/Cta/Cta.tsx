@@ -78,6 +78,9 @@ export default function Cta({ info }) {
               positionIconFirstHover="24px, -24px"
               positionIconSecond="-24px, 24px"
               onClick={openPopup}
+              disabled={
+                false
+              }
             />
           </CtaInner>
         </Container>

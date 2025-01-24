@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "@/components/controls/Button/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ContactInner = styled.div`
   margin: auto 0;
@@ -12,8 +12,9 @@ const ContactInner = styled.div`
   flex-direction: column;
   gap: clamp(1.25rem, 0.8494rem + 1.5444vw, 2.5rem);
   padding: clamp(1.25rem, 0.8494rem + 1.5444vw, 2.5rem);
-    transform: translateY(-800px);
+  transform: translateY(-800px);
   transition: all 0.5s;
+  border: 1px solid #fff;
 `;
 
 const ContactModalBlock = styled.div`
@@ -32,7 +33,8 @@ const ContactModalBlock = styled.div`
   visibility: hidden;
   z-index: 9999999;
   transition: all 0.5s;
-  background-color: rgba(1, 1, 1, 0.8);
+  backdrop-filter: blur(35.3px);
+  background-color: rgba(255, 255, 255, 0.01);
 
   &.open {
     opacity: 1;
@@ -112,6 +114,22 @@ const ContactInputPlaceholder = styled.span`
   transform: translateY(-50%);
 `;
 
+const ErrorMsg = styled.p`
+  display:none;
+  color: #ff4040;
+  font-weight: 600;
+  color: #ff4040;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  font-size: 14px;
+`;
+
+const StarError = styled.span`
+   color:#ff4040;
+   display:none;
+`
+
 const ContactInputBox = styled.label`
   position: relative;
   border-radius: 18px;
@@ -129,6 +147,19 @@ const ContactInputBox = styled.label`
       font-size: 10px;
       top: 40%;
     }
+  }
+
+  &.error {
+    border-color: #ff4040;
+    margin-bottom: 20px;
+
+    ${ErrorMsg} {
+       display:block;
+    }
+
+    ${StarError} {
+      display:inline;
+   }
   }
 `;
 
@@ -194,13 +225,33 @@ const ContactQuestionChexk = styled.span`
   color: #fff;
 `;
 
-export default function ContactPopup({isOpen}) {
+export default function ContactPopup({ isOpen }) {
+  const [checkboxTextGropOne, setCheckboxTextGropOne] = useState([
+    "Front-end Development",
+    "Back-end development",
+    "Full-stack development with ongoing support",
+    "DevOps",
+    "Smart contracts",
+    "Cloud Computing",
+    "Other",
+  ]);
+
+  const [checkboxTextGropTwo, setCheckboxTextGropTwo] = useState([
+    "Layer1 blockchain (Ethereum, Solana, TON etc.)",
+    "Layer 2S & Side blockchains (ZkSync, Polygon, Arbitrum etc.)",
+    "Multiple platforms",
+    "Not sure",
+    "Other",
+  ]);
+
   const [formData, setFormData] = useState({
     inputName: "",
     inputEmail: "",
     inputTel: "",
     inputCommunication: "",
   });
+
+  const [isDisabledButton, setIsDisabledButton] = useState(true)
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -224,8 +275,19 @@ export default function ContactPopup({isOpen}) {
     }
   }
 
+  function validateLengthInputs() {
+    if (formData.inputName.length && formData.inputEmail.length) {
+      setIsDisabledButton(() => false)
+    } else {
+      setIsDisabledButton(() => true)
+    }
+  }
+
+  useEffect(() => {
+    validateLengthInputs()
+  }, [formData])
   return (
-    <ContactModalBlock className={`contact-modal ${isOpen && 'open'}`}>
+    <ContactModalBlock className={`contact-modal ${isOpen && "open"}`}>
       <ContactInner>
         <ContactTop>
           <ContactTopContent>
@@ -263,7 +325,7 @@ export default function ContactPopup({isOpen}) {
         <ContactForm>
           <ContactInputs>
             <ContactInputBox>
-              <ContactInputPlaceholder>Your name</ContactInputPlaceholder>
+              <ContactInputPlaceholder>Your name<StarError>*</StarError></ContactInputPlaceholder>
 
               <ContactInput
                 type="text"
@@ -273,10 +335,14 @@ export default function ContactPopup({isOpen}) {
                 value={formData.inputName}
                 onChange={handleChange}
               />
+
+              <ErrorMsg>
+                The name must contain only letters of the Latin alphabet
+              </ErrorMsg>
             </ContactInputBox>
 
             <ContactInputBox>
-              <ContactInputPlaceholder>Your Email</ContactInputPlaceholder>
+              <ContactInputPlaceholder>Your Email<StarError>*</StarError></ContactInputPlaceholder>
 
               <ContactInput
                 type="email"
@@ -286,6 +352,8 @@ export default function ContactPopup({isOpen}) {
                 value={formData.inputEmail}
                 onChange={handleChange}
               />
+
+              <ErrorMsg>Check the entered email for the correct input</ErrorMsg>
             </ContactInputBox>
 
             <ContactInputBox>
@@ -327,53 +395,13 @@ export default function ContactPopup({isOpen}) {
               </ContactQuestionTitle>
 
               <ContactQuestionList>
-                <ContactQuestionItem>
-                  <ContactQuestionInput type="checkbox" />
+                {checkboxTextGropOne.map((item) => (
+                  <ContactQuestionItem key={item}>
+                    <ContactQuestionInput type="checkbox" />
 
-                  <ContactQuestionChexk>
-                    Front-end Development
-                  </ContactQuestionChexk>
-                </ContactQuestionItem>
-
-                <ContactQuestionItem>
-                  <ContactQuestionInput type="checkbox" />
-
-                  <ContactQuestionChexk>
-                    Back-end development
-                  </ContactQuestionChexk>
-                </ContactQuestionItem>
-
-                <ContactQuestionItem>
-                  <ContactQuestionInput type="checkbox" />
-
-                  <ContactQuestionChexk>
-                    Full-stack development with ongoing support
-                  </ContactQuestionChexk>
-                </ContactQuestionItem>
-
-                <ContactQuestionItem>
-                  <ContactQuestionInput type="checkbox" />
-
-                  <ContactQuestionChexk>DevOps</ContactQuestionChexk>
-                </ContactQuestionItem>
-
-                <ContactQuestionItem>
-                  <ContactQuestionInput type="checkbox" />
-
-                  <ContactQuestionChexk>Smart contracts</ContactQuestionChexk>
-                </ContactQuestionItem>
-
-                <ContactQuestionItem>
-                  <ContactQuestionInput type="checkbox" />
-
-                  <ContactQuestionChexk>Cloud Computing</ContactQuestionChexk>
-                </ContactQuestionItem>
-
-                <ContactQuestionItem>
-                  <ContactQuestionInput type="checkbox" />
-
-                  <ContactQuestionChexk>Other</ContactQuestionChexk>
-                </ContactQuestionItem>
+                    <ContactQuestionChexk>{item}</ContactQuestionChexk>
+                  </ContactQuestionItem>
+                ))}
               </ContactQuestionList>
             </ContactQuestion>
 
@@ -383,41 +411,13 @@ export default function ContactPopup({isOpen}) {
               </ContactQuestionTitle>
 
               <ContactQuestionList>
-                <ContactQuestionItem>
-                  <ContactQuestionInput type="checkbox" />
+                {checkboxTextGropTwo.map((item) => (
+                  <ContactQuestionItem key={item}>
+                    <ContactQuestionInput type="checkbox" />
 
-                  <ContactQuestionChexk>
-                    Layer1 blockchain (Ethereum, Solana, TON etc.)
-                  </ContactQuestionChexk>
-                </ContactQuestionItem>
-
-                <ContactQuestionItem>
-                  <ContactQuestionInput type="checkbox" />
-
-                  <ContactQuestionChexk>
-                    Layer 2S & Side blockchains (ZkSync, Polygon, Arbitrum etc.)
-                  </ContactQuestionChexk>
-                </ContactQuestionItem>
-
-                <ContactQuestionItem>
-                  <ContactQuestionInput type="checkbox" />
-
-                  <ContactQuestionChexk>
-                    Multiple platforms
-                  </ContactQuestionChexk>
-                </ContactQuestionItem>
-
-                <ContactQuestionItem>
-                  <ContactQuestionInput type="checkbox" />
-
-                  <ContactQuestionChexk>Not sure</ContactQuestionChexk>
-                </ContactQuestionItem>
-
-                <ContactQuestionItem>
-                  <ContactQuestionInput type="checkbox" />
-
-                  <ContactQuestionChexk>Other</ContactQuestionChexk>
-                </ContactQuestionItem>
+                    <ContactQuestionChexk>{item}</ContactQuestionChexk>
+                  </ContactQuestionItem>
+                ))}
               </ContactQuestionList>
             </ContactQuestion>
           </ContactQuestions>
@@ -428,7 +428,8 @@ export default function ContactPopup({isOpen}) {
           linkText="Send"
           positionIconFirstHover="40px, 0"
           positionIconSecond="-24px, 0"
-          onClick={() => console.log()}
+          onClick={() => console.log()} // here then there will be a function for submitting the form
+          disabled={isDisabledButton}
         />
       </ContactInner>
     </ContactModalBlock>

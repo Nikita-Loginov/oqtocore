@@ -25,6 +25,15 @@
       gap: 0;
     }
   }
+
+  .button-uniq {
+    &:disabled {
+      background: rgb(55, 55, 55);
+      opacity: 0.4;
+      pointer-events: none; 
+    }
+  }
+
   &.cases-page {
     @media (max-width: 500px) {
       .button-box {
@@ -43,6 +52,12 @@
 
         &:after {
             background-color: transparent;
+        }
+
+        &:disabled {
+          background: rgb(55, 55, 55);
+          opacity: 0.4;
+          pointer-events: none; 
         }
       }
 

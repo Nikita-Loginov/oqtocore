@@ -123,6 +123,9 @@ export const Stories: React.FC<StoriesProps> = ({
               onClick={moreStories}
               positionIconFirstHover="0, 40px"
               positionIconSecond='0, -40px'
+              disabled={
+                false
+              }
             />
           </ButtonBox>
         )}

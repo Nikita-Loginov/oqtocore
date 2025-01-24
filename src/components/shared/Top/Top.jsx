@@ -113,22 +113,22 @@ const TopGallaxy = styled.div`
 
 export default function Top({infoTop, styleWidthContent}) {
   const [loading, setLoading] = useState(true);
-  const [isLoaded, setLoadingPage] = useState(true);
-  const handleSetClient = () => {
-    setLoading(false);
-  };
+  // const [isLoaded, setLoadingPage] = useState(true);
+  // const handleSetClient = () => {
+  //   setLoading(false);
+  // };
   
-  useEffect(() => {
-    const handleLoad = () => {
-      setLoadingPage(false);
-    };
+  // useEffect(() => {
+  //   const handleLoad = () => {
+  //     setLoadingPage(false);
+  //   };
 
-    window.onload = handleLoad;
+  //   window.onload = handleLoad;
 
-    return () => {
-      window.onload = null;
-    };
-  }, []);
+  //   return () => {
+  //     window.onload = null;
+  //   };
+  // }, []);
 
   return (
     <TopBox>
@@ -150,7 +150,7 @@ export default function Top({infoTop, styleWidthContent}) {
         </TopInner>
 
         <TopGallaxy>
-          {isLoaded ? <Galaxy parametersGallaxy={infoTop.gallaxy} onClientReady={handleSetClient}></Galaxy> : <></>}
+          <Galaxy parametersGallaxy={infoTop.gallaxy}></Galaxy>
 
           {loading ? <picture>
               <img

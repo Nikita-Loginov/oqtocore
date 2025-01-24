@@ -118,9 +118,10 @@ export default function Button({
   onClick,
   positionIconFirstHover,
   positionIconSecond,
+  disabled
 }){
   return (
-    <ButtonBox className="button-uniq" type="button" onClick={onClick} position-first-hover={positionIconFirstHover}>
+    <ButtonBox disabled={disabled} className="button-uniq" type="button" onClick={onClick} position-first-hover={positionIconFirstHover}>
       <ButtonText>{linkText}</ButtonText>
 
       <ButtonDecor className="button-decor" icon={`./icons/${iconName}.svg`} position-before-icon={positionIconSecond}>

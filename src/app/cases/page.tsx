@@ -262,7 +262,7 @@ export default function Home() {
       <Header />
 
       <main className="main cases-page">
-        <Top infoTop={infoTop} styleWidthContent={{maxWidth:"1150px"}}/>
+        {/* <Top infoTop={infoTop} styleWidthContent={{maxWidth:"1150px"}}/> */}
 
         <Stories info={infoStoriesItem} preloaderTextStories={preloaderTextStories} countVisibleItems={countVisibleItems}/>
 
