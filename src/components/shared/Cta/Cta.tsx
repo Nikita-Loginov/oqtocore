@@ -63,7 +63,7 @@ export default function Cta({ info }) {
 
   return (
     <>
-      <CtaSection>
+      <CtaSection id="cta">
         <Container>
           <CtaInner>
             <CtaContent>

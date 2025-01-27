@@ -17,6 +17,7 @@ const WaySection = dynamic(() => import("@/components/modules/Home/Way"), {
 const infoTop = {
   title: "Web3 Development Powerhouse & all-in-one Solutionhub",
   text: "Let’s build something beyond ordinary together",
+  linkUrl: '/#services',
   gallaxy: {
     count: 518300,
     size: 0.005,

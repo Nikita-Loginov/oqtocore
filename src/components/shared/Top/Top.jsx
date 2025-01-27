@@ -113,22 +113,6 @@ const TopGallaxy = styled.div`
 
 export default function Top({infoTop, styleWidthContent}) {
   const [loading, setLoading] = useState(true);
-  // const [isLoaded, setLoadingPage] = useState(true);
-  // const handleSetClient = () => {
-  //   setLoading(false);
-  // };
-  
-  // useEffect(() => {
-  //   const handleLoad = () => {
-  //     setLoadingPage(false);
-  //   };
-
-  //   window.onload = handleLoad;
-
-  //   return () => {
-  //     window.onload = null;
-  //   };
-  // }, []);
 
   return (
     <TopBox>
@@ -145,7 +129,7 @@ export default function Top({infoTop, styleWidthContent}) {
           <LinkUniq
             iconName="arrow-down"
             linkText="discover more"
-            linkUrl="/#services"
+            linkUrl={infoTop.linkUrl}
           ></LinkUniq>
         </TopInner>
 

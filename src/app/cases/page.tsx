@@ -11,6 +11,7 @@ import '@/styles/case/main.scss'
 const infoTop = {
   title: "Learn about our customers' success stories",
   text: "Want to see your story here too? Read below or contact us",
+  linkUrl: '/cases#cta',
   gallaxy: {
     count: 269000,
     // size:  0.005,
