@@ -22,7 +22,7 @@ const LinkBox = styled.a`
     border-radius: 48px;
     text-transform: uppercase;
     background-color: rgb(43, 36, 255);
-    transition: all 0.5s;
+    transition: all 0.2s;
 
     &:hover {
         box-shadow: 0px 0px 30.1px 0px rgba(43, 36, 255, 0.7);

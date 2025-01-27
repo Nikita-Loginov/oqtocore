@@ -25,7 +25,7 @@ const SroriesContentBox = styled.div`
       // padding:0 15px;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 1279px) {
     flex-direction: column;
     border-radius: 24px;
 
@@ -46,7 +46,7 @@ const StoriesContent = styled.div`
     padding: 0 12px;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 1279px) {
     max-width: 100%;
     display: contents;
 
@@ -112,17 +112,21 @@ const StoriesItemLink = styled.li`
 `;
 
 const StoriesImg = styled.img`
-  max-width: clamp(27.5rem, -123.8339rem + 168.2657vw, 56rem);
-  width: auto !important;
+  max-width: clamp(40.625rem, -41.375rem + 91.1111vw, 56rem);;
+  width: auto;
   max-height: 642px;
   border-radius: 40px;
 
   @media (max-width: 1439px) {
-    max-width: clamp(21.25rem, 10.814rem + 18.5529vw, 27.5rem);
+    max-width: clamp(31.25rem, 26.2633rem + 15.9574vw, 40.625rem);
   }
 
   @media (max-width: 767px) {
     border-radius: 24px;
+  }
+
+  @media (max-width: 620px) {
+    width:100%;
   }
 
   @media (max-width: 500px) {

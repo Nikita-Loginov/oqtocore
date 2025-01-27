@@ -21,13 +21,9 @@
     }
 
     &__content-box {
-      padding: 0 40px;
+      padding: 0 clamp(0.9375rem, -10.4954rem + 20.3252vw, 2.5rem);
       justify-content: start;
       gap: clamp(1.25rem, 0.0483rem + 4.6332vw, 5rem);
-
-      @media (max-width: 1023px) {
-        padding:0 15px;
-      }
     }
 
     &__inner {
