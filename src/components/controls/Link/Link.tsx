@@ -74,7 +74,6 @@ export default function Link<LinkProps>({ children, iconName, linkUrl, className
         <LinkBox
             href={linkUrl}
             className={className}
-            target='_blank'
         >
             <span className='link__text'>{children}</span>
 
