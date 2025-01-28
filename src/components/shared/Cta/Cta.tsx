@@ -86,7 +86,7 @@ export default function Cta({ info }) {
         </Container>
       </CtaSection>
 
-      <ContactModal isOpen={isOpenPopup}/>
+      <ContactModal isOpen={isOpenPopup} isDisabled={true}/>
     </>
   );
 }

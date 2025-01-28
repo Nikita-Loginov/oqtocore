@@ -14,6 +14,10 @@ const WaySection = dynamic(() => import("@/components/modules/Home/Way"), {
   ssr: false,
 });
 
+const headerInfo = {
+  contactBtn: false
+}
+
 const infoTop = {
   title: "Web3 Development Powerhouse & all-in-one Solutionhub",
   text: "Let’s build something beyond ordinary together",
@@ -146,7 +150,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header headerInfo={headerInfo}/>
 
       <main className="main">
         <Top infoTop={infoTop} styleWidthContent={{maxWidth:"1424px"}}/>

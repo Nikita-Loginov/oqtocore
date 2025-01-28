@@ -5,8 +5,11 @@ import Top from "@/components/shared/Top/Top";
 import {Header, Stories, Footer } from "@/components/widgets";
 import Cta from "@/components/shared/Cta/Cta";
 
-import '@/styles/case/main.scss'
+import '@/styles/case/main.scss';
 
+const headerInfo = {
+  contactBtn: true
+}
 
 const infoTop = {
   title: "Learn about our customers' success stories",
@@ -260,7 +263,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header headerInfo={headerInfo}/>
 
       <main className="main cases-page">
         <Top infoTop={infoTop} styleWidthContent={{maxWidth:"1150px"}}/>

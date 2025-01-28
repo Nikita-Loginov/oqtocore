@@ -225,7 +225,7 @@ const ContactQuestionChexk = styled.span`
   color: #fff;
 `;
 
-export default function ContactPopup({ isOpen }) {
+export default function ContactPopup({ isOpen, isDisabled }) {
   const [checkboxTextGropOne, setCheckboxTextGropOne] = useState([
     "Front-end Development",
     "Back-end development",
@@ -251,7 +251,8 @@ export default function ContactPopup({ isOpen }) {
     inputCommunication: "",
   });
 
-  const [isDisabledButton, setIsDisabledButton] = useState(true)
+  const [isDisabledButton, setIsDisabledButton] = useState(isDisabled);
+  // console.log(isDisabledButton)
 
   function handleChange(e) {
     const { name, value } = e.target;

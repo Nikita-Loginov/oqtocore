@@ -30,12 +30,14 @@ const ButtonDecor = styled.span`
     content: "";
     width: 16px;
     height: 16px;
-    background-image: url(${(props) => props['icon']});
+    background-image: url(${(props) => props["icon"]});
     background-repeat: no-repeat;
     background-position: center;
     transform: translateY(-30px);
     transition: all 0.5s;
-    transform: translate(${(props) => (props['position-before-icon'] || '-24px, 24px')});
+    transform: translate(
+      ${(props) => props["position-before-icon"] || "-24px, 24px"}
+    );
   }
 
   @media (max-width: 500px) {
@@ -72,6 +74,12 @@ const ButtonBox = styled.button`
     transition: transform 0.6s, width 0.5s, background-color 0.6s;
   }
 
+  &:disabled {
+    background: rgb(55, 55, 55);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
   &:hover {
     &:after {
       transform: translate(0%, 0%);
@@ -81,8 +89,10 @@ const ButtonBox = styled.button`
 
     img {
       transition: all 0.5s;
-      
-      transform: translate(${(props) => (props['position-first-hover'] || '24px, -24px')});
+
+      transform: translate(
+        ${(props) => props["position-first-hover"] || "24px, -24px"}
+      );
     }
 
     ${ButtonDecor} {
@@ -118,16 +128,26 @@ export default function Button({
   onClick,
   positionIconFirstHover,
   positionIconSecond,
-  disabled
-}){
+  disabled,
+}) {
+  console.log(disabled);
   return (
-    <ButtonBox disabled={disabled} className="button-uniq" type="button" onClick={onClick} position-first-hover={positionIconFirstHover}>
+    <ButtonBox
+      disabled={disabled}
+      className="button-uniq"
+      type="button"
+      onClick={onClick}
+      position-first-hover={positionIconFirstHover}
+    >
       <ButtonText>{linkText}</ButtonText>
 
-      <ButtonDecor className="button-decor" icon={`./icons/${iconName}.svg`} position-before-icon={positionIconSecond}>
-        <img  src={`./icons/${iconName}.svg`} alt={linkText} loading="lazy" />
+      <ButtonDecor
+        className="button-decor"
+        icon={`./icons/${iconName}.svg`}
+        position-before-icon={positionIconSecond}
+      >
+        <img src={`./icons/${iconName}.svg`} alt={linkText} loading="lazy" />
       </ButtonDecor>
     </ButtonBox>
   );
-};
-
+}
