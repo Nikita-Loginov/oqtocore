@@ -73,7 +73,7 @@ export default function Social() {
             </SociaLink>
 
             <SociaLink>
-                <SocialItem href='t.me/oqtacore_cto' aria-label="Перейти на наш telegram" target='_blank'>
+                <SocialItem href='https://t.me/oqtacore_cto' aria-label="Перейти на наш telegram" target='_blank'>
                     <svg
                         width='24'
                         height='24'
@@ -103,7 +103,7 @@ export default function Social() {
             </SociaLink>
 
             <SociaLink>
-                <SocialItem href='x.com/oqtacore_devs' aria-label="Перейти на наш x.com" target='_blank'>
+                <SocialItem href='https://x.com/oqtacore_devs' aria-label="Перейти на наш x.com" target='_blank'>
                     <svg
                         width='24'
                         height='24'

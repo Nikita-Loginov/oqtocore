@@ -199,7 +199,7 @@ const infoStoriesItem = [
       },
       {
         title: 'Tech stack:',
-        text: 'Microsoft Azure, MySQL, C#, React, Redis, Flutte'
+        text: 'Microsoft Azure, MySQL, C#, React, Redis, Flutter'
       },
     ],
     img: {
@@ -228,7 +228,7 @@ const infoStoriesItem = [
       },
       {
         title: 'Tech stack:',
-        text: 'Microsoft Azure, MySQL, C#, React, Redis, Flutte'
+        text: 'Microsoft Azure, MySQL, C#, React, Redis, Flutter'
       },
     ],
     img: {
