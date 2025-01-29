@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import Link from "@/components/controls/Link/Link";
@@ -17,7 +17,6 @@ const HeaderBox = styled.header`
   background: rgba(255, 255, 255, 0.01);
   z-index: 1000;
   transition: all 0.5s;
-  
 
   &:before {
     content: "";
@@ -41,9 +40,9 @@ const HeaderBox = styled.header`
     background-color: rgb(43, 36, 255);
 
     &:disabled {
-        background: rgb(55, 55, 55);
-        pacity: 0.4;
-        pointer-events: none; 
+      background: rgb(55, 55, 55);
+      pacity: 0.4;
+      pointer-events: none;
     }
 
     &:after {
@@ -231,11 +230,22 @@ export const Header: React.FC<HeaderProps> = ({ headerInfo }) => {
   const [isOpenPopup, setOpenPopup] = useState<boolean>(false);
   const [isDisabledButton, setIsDisabledButton] = useState(true);
   const [isMobile, setIsMobile] = useState<boolean>(true);
+  const burgerContainer = useRef(null);
 
   function openPopup() {
     setOpenPopup(() => true);
     setIsMenuOpen(() => false);
     document.documentElement.style.overflow = "hidden";
+  }
+
+  function toggleMenu() {
+    setIsMenuOpen((prev) => !prev);
+
+    if (burgerContainer.current.classList.contains('open')) {
+        document.documentElement.style.overflow = "visible";
+    } else {
+        document.documentElement.style.overflow = "hidden";
+    }
   }
 
   useEffect(() => {
@@ -254,7 +264,6 @@ export const Header: React.FC<HeaderProps> = ({ headerInfo }) => {
   }, []);
 
   useEffect(() => {
-    // Проверяем ширину окна при первом рендере
     const updateMedia = () => {
       setIsMobile(window.innerWidth < 767);
     };
@@ -283,11 +292,14 @@ export const Header: React.FC<HeaderProps> = ({ headerInfo }) => {
               />
             </HeaderLogo>
 
-            <HeaderMenu className={isMenuOpen ? "open" : ""}>
+            <HeaderMenu
+              className={isMenuOpen ? "open" : ""}
+              ref={burgerContainer}
+            >
               <HaederMenuBtn
                 type="button"
                 aria-label="burger menu"
-                onClick={() => setIsMenuOpen((prev) => !prev)}
+                onClick={toggleMenu}
               >
                 <span></span>
               </HaederMenuBtn>

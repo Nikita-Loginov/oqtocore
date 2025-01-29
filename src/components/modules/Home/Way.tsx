@@ -311,19 +311,19 @@ export default function Way() {
                         height: "85vh",
                         duration: 0.5,
                       });
-                      scrollTrigger.refresh();
+                      scrollTrigger?.refresh();
                     } else if (newBlockIndex === blocks.length - 2) {
                       gsap.to(".way", {
                         height: "70vh",
                         duration: 0.5,
                       }),
-                        scrollTrigger.refresh();
+                        scrollTrigger?.refresh();
                     } else if (newBlockIndex === blocks.length - 1) {
                       gsap.to(".way", {
                         height: "55vh",
                         duration: 0.5,
                       }),
-                        scrollTrigger.refresh();
+                        scrollTrigger?.refresh();
 
                       gsap.to(".experience", {
                         opacity: 1,
@@ -340,19 +340,19 @@ export default function Way() {
                         height: "85vh",
                         duration: 0.5,
                       });
-                      scrollTrigger.refresh();
+                      scrollTrigger?.refresh();
                     } else if (newBlockIndex === blocks.length - 2) {
                       gsap.to(".way", {
                         height: "75vh",
                         duration: 0.5,
                       });
-                      scrollTrigger.refresh();
+                      scrollTrigger?.refresh();
                     } else if (newBlockIndex === blocks.length - 1) {
                       gsap.to(".way", {
                         height: "70vh",
                         duration: 2,
                       });
-                      scrollTrigger.refresh();
+                      scrollTrigger?.refresh();
                     }
                   }
                 }
@@ -370,7 +370,7 @@ export default function Way() {
               duration: 0,
               ease: "power1.inOut",
             });
-            // scrollTrigger.refresh();
+            // scrollTrigger?.refresh();
           },
         });
       }
@@ -378,7 +378,7 @@ export default function Way() {
       if (scrollTrigger) {
         scrollTrigger.kill();
         scrollTrigger = null;
-        scrollTrigger.refresh();
+        scrollTrigger?.refresh();
       }
     }
   }

@@ -130,7 +130,6 @@ export default function Button({
   positionIconSecond,
   disabled,
 }) {
-  console.log(disabled);
   return (
     <ButtonBox
       disabled={disabled}
