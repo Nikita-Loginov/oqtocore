@@ -10,6 +10,8 @@ import Partners from "@/components/shared/Partners/Partners";
 import Experience from "@/components/modules/Home/Experience";
 import News from "@/components/modules/Home/News";
 
+import '@/styles/index/main.scss';
+
 const WaySection = dynamic(() => import("@/components/modules/Home/Way"), {
   ssr: false,
 });

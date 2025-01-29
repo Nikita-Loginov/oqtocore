@@ -343,7 +343,6 @@ export const Header: React.FC<HeaderProps> = ({ headerInfo }) => {
                 </HeaderList>
 
                 <HeaderMenuContent>
-                  {headerInfo?.contactBtn ? (
                     <Button
                       iconName="comment"
                       linkText="Contact us"
@@ -352,23 +351,13 @@ export const Header: React.FC<HeaderProps> = ({ headerInfo }) => {
                       onClick={openPopup}
                       disabled={false}
                     />
-                  ) : (
-                    <Link
-                      iconName="comment"
-                      linkUrl="/contact"
-                      className={"header__menu-link"}
-                      style={{}}
-                    >
-                      Contact us
-                    </Link>
-                  )}
 
                   <Social />
                 </HeaderMenuContent>
               </HeaderMenuInfo>
             </HeaderMenu>
 
-            {headerInfo?.contactBtn && !isMobile ? (
+            {!isMobile && (
               <Button
                 iconName="comment"
                 linkText="Contact us"
@@ -377,15 +366,6 @@ export const Header: React.FC<HeaderProps> = ({ headerInfo }) => {
                 onClick={openPopup}
                 disabled={false}
               />
-            ) : (
-              <Link
-                iconName="comment"
-                linkUrl="/contact"
-                className={"header__menu-link"}
-                style={{}}
-              >
-                Contact us
-              </Link>
             )}
           </HeaderInner>
         </Container>

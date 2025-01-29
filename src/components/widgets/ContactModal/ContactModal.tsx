@@ -27,6 +27,7 @@ const ContactModalBlock = styled.div`
   height: 100%;
   display: flex;
   overflow: scroll;
+  overflow-x: hidden;
   justify-content: center;
   color: #fff;
   opacity: 0;
