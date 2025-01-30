@@ -134,7 +134,7 @@ export default function Top({infoTop, styleWidthContent}) {
         </TopInner>
 
         <TopGallaxy>
-          {/* <Galaxy parametersGallaxy={infoTop.gallaxy}></Galaxy> */}
+          <Galaxy parametersGallaxy={infoTop.gallaxy}></Galaxy>
 
           {loading ? <picture>
               <img
