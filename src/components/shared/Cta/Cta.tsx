@@ -1,9 +1,19 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Container } from "@/components/widgets";
-import Button from "@/components/controls/Button/Button";
+import {Button} from "@/components/controls/Button/Button";
 import ContactModal from "@/components/widgets/ContactModal/ContactModal";
+
+interface CtaInfo {
+  title: string;
+  text: string;
+}
+
+interface CtaProps {
+  info?: CtaInfo;
+}
+
 
 const CtaSection = styled.section`
   padding: clamp(5rem, 4.1988rem + 3.0888vw, 7.5rem) 0 40px;
@@ -38,7 +48,7 @@ const CtaText = styled.p`
   text-align: center;
 `;
 
-export default function Cta({ info }) {
+export const Cta: React.FC<CtaProps> = ({info}) => {
   const [isOpenPopup, setOpenPopup] = useState(false);
 
   function openPopup() {

@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Container } from "@/components/widgets";
-import Button from "@/components/controls/Button/Button";
-import StoriesItemBox from "./parts/SroriesItemBox";
+import {Button} from "@/components/controls/Button/Button";
+import {StoriesItemBox} from "./parts/SroriesItemBox";
 
 const StoriesSection = styled.section`
   position: relative;

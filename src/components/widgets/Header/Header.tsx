@@ -2,10 +2,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import styled from "styled-components";
-import Link from "@/components/controls/Link/Link";
 import { Container } from "@/components/widgets";
 import Social from "@/components/shared/Social/Social";
-import Button from "@/components/controls/Button/Button";
+import {Button} from "@/components/controls/Button/Button";
 import ContactModal from "@/components/widgets/ContactModal/ContactModal";
 
 const HeaderBox = styled.header`
@@ -225,10 +224,9 @@ interface HeaderProps {
   };
 }
 
-export const Header: React.FC<HeaderProps> = ({ headerInfo }) => {
+export const Header: React.FC<HeaderProps> = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isOpenPopup, setOpenPopup] = useState<boolean>(false);
-  const [isDisabledButton, setIsDisabledButton] = useState(true);
   const [isMobile, setIsMobile] = useState<boolean>(true);
   const burgerContainer = useRef(null);
 

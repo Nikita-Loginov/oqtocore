@@ -1,5 +1,6 @@
+import React from "react";
 import styled from "styled-components";
-import Button from "@/components/controls/Button/Button";
+import {Button} from "@/components/controls/Button/Button";
 import { useEffect, useState } from "react";
 
 const ContactInner = styled.div`
@@ -226,8 +227,13 @@ const ContactQuestionChexk = styled.span`
   color: #fff;
 `;
 
-export default function ContactPopup({ isOpen, isDisabled }) {
-  const [checkboxTextGropOne, setCheckboxTextGropOne] = useState([
+interface ContactPopupProps {
+  isOpen: boolean;
+  isDisabled: boolean
+}
+
+const  ContactPopup: React.FC<ContactPopupProps> = ({ isOpen, isDisabled }) => {
+  const checkboxTextGropOne  =[
     "Front-end Development",
     "Back-end development",
     "Full-stack development with ongoing support",
@@ -235,15 +241,15 @@ export default function ContactPopup({ isOpen, isDisabled }) {
     "Smart contracts",
     "Cloud Computing",
     "Other",
-  ]);
+  ];
 
-  const [checkboxTextGropTwo, setCheckboxTextGropTwo] = useState([
+  const checkboxTextGropTwo = [
     "Layer1 blockchain (Ethereum, Solana, TON etc.)",
     "Layer 2S & Side blockchains (ZkSync, Polygon, Arbitrum etc.)",
     "Multiple platforms",
     "Not sure",
     "Other",
-  ]);
+  ]
 
   const [formData, setFormData] = useState({
     inputName: "",
@@ -253,7 +259,6 @@ export default function ContactPopup({ isOpen, isDisabled }) {
   });
 
   const [isDisabledButton, setIsDisabledButton] = useState(isDisabled);
-  // console.log(isDisabledButton)
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -295,7 +300,7 @@ export default function ContactPopup({ isOpen, isDisabled }) {
           <ContactTopContent>
             <ContactTopTitle>Your Next Big Step Starts Here</ContactTopTitle>
 
-            <ContactTopText>Let's learn more about each of us</ContactTopText>
+            <ContactTopText>Let&apos;s learn more about each of us</ContactTopText>
           </ContactTopContent>
 
           <ContactTopClose type="button" className="close-btn">
@@ -437,3 +442,5 @@ export default function ContactPopup({ isOpen, isDisabled }) {
     </ContactModalBlock>
   );
 }
+
+export default ContactPopup;

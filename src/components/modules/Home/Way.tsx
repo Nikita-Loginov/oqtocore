@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import React from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import styled from "styled-components";
@@ -118,19 +119,6 @@ const WayLine = styled.div`
   }
 `;
 
-const WayAnimationDecor = styled.div`
-  position: absolute;
-  width: 3px;
-  height: 100%;
-  opacity: 0;
-  top: 0;
-
-  @media (max-width: 900px) {
-    img {
-      display: none;
-    }
-  }
-`;
 
 const WayItems = styled.div`
   display: flex;
@@ -249,7 +237,6 @@ const WayItemText = styled.p`
 `;
 
 export default function Way() {
-  const [isSmoothScrollLoaded, setIsSmoothScrollLoaded] = useState(false);
   let blocks = [];
   let title = undefined;
   let scrollTrigger = null;
@@ -263,10 +250,7 @@ export default function Way() {
   function handleResize() {
     const isLargeScreen = window.matchMedia("(min-width: 900px)").matches;
     const isTallScreen = window.innerHeight > 1000;
-    const windowWidth = window.innerWidth;
     let lastScrollY = window.scrollY;
-    let speedAnimation;
-    // let bottom = `${clamp(7.5rem, 5.0965rem + 9.2664vw, 15rem)}`;
     let currentStartAnimation = 240;
     let currentTrigerBlock = ".animation-block";
 
@@ -276,7 +260,6 @@ export default function Way() {
       ) as HTMLElement;
       experienceBlock.style.padding =
         "clamp(5rem, 1.7954rem + 12.3552vw, 15rem) 0";
-      speedAnimation = blocks.length * 300;
       currentStartAnimation = 0;
       currentTrigerBlock = ".way-animaton";
     }
@@ -316,13 +299,13 @@ export default function Way() {
                       gsap.to(".way", {
                         height: "70vh",
                         duration: 0.5,
-                      }),
+                      });
                         scrollTrigger?.refresh();
                     } else if (newBlockIndex === blocks.length - 1) {
                       gsap.to(".way", {
                         height: "55vh",
                         duration: 0.5,
-                      }),
+                      });
                         scrollTrigger?.refresh();
 
                       gsap.to(".experience", {
@@ -370,7 +353,6 @@ export default function Way() {
               duration: 0,
               ease: "power1.inOut",
             });
-            // scrollTrigger?.refresh();
           },
         });
       }
@@ -476,7 +458,7 @@ export default function Way() {
                             high-level project timeline. This roadmap
                             incorporates your preferences, desired features, and
                             estimated delivery timeframes, providing a clear
-                            view of the project's structure.
+                            view of the project&apos;s structure.
                           </WayItemText>
                         </WayItemContent>
 
@@ -597,7 +579,7 @@ export default function Way() {
 
                           <WayItemText>
                             We offer a unique opportunity to revise the
-                            technical specification and shift the project's
+                            technical specification and shift the project&apos;s
                             direction at no additional cost. As result-focused
                             partner, we understand the importance of flexibility
                             in adapting to new insights and changing priorities.

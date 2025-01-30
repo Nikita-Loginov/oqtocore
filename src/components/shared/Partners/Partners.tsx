@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { useState,forwardRef  } from 'react';
+import { forwardRef  } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Container } from '@/components/widgets';
 
@@ -58,10 +58,8 @@ const PartnersItem = styled.div`
     animation: ${scrollParnners} 40s linear infinite;
 `;
 
-interface PartnersProps extends React.HTMLProps<HTMLDivElement> {}
-
-const Partners = forwardRef<HTMLDivElement, PartnersProps>((props, ref) => {
-    const [images, setImages] = useState([
+const Partners = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>((props, ref) => {
+    const images = [
         {
             srcImage: './images/partners/zellic.svg',
             alt: 'zellic',
@@ -98,7 +96,7 @@ const Partners = forwardRef<HTMLDivElement, PartnersProps>((props, ref) => {
             srcImage: './images/partners/teams.svg',
             alt: 'teams',
         },
-    ]);
+    ]
     const repeations = 4;
 
     const combinedArr = Array(repeations).fill(images).flat();
@@ -139,5 +137,7 @@ const Partners = forwardRef<HTMLDivElement, PartnersProps>((props, ref) => {
         </PartnersBox>
     );
 })
+
+Partners.displayName = 'Partners';
 
 export default Partners

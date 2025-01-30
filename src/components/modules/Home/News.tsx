@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import React from 'react';
 // import { Skeleton } from '@/components/widgets';
 
 import { Container } from '@/components/widgets';
@@ -124,19 +125,6 @@ const NewsItemImgDecor = styled.div`
             width: 50%;
         }
     }
-`;
-
-const NewsItemImgTitle = styled.h3`
-    font-size: clamp(0.9375rem, 0.6771rem + 1.0039vw, 1.75rem);
-    font-weight: 600;
-    position: absolute;
-    top: 0;
-    max-width: 364px;
-    line-height: 1.35;
-    left: 64px;
-    top: 14px;
-    text-transform: uppercase;
-    right: 5px;
 `;
 
 export default function News() {

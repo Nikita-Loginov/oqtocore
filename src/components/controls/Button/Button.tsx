@@ -1,6 +1,13 @@
 import styled from "styled-components";
+import React from "react";
 
-const ButtonDecor = styled.span`
+interface ButtonDecorProps {
+  icon: string;
+  positionBeforeIcon?: string;
+}
+
+
+const ButtonDecor = styled.span<ButtonDecorProps>`
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -122,14 +129,23 @@ const ButtonText = styled.span`
   font-weight: 700;
 `;
 
-export default function Button({
+interface ButtonProps {
+  iconName?: string;
+  linkText?: string;
+  positionIconFirstHover?: string;
+  positionIconSecond?: string;
+  onClick?: () => void;
+  disabled?: boolean
+}
+
+export const Button: React.FC<ButtonProps> = ({
   iconName,
   linkText,
   onClick,
   positionIconFirstHover,
   positionIconSecond,
-  disabled,
-}) {
+  disabled
+}) => {
   return (
     <ButtonBox
       disabled={disabled}

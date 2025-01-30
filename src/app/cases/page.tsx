@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { useEffect} from "react";
-import Top from "@/components/shared/Top/Top";
+import {Top} from "@/components/shared/Top/Top";
 import {Header, Stories, Footer } from "@/components/widgets";
-import Cta from "@/components/shared/Cta/Cta";
+import {Cta} from "@/components/shared/Cta/Cta";
 
 import '@/styles/case/main.scss';
 
@@ -30,7 +30,7 @@ const infoTop = {
 
 const preloaderTextStories = false;
 
-const infoStoriesItem = [
+const infoStoriesItems = [
   {
     id: 1,
     title: 'GTM',
@@ -268,7 +268,7 @@ export default function Home() {
       <main className="main cases-page">
         <Top infoTop={infoTop} styleWidthContent={{maxWidth:"1150px"}}/>
 
-        <Stories info={infoStoriesItem} preloaderTextStories={preloaderTextStories} countVisibleItems={countVisibleItems}/>
+        <Stories info={infoStoriesItems} preloaderTextStories={preloaderTextStories} countVisibleItems={countVisibleItems}/>
 
         <Cta info={ctaInfo}/>
       </main>

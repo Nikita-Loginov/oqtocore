@@ -1,5 +1,6 @@
 import Link from "@/components/controls/Link/Link";
 import styled from "styled-components";
+import React from "react";
 
 const StoriesBox = styled.div`
   border: 2px solid rgb(55, 55, 55);
@@ -134,7 +135,29 @@ const StoriesImg = styled.img`
   }
 `;
 
-export default function StoriesItemBox({ content }) {
+interface InfoItem {
+  title: string;
+  text: string;
+  list?: string[];
+}
+
+interface ContentProps {
+  content: {
+    id: number;
+    title: string;
+    items: InfoItem[];
+    img: {
+      top: boolean;
+      imgSrc: {
+        webp: string;
+        webp2x: string;
+      };
+    };
+  }
+}
+
+export const StoriesItemBox: React.FC<ContentProps> = ({ content }) => {
+
   return (
     <StoriesBox
       className={`stories-box-img-${

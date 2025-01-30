@@ -2,6 +2,7 @@
 import styled from 'styled-components';
 import Link from '@/components/controls/Link/Link';
 import { Container } from '@/components/widgets';
+import React from 'react';
 
 const ServicesBox = styled.section`
     padding: clamp(5rem, 4.1988rem + 3.0888vw, 7.5rem) 0 clamp(2.5rem, 1.6988rem + 3.0888vw, 5rem);

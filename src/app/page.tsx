@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Script from "next/script";
 import { useInView } from "react-intersection-observer";
-import Top from "@/components/shared/Top/Top";
+import {Top} from "@/components/shared/Top/Top";
 import { Services, Stories, Header, Footer } from "@/components/widgets";
 import Partners from "@/components/shared/Partners/Partners";
 import Experience from "@/components/modules/Home/Experience";
@@ -39,7 +39,7 @@ const infoTop = {
 
 const preloaderTextStories = true;
 
-const infoStoriesItem = [
+const infoStoriesItems = [
   {
     id: 1,
     title: 'GTM',
@@ -100,7 +100,24 @@ const infoStoriesItem = [
   }
 ]
 
-const countVisibleItems = infoStoriesItem.length;
+const countVisibleItems = infoStoriesItems.length;
+
+interface SmoothScrollOptions {
+  stepSize: number;
+  keyboardSupport: boolean;
+  arrowScroll: number;
+  touchpadSupport: boolean;
+}
+
+interface SmoothScroll {
+  new (options: SmoothScrollOptions): object; 
+}
+
+declare global {
+  interface Window {
+    SmoothScroll: SmoothScroll;
+  }
+}
 
 export default function Home() {
   const { ref, inView } = useInView({
@@ -120,19 +137,20 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  let smoothScroll;
 
   function handleScriptLoad() {
     setIsSmoothScrollLoaded(true);
   }
 
   function initSmoothScroll() {
-    smoothScroll = new (window as any).SmoothScroll({
-      stepSize: 100,
-      keyboardSupport: true,
-      arrowScroll: 100,
-      touchpadSupport: true,
-    });
+    if (window.SmoothScroll) {
+      new window.SmoothScroll({
+        stepSize: 100,
+        keyboardSupport: true,
+        arrowScroll: 100,
+        touchpadSupport: true,
+      });
+    }
   }
 
   useEffect(() => {
@@ -167,7 +185,7 @@ export default function Home() {
           <Experience />
         </div>
 
-        <Stories info={infoStoriesItem} preloaderTextStories={preloaderTextStories} countVisibleItems={countVisibleItems}/>
+        <Stories info={infoStoriesItems} preloaderTextStories={preloaderTextStories} countVisibleItems={countVisibleItems}/>
 
         <News />
       </main>

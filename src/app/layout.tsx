@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import StyledComponentsRegistry from "./registry";
 
 export default function RootLayout({

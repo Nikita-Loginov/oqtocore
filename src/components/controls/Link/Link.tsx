@@ -69,7 +69,7 @@ const LinkDecor = styled.span`
     }
 `;
 
-export default function Link<LinkProps>({ children, iconName, linkUrl, className, style}) {
+export default function Link({ children, iconName, linkUrl, className, style }: LinkProps) {
     return (
         <LinkBox
             href={linkUrl}

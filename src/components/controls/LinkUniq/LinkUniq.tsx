@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import React from "react";
 
 const LinkDecor = styled.span`
     width: 36px;
@@ -96,8 +97,13 @@ const LinkText = styled.span`
     font-weight: 700;
 `;
 
+interface LinkUniqProps {
+    iconName: string;
+    linkText: string;
+    linkUrl: string;
+}
 
-export default function LinkUniq({ iconName, linkText, linkUrl }) {
+export const LinkUniq: React.FC<LinkUniqProps> = ({ iconName, linkText, linkUrl }) => {
     return (
         <Link href={linkUrl}>
             <LinkText>{linkText}</LinkText>
