@@ -4,6 +4,8 @@ import React from "react";
 import { Container } from "@/components/widgets";
 
 const ContactsSection = styled.section`
+  padding-top: 40px;
+
   @media (max-width: 1023px) {
     .container {
       padding: 0;
