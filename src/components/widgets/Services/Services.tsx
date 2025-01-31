@@ -230,7 +230,7 @@ export const Services: React.FC = () => {
                     <ServicesItems>
                         <ServicesItem>
                             <ServicesItemContent>
-                                <ServicesItemContentBox>
+                                <ServicesItemContentBox className='services__item-content-box'>
                                     <img
                                         src='./images/services/development.svg'
                                         alt='development'
@@ -248,7 +248,7 @@ export const Services: React.FC = () => {
 
                         <ServicesItem>
                             <ServicesItemContent>
-                                <ServicesItemContentBox>
+                                <ServicesItemContentBox className='services__item-content-box'>
                                     <img
                                         src='./images/services/writing.svg'
                                         alt='writing'
@@ -266,7 +266,7 @@ export const Services: React.FC = () => {
 
                         <ServicesItem>
                             <ServicesItemContent>
-                                <ServicesItemContentBox>
+                                <ServicesItemContentBox className='services__item-content-box'>
                                     <img
                                         src='./images/services/design.svg'
                                         alt='design'
@@ -286,7 +286,7 @@ export const Services: React.FC = () => {
 
                         <ServicesItem>
                             <ServicesItemContent>
-                                <ServicesItemContentBox>
+                                <ServicesItemContentBox className='services__item-content-box'>
                                     <img
                                         src='./images/services/smallDevelopment.svg'
                                         alt='smallDevelopment'
@@ -306,7 +306,7 @@ export const Services: React.FC = () => {
 
                         <ServicesItem>
                             <ServicesItemContent>
-                                <ServicesItemContentBox>
+                                <ServicesItemContentBox className='services__item-content-box'>
                                     <img
                                         src='./images/services/blockchain.svg'
                                         alt='blockchain'

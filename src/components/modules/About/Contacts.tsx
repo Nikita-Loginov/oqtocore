@@ -32,6 +32,7 @@ const ContactsTitle = styled.h3`
   font-weight: 700;
   line-height: 1.17;
   text-align: center;
+  text-transform: capitalize;
 `;
 
 const ContactsList = styled.ul`
@@ -46,13 +47,7 @@ const ContactsList = styled.ul`
 `;
 
 const ContactsLink = styled.li`
-  padding: 16px;
-
-  @media (max-width: 767px) {
-    &__link {
-      padding: 12px;
-    }
-  }
+  transition: all 0.5s;
 `;
 
 const ContactsItem = styled.a`
@@ -64,6 +59,33 @@ const ContactsItem = styled.a`
   font-weight: 600;
   line-height: 1.45;
   gap: 10px;
+  transition: all 0.5s;
+  padding: 16px;
+  border-radius: 8px;
+
+  svg {
+    path {
+      transition: all 0.5s;
+    }
+  }
+
+  &:hover {
+    background-color: #fff;
+
+    color: rgb(1, 1, 1);
+
+    svg {
+      path {
+        fill: rgb(1, 1, 1);
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    &__link {
+      padding: 12px;
+    }
+  }
 `;
 
 export default function Contacts() {
@@ -85,8 +107,8 @@ export default function Contacts() {
                 title="x com"
               >
                 <svg
-                  width="44"
-                  height="40"
+                  width="43"
+                  height="43"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -110,8 +132,8 @@ export default function Contacts() {
                 title="linkedin"
               >
                 <svg
-                  width="48"
-                  height="48"
+                  width="43"
+                  height="43"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -143,8 +165,8 @@ export default function Contacts() {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="49"
-                  height="34"
+                 width="43"
+                  height="43"
                   viewBox="0 0 49 34"
                   fill="none"
                 >

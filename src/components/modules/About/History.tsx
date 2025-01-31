@@ -5,7 +5,7 @@ import { Container } from "@/components/widgets";
 
 const HistorySection = styled.section`
   background-color: #2b24ff;
-  padding: 40px 0;
+  padding: clamp(2.5rem, 1.6988rem + 3.0888vw, 5rem) 0;
 `;
 
 const HistoryInner = styled.div`
@@ -21,6 +21,7 @@ const HistoryTitle = styled.h2`
   font-size: 40px;
   font-weight: 700;
   font-size: clamp(1.25rem, 0.8494rem + 1.5444vw, 2.5rem);
+  line-height: 1.15;
 `;
 
 const HistoryList = styled.ul`
