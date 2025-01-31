@@ -17,7 +17,6 @@ const infoTop = {
   linkUrl: '/cases#cta',
   gallaxy: {
     count: 269000,
-    // size:  0.005,
     radius: 6.47,
     branches: 5,
     spin: 5,

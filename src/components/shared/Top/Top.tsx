@@ -133,7 +133,6 @@ const TopGallaxy = styled.div`
 
 export const Top: React.FC<{ infoTop: InfoTop; styleWidthContent?: React.CSSProperties }> = ({ infoTop, styleWidthContent }) => {
   const [loading, setLoading] = useState(true);
-  // setLoading(true)
 
   useEffect(() => {
     setLoading(true)

@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import React from 'react';
-// import { Skeleton } from '@/components/widgets';
 
 import { Container } from '@/components/widgets';
 import Link from '@/components/controls/Link/Link';
