@@ -36,6 +36,21 @@ const NewsTitle = styled.h2`
     text-transform: capitalize;
 `;
 
+const NewsItemImg = styled.div`
+    position: relative;
+    border: 1.74px solid rgb(55, 55, 55);
+    background: rgb(1, 1, 1);
+    width: 100%;
+    max-height: 286px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit:cover;
+    }
+`;
+
+
 const NewsItems = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -47,6 +62,10 @@ const NewsItems = styled.div`
 
     @media (max-width: 767px) {
         grid-template-columns: repeat(1, 1fr);
+
+        ${NewsItemImg} {
+           max-height: 386px;
+        }
     }
 `;
 
@@ -92,39 +111,26 @@ const NewsItem = styled.a`
     }
 `;
 
-const NewsItemImg = styled.div`
-    position: relative;
-    border: 1.74px solid rgb(55, 55, 55);
-    background: rgb(1, 1, 1);
-    width: 100%;
-    max-height: 286px;
+// const NewsItemImgDecor = styled.div`
+//     left: 0;
+//     position: absolute;
+//     top: 0;
+//     bottom: 0;
+//     width: clamp(1.75rem, 1.3094rem + 1.6988vw, 3.125rem);
+//     background-color: rgb(43, 36, 255);
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
 
-    img {
-        width: 100%;
-        height: 100%;
-    }
-`;
+//     img {
+//         width: auto;
+//         height: auto;
 
-const NewsItemImgDecor = styled.div`
-    left: 0;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: clamp(1.75rem, 1.3094rem + 1.6988vw, 3.125rem);
-    background-color: rgb(43, 36, 255);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-        width: auto;
-        height: auto;
-
-        @media (max-width: 500px) {
-            width: 50%;
-        }
-    }
-`;
+//         @media (max-width: 500px) {
+//             width: 50%;
+//         }
+//     }
+// `;
 
 interface NewsProps {
     newsInfo: {
@@ -209,13 +215,13 @@ export const News: React.FC<NewsProps> = ({newsInfo}) =>  {
                                             </picture>
                                         )}
 
-                                        <NewsItemImgDecor>
+                                        {/* <NewsItemImgDecor>
                                             <img
                                                 src='./images/news/logo.svg'
                                                 alt='logo'
                                                 loading='lazy'
                                             />
-                                        </NewsItemImgDecor>
+                                        </NewsItemImgDecor> */}
 
                                     </NewsItemImg>
 
@@ -242,7 +248,7 @@ export const News: React.FC<NewsProps> = ({newsInfo}) =>  {
                     </NewsItems>
 
                     <Link
-                        linkUrl='oqtacore.com/blog'
+                        linkUrl='https://oqtacore.com/blog/'
                         iconName='arrow-up-right'
                         className={'news-link'}
                         style={{}}

@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { forwardRef  } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Container } from '@/components/widgets';
@@ -38,27 +38,52 @@ const PartnersItems = styled.div`
 
     img {
         height: clamp(1.875rem, 1.2541rem + 2.3938vw, 3.8125rem);
+        width:150px;
     }
 `;
 
 const scrollParnners = keyframes`
     0% {
-        transform: translateX(0%);
+        -webkit-transform: translateX(0%);
+        -ms-transform: translateX(0%);
+            transform: translateX(0%);
     }
 
     100% {
-        transform: translateX(calc(-100% - ${gapValue}));
+        -webkit-transform: translateX(calc(-100% - ${gapValue}));
+        -ms-transform: translateX(calc(-100% - ${gapValue}));
+            transform: translateX(calc(-100% - ${gapValue}));
     }
 `;
 
 const PartnersItem = styled.div`
-    display: flex;
-    flex-shrink: 0;
+   display: -webkit-box;
+     display: -ms-flexbox;
+     display: flex;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
     gap: ${gapValue};
+    -webkit-transform: translateX(0%);
+        -ms-transform: translateX(0%);
+            transform: translateX(0%);
+    -webkit-animation: ${scrollParnners} 40s linear infinite;
     animation: ${scrollParnners} 40s linear infinite;
+    will-change: transform;
 `;
 
 const Partners = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>((props, ref) => {
+    const [isSafari, setIsSafari] = useState(false);
+
+    useEffect(() => {
+        const userAgent = navigator.userAgent;
+        const isSafariBrowser = /^((?!chrome|android).)*safari/i.test(userAgent);
+
+        setIsSafari(isSafariBrowser);
+
+    }, [])
+
+    console.log(isSafari)
+
     const images = [
         {
             srcImage: './images/partners/zellic.svg',
@@ -116,7 +141,7 @@ const Partners = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>((pr
                                 key={index}
                                 alt={item.alt}
                                 loading='lazy'
-                                width={"100%"}
+                                style={{ width: isSafari ? "120px" : "auto" }}
                             />
                         ))}
                     </PartnersItem>
@@ -128,7 +153,7 @@ const Partners = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>((pr
                                 key={index}
                                 alt={item.alt}
                                 loading='lazy'
-                                width={"100%"}
+                                style={{ width: isSafari ? "120px" : "auto" }}
                             />
                         ))}
                     </PartnersItem>

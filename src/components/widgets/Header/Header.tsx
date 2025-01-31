@@ -4,7 +4,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import { Container } from "@/components/widgets";
 import Social from "@/components/shared/Social/Social";
-import {Button} from "@/components/controls/Button/Button";
+import { Button } from "@/components/controls/Button/Button";
 import ContactModal from "@/components/widgets/ContactModal/ContactModal";
 
 const HeaderBox = styled.header`
@@ -30,6 +30,10 @@ const HeaderBox = styled.header`
 
   @media (max-width: 767px) {
     padding-top: 35px;
+
+    .button-uniq {
+      display: none;
+    }
   }
 
   .button-uniq {
@@ -186,6 +190,10 @@ const HeaderMenuInfo = styled.div`
     gap: 80px;
     transition: all 0.5s;
     transform: translateX(100%);
+
+    .button-uniq {
+      display: flex;
+    }
   }
 `;
 
@@ -227,7 +235,6 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isOpenPopup, setOpenPopup] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>(true);
   const burgerContainer = useRef(null);
 
   function openPopup() {
@@ -239,10 +246,10 @@ export const Header: React.FC<HeaderProps> = () => {
   function toggleMenu() {
     setIsMenuOpen((prev) => !prev);
 
-    if (burgerContainer.current.classList.contains('open')) {
-        document.documentElement.style.overflow = "visible";
+    if (burgerContainer.current.classList.contains("open")) {
+      document.documentElement.style.overflow = "visible";
     } else {
-        document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     }
   }
 
@@ -259,18 +266,6 @@ export const Header: React.FC<HeaderProps> = () => {
         document.documentElement.style.overflow = "visible";
       }
     });
-  }, []);
-
-  useEffect(() => {
-    const updateMedia = () => {
-      setIsMobile(window.innerWidth < 767);
-    };
-
-    updateMedia();
-
-    window.addEventListener("resize", updateMedia);
-
-    return () => window.removeEventListener("resize", updateMedia);
   }, []);
 
   return (
@@ -340,30 +335,28 @@ export const Header: React.FC<HeaderProps> = () => {
                 </HeaderList>
 
                 <HeaderMenuContent>
-                    <Button
-                      iconName="comment"
-                      linkText="Contact us"
-                      positionIconFirstHover="24px, -24px"
-                      positionIconSecond="-24px, 24px"
-                      onClick={openPopup}
-                      disabled={false}
-                    />
+                  <Button
+                    iconName="comment"
+                    linkText="Contact us"
+                    positionIconFirstHover="24px, -24px"
+                    positionIconSecond="-24px, 24px"
+                    onClick={openPopup}
+                    disabled={false}
+                  />
 
                   <Social />
                 </HeaderMenuContent>
               </HeaderMenuInfo>
             </HeaderMenu>
 
-            {!isMobile && (
-              <Button
-                iconName="comment"
-                linkText="Contact us"
-                positionIconFirstHover="24px, -24px"
-                positionIconSecond="-24px, 24px"
-                onClick={openPopup}
-                disabled={false}
-              />
-            )}
+            <Button
+              iconName="comment"
+              linkText="Contact us"
+              positionIconFirstHover="24px, -24px"
+              positionIconSecond="-24px, 24px"
+              onClick={openPopup}
+              disabled={false}
+            />
           </HeaderInner>
         </Container>
       </HeaderBox>
