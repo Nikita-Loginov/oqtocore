@@ -286,7 +286,6 @@ export const Header: React.FC<HeaderProps> = () => {
                 height={21}
                 unoptimized
                 priority
-                //  loading='lazy'
               />
             </HeaderLogo>
 

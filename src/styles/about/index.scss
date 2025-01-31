@@ -1,0 +1,41 @@
+.about-page {
+    .partners__title{
+        text-align: center;
+
+        @media(max-width:767px) {
+            text-align: start;
+        }
+    }
+    .services__title,
+    .services-link,
+    .news__title,
+    .news-link {
+        margin: 0 auto;
+
+        @media(max-width:767px) {
+            margin: 0;
+        }
+    }
+}
+
+.contact-modal {
+    .button-uniq {
+      background-color: rgb(43, 36, 255);
+      align-self: center;
+      gap: 110px;
+  
+      &:after {
+          background-color: transparent;
+      }
+  
+      &:disabled {
+        background: rgb(55, 55, 55);
+        opacity: 0.4;
+        pointer-events: none; 
+      }
+    }
+  
+    .button-decor {
+      background-color: #010101;
+    }
+  }

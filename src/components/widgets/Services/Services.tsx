@@ -225,7 +225,7 @@ export const Services: React.FC = () => {
         <ServicesBox className='services' id='services'>
             <Container>
                 <ServicesInner>
-                    <ServicesTitle>Our Key services</ServicesTitle>
+                    <ServicesTitle className='services__title'>Our Key services</ServicesTitle>
 
                     <ServicesItems>
                         <ServicesItem>
@@ -240,7 +240,7 @@ export const Services: React.FC = () => {
                                     <ServicesItemTitle>End-to-end Development</ServicesItemTitle>
                                 </ServicesItemContentBox>
 
-                                <ServicesItemLink href='/end-to-end-development' target='_blank'>
+                                <ServicesItemLink href='/end-to-end-development'>
                                     Read More
                                 </ServicesItemLink>
                             </ServicesItemContent>
@@ -258,7 +258,7 @@ export const Services: React.FC = () => {
                                     <ServicesItemTitle>Whitepaper Writing</ServicesItemTitle>
                                 </ServicesItemContentBox>
 
-                                <ServicesItemLink href='/whitepaper-writing' target='_blank'>
+                                <ServicesItemLink href='/whitepaper-writing'>
                                     Read More
                                 </ServicesItemLink>
                             </ServicesItemContent>
@@ -278,7 +278,7 @@ export const Services: React.FC = () => {
                                     </ServicesItemTitle>
                                 </ServicesItemContentBox>
 
-                                <ServicesItemLink href='/software-design' target='_blank'>
+                                <ServicesItemLink href='/software-design'>
                                     Read More
                                 </ServicesItemLink>
                             </ServicesItemContent>
@@ -298,7 +298,7 @@ export const Services: React.FC = () => {
                                     </ServicesItemTitle>
                                 </ServicesItemContentBox>
 
-                                <ServicesItemLink href='/smart-contract-development' target='_blank'>
+                                <ServicesItemLink href='/smart-contract-development'>
                                     Read More
                                 </ServicesItemLink>
                             </ServicesItemContent>

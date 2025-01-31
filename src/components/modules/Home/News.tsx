@@ -126,7 +126,13 @@ const NewsItemImgDecor = styled.div`
     }
 `;
 
-export default function News() {
+interface NewsProps {
+    newsInfo: {
+        title: string
+    }
+}
+
+export const News: React.FC<NewsProps> = ({newsInfo}) =>  {
     const [news, setNews] = useState([]);
     const [newsImages, setNewsImages] = useState({});
     const [loading, setLoading] = useState(true);
@@ -181,7 +187,7 @@ export default function News() {
         <NewsSection>
             <Container>
                 <NewsInner>
-                    <NewsTitle>Learn something new in our blog</NewsTitle>
+                    <NewsTitle className='news__title'>{newsInfo.title}</NewsTitle>
 
                     <NewsItems>
                         {!loading ? (

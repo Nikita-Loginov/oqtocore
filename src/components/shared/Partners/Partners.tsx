@@ -105,7 +105,7 @@ const Partners = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>((pr
         <PartnersBox ref={ref}>
             <PartnersInner>
                 <Container>
-                    <PartnersTitle>Trusted By</PartnersTitle>
+                    <PartnersTitle className='partners__title'>Trusted By</PartnersTitle>
                 </Container>
 
                 <PartnersItems>

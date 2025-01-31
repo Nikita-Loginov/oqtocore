@@ -434,7 +434,7 @@ const  ContactPopup: React.FC<ContactPopupProps> = ({ isOpen, isDisabled }) => {
           iconName="arrow-right"
           linkText="Send"
           positionIconFirstHover="40px, 0"
-          positionIconSecond="-24px, 0"
+          positionIconSecond="-30px, 0"
           onClick={() => console.log()} // here then there will be a function for submitting the form
           disabled={isDisabledButton}
         />

@@ -8,7 +8,7 @@ import {Top} from "@/components/shared/Top/Top";
 import { Services, Stories, Header, Footer } from "@/components/widgets";
 import Partners from "@/components/shared/Partners/Partners";
 import Experience from "@/components/modules/Home/Experience";
-import News from "@/components/modules/Home/News";
+import {News} from "@/components/modules/Home/News";
 
 import '@/styles/index/main.scss';
 
@@ -100,6 +100,10 @@ const infoStoriesItems = [
   }
 ]
 
+const newsInfo = {
+    title: 'Our Key services'
+}
+
 const countVisibleItems = infoStoriesItems.length;
 
 interface SmoothScrollOptions {
@@ -177,7 +181,7 @@ export default function Home() {
 
         <Partners ref={ref} />
 
-        <Services />
+        <Services/>
 
         <div className="animation-block">
           <WaySection />
@@ -187,7 +191,7 @@ export default function Home() {
 
         <Stories info={infoStoriesItems} preloaderTextStories={preloaderTextStories} countVisibleItems={countVisibleItems}/>
 
-        <News />
+        <News newsInfo={newsInfo}/>
       </main>
 
       <Footer />
