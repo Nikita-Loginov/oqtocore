@@ -7,11 +7,20 @@
 
 html {
   overflow: hidden;
+
+  @media(max-width:1279px) {
+    visibility: visible;
+  }
 }
 
 .main {
   opacity: 0;
   visibility: hidden;
+
+  @media(max-width:1279px) {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 .grid-two {

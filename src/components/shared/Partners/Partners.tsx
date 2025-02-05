@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 import styled, { keyframes } from "styled-components";
 import { Container } from "@/components/widgets";
 
-const gapValue = "clamp(0.9375rem, 0.2765rem + 2.5483vw, 3rem)";
+// const gapValue = "clamp(0.9375rem, 0.2765rem + 2.5483vw, 3rem)";
 
 const PartnersBox = styled.section`
   overflow: hidden;
@@ -27,19 +27,14 @@ const PartnersTitle = styled.h2`
 `;
 
 const PartnersItems = styled.div`
-  position: relative;
   display: flex;
+  position: relative;
   overflow: hidden;
-  gap: ${gapValue};
+  gap:48px;
   border-bottom: 1px solid rgb(55, 55, 55);
   border-top: 1px solid rgb(55, 55, 55);
   background-color: #010101;
   padding: 24px 0;
-
-  img {
-    height: clamp(1.875rem, 1.2541rem + 2.3938vw, 3.8125rem);
-    // width: 150px;
-  }
 `;
 
 const scrollParnners = keyframes`
@@ -48,31 +43,27 @@ const scrollParnners = keyframes`
     }
 
     100% {
-        // -webkit-transform: translateX(calc(-100% - ${gapValue}));
-        // -ms-transform: translateX(calc(-100% - ${gapValue}));
-            transform: translateX(calc(-100% - ${gapValue}));
+            transform: translateX(calc(-100% - 96px));
     }
 `;
 
 const PartnersItem = styled.div`
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  // min-width: 100%;
-  // -ms-flex-negative: 0;
-  // flex-shrink: 0;
-  gap: ${gapValue};
-  // -webkit-transform: translateX(0%);
-  // -ms-transform: translateX(0%);
-  // transform: translateX(0%);
-  -webkit-animation: ${scrollParnners} 30s linear infinite;
-  animation: ${scrollParnners} 30s linear infinite;
-  will-change: transform;
+  gap: 48px;
+
+  img {
+    max-width: 240px;
+    height: 60px;
+
+    @media(max-width:600px) {
+       height: 37px;
+    }
+  }
+  animation: ${scrollParnners} 50s linear infinite;
 `;
 
 const Partners = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
   (props, ref) => {
-
     return (
       <PartnersBox ref={ref}>
         <PartnersInner>

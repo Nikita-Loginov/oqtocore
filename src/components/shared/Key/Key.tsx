@@ -7,7 +7,7 @@ interface KeyItem {
   id: number;
   iconSrc: string;
   title: string;
-  text: string;
+  text: string[];
   maxWidthText: string;
 }
 
@@ -49,11 +49,13 @@ const KeyItem = styled.div`
   flex-direction: column;
   gap: 28px;
   align-items: center;
-  padding: clamp(5.4375rem, 3.8953rem + 5.9459vw, 10.25rem)
+  padding: 30px
     clamp(0.9375rem, 0.5169rem + 1.6216vw, 2.25rem);
   border: 2px solid rgb(55, 55, 55);
   border-radius: 20px;
   background-color: rgba(1, 1, 1, 0.2);
+  min-height: clamp(25.625rem, 21.0183rem + 17.7606vw, 40rem);
+  justify-content: center;
 
   @media (max-width: 1600px) {
     &:nth-child(3) {
@@ -87,6 +89,12 @@ const KeyItemTitle = styled.h3`
     text-transform: capitalize;
 `;
 
+const KeyTextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
 const KeyText = styled.p`
   font-size: clamp(0.875rem, 0.7548rem + 0.4633vw, 1.25rem);
   font-weight: 600;
@@ -111,8 +119,12 @@ export const Key: React.FC<KeyProp> = ({ info }) => {
 
                 <KeyItemContent>
                   <KeyItemTitle style={{ maxWidth: `${item.maxWidthText}px` }}>{item.title}</KeyItemTitle>
-
-                  <KeyText>{item.text}</KeyText>
+                    
+                  <KeyTextBox>
+                    {item.text.map((itemText) => (
+                      <KeyText key={itemText}>{itemText}</KeyText>
+                    ))}
+                    </KeyTextBox>
                 </KeyItemContent>
               </KeyItem>
             ))}

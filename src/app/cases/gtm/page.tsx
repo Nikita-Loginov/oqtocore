@@ -65,21 +65,21 @@ const infoKey = {
       id: 1,
       iconSrc: "/icons/wallet.svg",
       title: "Extensive Wallets support",
-      text: "The platform supports 400+ wallets, such as Metamask, Trust walllet, Phantom wallet and many many others.",
+      text: ["The platform supports 400+ wallets, such as Metamask, Trust walllet, Phantom wallet and many many others."],
       maxWidthText: '243'
     },
     {
       id: 2,
       iconSrc: "/icons/schedule.svg",
       title: "Advanced search and flitering system for Games",
-      text: "Using complex algorithms, this feature allows users to quickly and effectivelly find games and assets that would be interesting and useful for them.",
+      text: ["Using complex algorithms, this feature allows users to quickly and effectivelly find games and assets that would be interesting and useful for them."],
       maxWidthText: '460'
     },
     {
       id: 3,
       iconSrc: "/icons/supermarket.svg",
       title: "Marketplace for game-assets",
-      text: "Allows users to buy and sell game items on multiple blockchains with ease. ",
+      text: ["Allows users to buy and sell game items on multiple blockchains with ease."],
       maxWidthText: '300'
     },
   ],
@@ -117,7 +117,7 @@ const marketInfo = {
 
 const architecture = {
   title: 'architecture',
-  imgSrc: '/images/architecture/gtm'
+  imgSrc: ['/images/architecture/gtm']
 }
 
 const stackInfo = {

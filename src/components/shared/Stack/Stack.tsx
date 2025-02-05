@@ -7,6 +7,7 @@ interface CaseItem {
   id: number;
   title: string;
   list: string[];
+  mibbleLink?: boolean;
 }
 
 interface CaseItemsBoxs {
@@ -92,6 +93,15 @@ const StackItemList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  flex-wrap: wrap;
+
+  &.middle {
+    flex-direction: row;
+
+    @media(max-width:1279px) {
+      flex-direction: column;
+    }
+  }
 `;
 
 const StackItemLink = styled.li`
@@ -99,6 +109,15 @@ const StackItemLink = styled.li`
   display: flex;
   align-items: center;
   padding-left: 25px;
+
+  &.middle {
+    max-width: 48%;
+    width: 100%;
+
+    @media(max-width:1279px) {
+      max-width: 100%;
+    }
+  }
 
   &:before {
     content: "";
@@ -126,9 +145,12 @@ export const Stack: React.FC<CaseProp> = ({ info }) => {
                       <StackItem key={index}>
                         <StackItemTitle>{subItem.title}</StackItemTitle>
 
-                        <StackItemList>
+                        <StackItemList className={`${subItem.mibbleLink && "middle"}`}>
                           {subItem.list.map((linkText) => (
-                            <StackItemLink key={linkText}>
+                            <StackItemLink
+                              key={linkText}
+                              className={`${subItem.mibbleLink && "middle"}`}
+                            >
                               {linkText}
                             </StackItemLink>
                           ))}

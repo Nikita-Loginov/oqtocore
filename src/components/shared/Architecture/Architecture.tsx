@@ -6,7 +6,7 @@ import { Container } from "@/components/widgets";
 interface ArchitectureProp {
   info: {
     title: string;
-    imgSrc: string;
+    imgSrc: string[];
   };
 }
 
@@ -40,12 +40,14 @@ export const Architecture: React.FC<ArchitectureProp> = ({ info }) => {
           <h2 className="title-two">{info.title}</h2>
 
           <ArchitectureImgs>
-            <picture>
+            {info.imgSrc.map((itemSrc, index) => (
+              <picture key={index}>
               <source
-                srcSet={`${info.imgSrc}.webp 1x, ${info.imgSrc}2x.webp 2x`}
+                srcSet={`${itemSrc}.webp 1x, ${itemSrc}2x.webp 2x`}
               />
-              <img src={`${info.imgSrc}.webp`} alt="description" />
+              <img src={`${itemSrc}.webp`} alt="description" />
             </picture>
+            ))}
           </ArchitectureImgs>
         </ArchitectureInner>
       </Container>
