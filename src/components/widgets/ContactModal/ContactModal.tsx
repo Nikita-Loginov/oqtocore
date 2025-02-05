@@ -57,7 +57,7 @@ const ContactTop = styled.div`
 const ContactTopContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: clamp(0.125rem, -0.0753rem + 0.7722vw, 0.75rem)
 `;
 
 const ContactTopTitle = styled.h3`
@@ -95,7 +95,7 @@ const ContactTopClose = styled.button`
 const ContactForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: clamp(1.5rem, 1.1795rem + 1.2355vw, 2.5rem);
 `;
 
 const ContactInputs = styled.div`
@@ -178,13 +178,13 @@ const ContactInput = styled.input`
 const ContactQuestions = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: clamp(1.5rem, 1.1795rem + 1.2355vw, 2.5rem);
 `;
 
 const ContactQuestion = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: clamp(0.75rem, 0.5898rem + 0.6178vw, 1.25rem);
 `;
 
 const ContactQuestionTitle = styled.h4`
@@ -197,6 +197,10 @@ const ContactQuestionList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+
+  @media(max-width:550px) {
+    display: grid
+  }
 `;
 
 const ContactQuestionItem = styled.label`
@@ -225,6 +229,7 @@ const ContactQuestionChexk = styled.span`
   padding: 0 16px;
   transition: all 0.5s;
   color: #fff;
+  text-align: center;
 `;
 
 interface ContactPopupProps {
