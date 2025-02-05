@@ -7,7 +7,7 @@ import ContactModal from "@/components/widgets/ContactModal/ContactModal";
 
 interface CtaInfo {
   title: string;
-  text: string;
+  text?: string;
 }
 
 interface CtaProps {
@@ -16,7 +16,7 @@ interface CtaProps {
 
 
 const CtaSection = styled.section`
-  padding: clamp(5rem, 4.1988rem + 3.0888vw, 7.5rem) 0 40px;
+  padding: 120px 0;
 `;
 
 const CtaInner = styled.div`

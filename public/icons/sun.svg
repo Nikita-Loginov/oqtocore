@@ -1,0 +1,20 @@
+<svg width="80.000000" height="80.000000" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<clipPath id="clip2127_4812">
+			<rect id="sun" rx="0.000000" width="79.333336" height="79.333336" transform="translate(0.333333 0.333333)" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<rect id="sun" rx="0.000000" width="79.333336" height="79.333336" transform="translate(0.333333 0.333333)" fill="#FFFFFF" fill-opacity="0"/>
+	<g clip-path="url(#clip2127_4812)">
+		<path id="Vector" d="M40 56.66C30.79 56.66 23.33 49.2 23.33 40C23.33 30.79 30.79 23.33 40 23.33C49.2 23.33 56.66 30.79 56.66 40C56.66 49.2 49.2 56.66 40 56.66Z" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.666667" stroke-linejoin="round"/>
+		<path id="Vector" d="M49.33 40C49.33 45.15 45.15 49.33 40 49.33C34.84 49.33 30.66 45.15 30.66 40C30.66 34.84 34.84 30.66 40 30.66C45.15 30.66 49.33 34.84 49.33 40Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+		<path id="Vector" d="M40 3.33L40 10" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.666667" stroke-linejoin="round" stroke-linecap="round"/>
+		<path id="Vector" d="M40 70L40 76.66" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.666667" stroke-linejoin="round" stroke-linecap="round"/>
+		<path id="Vector" d="M14.06 14.06L18.79 18.79" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.666667" stroke-linejoin="round" stroke-linecap="round"/>
+		<path id="Vector" d="M61.2 61.2L65.93 65.93" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.666667" stroke-linejoin="round" stroke-linecap="round"/>
+		<path id="Vector" d="M3.33 40L10 40" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.666667" stroke-linejoin="round" stroke-linecap="round"/>
+		<path id="Vector" d="M70 40L76.66 40" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.666667" stroke-linejoin="round" stroke-linecap="round"/>
+		<path id="Vector" d="M14.06 65.93L18.79 61.2" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.666667" stroke-linejoin="round" stroke-linecap="round"/>
+		<path id="Vector" d="M61.2 18.79L65.93 14.06" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.666667" stroke-linejoin="round" stroke-linecap="round"/>
+	</g>
+</svg>

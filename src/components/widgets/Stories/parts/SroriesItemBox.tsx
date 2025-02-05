@@ -146,6 +146,7 @@ interface ContentProps {
     id: number;
     title: string;
     items: InfoItem[];
+    linkSrc: string,
     img: {
       top: boolean;
       imgSrc: {
@@ -192,7 +193,7 @@ export const StoriesItemBox: React.FC<ContentProps> = ({ content }) => {
           </StoriesItems>
 
           <Link
-            linkUrl="/cases/gametrade-market"
+            linkUrl={content.linkSrc}
             iconName="arrow-up-right"
             className="stories-link"
             style={{}}

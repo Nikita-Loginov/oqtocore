@@ -56,7 +56,7 @@ const LinkDecor = styled.span`
         content: '';
         width: 17px;
         height: 17px;
-        background-image: url(./icons/arrow-up-right.svg);
+        background-image: url(/icons/arrow-up-right.svg);
         background-repeat: no-repeat;
         transform: translate(-24px, 24px);
         transition: all 0.5s;
@@ -81,7 +81,7 @@ export default function Link({ children, iconName, linkUrl, className, style }: 
                 <img
                     width='16'
                     height='16'
-                    src={`./icons/${iconName}.svg`}
+                    src={`/icons/${iconName}.svg`}
                     alt={iconName}
                     style={style}
                     loading='lazy'

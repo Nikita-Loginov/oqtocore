@@ -1,0 +1,68 @@
+.title-two {
+  font-size: clamp(1.25rem, 0.8494rem + 1.5444vw, 2.5rem);
+  font-weight: 700;
+  line-height: 117%;
+  text-transform: capitalize;
+}
+
+html {
+  overflow: hidden;
+}
+
+.main {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.grid-two {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-three {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-four {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.contact-modal {
+  .button-uniq {
+    align-self: center;
+    gap: 110px;
+    background-color: rgb(43, 36, 255);
+
+    &:after {
+      background-color: transparent;
+    }
+
+    &:disabled {
+      background: rgb(55, 55, 55);
+      opacity: 0.4;
+      pointer-events: none; 
+    }
+
+    @media (max-width: 500px) {
+      gap: 40px;
+    }
+
+    .button-decor {
+      background-color: #010101;
+    }
+  }
+}
+
+
+// .cases-pages {
+//   @media (max-width: 500px) {
+//     .button-box {
+//       button {
+//         gap: 24px;
+//         background-color: transparent;
+//       }
+//     }
+//   }
+// }

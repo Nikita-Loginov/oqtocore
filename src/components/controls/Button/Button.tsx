@@ -158,10 +158,10 @@ export const Button: React.FC<ButtonProps> = ({
 
       <ButtonDecor
         className="button-decor"
-        icon={`./icons/${iconName}.svg`}
+        icon={`/icons/${iconName}.svg`}
         position-before-icon={positionIconSecond}
       >
-        <img src={`./icons/${iconName}.svg`} alt={linkText} loading="lazy" />
+        <img src={`/icons/${iconName}.svg`} alt={linkText} loading="lazy" />
       </ButtonDecor>
     </ButtonBox>
   );

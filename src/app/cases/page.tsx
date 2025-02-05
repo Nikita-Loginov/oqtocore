@@ -33,6 +33,7 @@ const infoStoriesItems = [
   {
     id: 1,
     title: 'GTM',
+    linkSrc: '/cases/gametrade-market',
     items: [
       {
         title: 'Who:',
@@ -62,6 +63,7 @@ const infoStoriesItems = [
   {
     id: 2,
     title: 'Flymining',
+    linkSrc: '/cases/gametrade-market',
     items: [
       {
         title: 'Who:',
@@ -91,6 +93,7 @@ const infoStoriesItems = [
   {
     id: 3,
     title: 'Intranet',
+    linkSrc: '/cases/gametrade-market',
     items: [
       {
         title: 'Who:',
@@ -120,6 +123,7 @@ const infoStoriesItems = [
   {
     id: 4,
     title: 'In-Game Overlay',
+    linkSrc: '/cases/gametrade-market',
     items: [
       {
         title: 'Who:',
@@ -154,6 +158,7 @@ const infoStoriesItems = [
   {
     id: 5,
     title: 'Runes',
+    linkSrc: '/cases/gametrade-market',
     items: [
       {
         title: 'Who:',
@@ -183,6 +188,7 @@ const infoStoriesItems = [
   {
     id: 6,
     title: 'Desktop Time Tracker ',
+    linkSrc: '/cases/gametrade-market',
     items: [
       {
         title: 'Who:',
@@ -212,6 +218,7 @@ const infoStoriesItems = [
   {
     id: 7,
     title: 'Tyrcoin',
+    linkSrc: '/cases/gametrade-market',
     items: [
       {
         title: 'Who:',

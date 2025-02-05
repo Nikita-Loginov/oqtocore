@@ -72,10 +72,12 @@ interface InfoItem {
 }
 
 interface StoriesProps {
+  titleBlockStories?: string;
   info: {
     id: number;
     title: string;
     items: InfoItem[];
+    link?: string;
     img: {
       top: boolean;
       imgSrc: {
@@ -83,6 +85,7 @@ interface StoriesProps {
         webp2x: string;
       };
     };
+    linkSrc: string;
   }[];
   preloaderTextStories: boolean;
   countVisibleItems: number;
@@ -90,6 +93,7 @@ interface StoriesProps {
 
 export const Stories: React.FC<StoriesProps> = ({
   info,
+  titleBlockStories,
   preloaderTextStories,
   countVisibleItems,
 }) => {
@@ -107,7 +111,8 @@ export const Stories: React.FC<StoriesProps> = ({
       className={`${preloaderTextStories && "preloader-text"} stories`}
     >
       <Container>
-        <StoriesInner className="stories__inner">
+        <StoriesInner className="stories__inner" style={titleBlockStories ? { gap: "40px" } : {}}>
+          {titleBlockStories && <h2 className="title-two">{titleBlockStories}</h2>}
           {items.map((box) => (
             <StoriesItemBox key={box.id} content={box} />
           ))}

@@ -275,7 +275,7 @@ export const Header: React.FC<HeaderProps> = () => {
           <HeaderInner>
             <HeaderLogo className="header__logo" href="/">
               <Image
-                src="./images/header/logo.svg"
+                src="/images/header/logo.svg"
                 alt="ogtacore logo"
                 width={161}
                 height={21}

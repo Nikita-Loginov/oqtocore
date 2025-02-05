@@ -111,7 +111,7 @@ export const Footer: React.FC = () => {
                   >
                     <span className="footer__link-decor">
                       <img
-                        src="./icons/phone.svg"
+                        src="/icons/phone.svg"
                         alt=""
                         loading="lazy"
                         width={"16"}
@@ -131,7 +131,7 @@ export const Footer: React.FC = () => {
                   >
                     <span className="footer__link-decor">
                       <img
-                        src="./icons/phone.svg"
+                        src="/icons/phone.svg"
                         alt=""
                         loading="lazy"
                         width={"16"}
@@ -151,7 +151,7 @@ export const Footer: React.FC = () => {
                   >
                     <span className="footer__link-decor">
                       <img
-                        src="./icons/phone.svg"
+                        src="/icons/phone.svg"
                         alt=""
                         width={"16"}
                         height={"16"}
@@ -176,7 +176,7 @@ export const Footer: React.FC = () => {
                   <FooterSpanItem>
                     <span className="footer__link-decor">
                       <img
-                        src="./icons/map-pin.svg"
+                        src="/icons/map-pin.svg"
                         alt=""
                         width={"16"}
                         height={"16"}
@@ -248,22 +248,22 @@ export const Footer: React.FC = () => {
 
         <FooterDecor>
           <picture>
-            <source srcSet="./images/footer/decor.webp" type="image/webp" />
-            <source srcSet="./images/footer/decor.png" type="image/png" />
+            <source srcSet="/images/footer/decor.webp" type="image/webp" />
+            <source srcSet="/images/footer/decor.png" type="image/png" />
             <img
               loading="lazy"
-              src="./images/footer/decor.png"
+              src="/images/footer/decor.png"
               alt="decor"
               width={"100%"}
               height={"100%"}
             />
           </picture>
           <picture>
-            <source srcSet="./images/footer/decor.webp" type="image/webp" />
-            <source srcSet="./images/footer/decor.png" type="image/png" />
+            <source srcSet="/images/footer/decor.webp" type="image/webp" />
+            <source srcSet="/images/footer/decor.png" type="image/png" />
             <img
               loading="lazy"
-              src="./images/footer/decor.png"
+              src="/images/footer/decor.png"
               alt="decor"
               width={"100%"}
               height={"100%"}

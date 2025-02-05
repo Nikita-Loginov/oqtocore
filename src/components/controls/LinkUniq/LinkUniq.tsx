@@ -110,7 +110,7 @@ export const LinkUniq: React.FC<LinkUniqProps> = ({ iconName, linkText, linkUrl 
 
             <LinkDecor className='link-uniq__decor'>
                 <img
-                    src={`./icons/${iconName}.svg`}
+                    src={`/icons/${iconName}.svg`}
                     alt=''
                     loading='lazy'
                 />
