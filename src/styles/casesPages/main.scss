@@ -38,6 +38,11 @@ html {
   grid-template-columns: repeat(4, 1fr);
 }
 
+.grid-five {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
 .contact-modal {
   .button-uniq {
     align-self: center;

@@ -98,7 +98,7 @@ const marketInfo = {
       id: 2,
       iconSrc: "/icons/money.svg",
       title: "Technology Stack and Blockchain Support",
-      text: ['The system is capable of supporting any token and easily integrates with new blockchains. It supported Ethereum and various EVMS, Polygon, and Binance Smart Chain, later we added Solana and Avalanche.', 'The frontend uses ethers.js and web3.js, while the backend employs Infura for blockchain interactions. BigQuery is used for processing large datasets, such as parsing user tokens. '],
+      text: ['The system is capable of supporting any token and easily integrates with new blockchains. It supported Ethereum and various EVMS, Polygon, and Binance Smart Chain, later we added Solana and Avalanche.', 'The frontend uses ethers.js and web3.js, while the backend employs Infura for blockchain interactions. BigQuery is used for processing large datasets, such as parsing user tokens.'],
     },
     {
       id: 3,
@@ -191,6 +191,7 @@ const killerInfo = {
 
 const weCreate = {
   title: 'Something close we can create',
+  classAdd: 'grid-three',
   items: [
     {
       id: 1,
@@ -201,13 +202,13 @@ const weCreate = {
     {
       id: 2,
       iconSrc: '/icons/setting.svg',
-      title: 'Digital Asset Management System',
+      title: 'Digital Asset\n Management System',
       text: 'Creating a solution for inventorying and managing digital assets such as software licenses, digital media files, and documents, with capabilities for their exchange and sale.'
     },
     {
       id: 3,
       iconSrc: '/icons/nft.svg',
-      title: 'NFT Marketplace',
+      title: 'NFT\n Marketplace',
       text: 'Developing a platform for creating, buying, selling, and auctioning non-fungible tokens (NFTs), providing opportunities for artists, musicians, and other creators of digital content.'
     }
   ]

@@ -167,24 +167,31 @@ const killerInfo = {
 
 const weCreate = {
   title: 'Something close we can create',
+  classAdd: 'grid-four',
   items: [
     {
       id: 1,
-      iconSrc: '/icons/ido.svg',
-      title: 'ICO/IDO Platform(Initial Coin Offering/Initial DEX Offering)',
-      text: 'Developing a platform for organizing and conducting crowdfunding campaigns using cryptocurrencies, including tools for token creation and management, fundraising, and distribution of tokens to investors.'
+      iconSrc: '/icons/wallet.svg',
+      title: 'Crypto Wallet and\n Exchange Platform',
+      text: 'Building on our security and infrastructure expertise, we can create a secure cryptocurrency wallet or a comprehensive exchange platform that supports multiple cryptocurrencies, offers enhanced trading features, and integrates seamlessly with existing financial systems.'
     },
     {
       id: 2,
-      iconSrc: '/icons/setting.svg',
-      title: 'Digital Asset Management System',
-      text: 'Creating a solution for inventorying and managing digital assets such as software licenses, digital media files, and documents, with capabilities for their exchange and sale.'
+      iconSrc: '/icons/development.svg',
+      title: 'IoT and Blockchain\n Integration',
+      text: 'We can develop solutions that integrate IoT (Internet of Things) with blockchain technology to create secure and decentralized networks for industries like supply chain, manufacturing, or smart home devices.'
     },
     {
       id: 3,
-      iconSrc: '/icons/nft.svg',
-      title: 'NFT Marketplace',
-      text: 'Developing a platform for creating, buying, selling, and auctioning non-fungible tokens (NFTs), providing opportunities for artists, musicians, and other creators of digital content.'
+      iconSrc: '/icons/drive.svg',
+      title: 'AI-Driven Analytics\n for Blockchain',
+      text: 'We can utilize AI to analyze and predict cryptocurrency market trends or to enhance the security of blockchain transactions. This could involve developing AI models that detect anomalies or potential security threats in real-time.'
+    },
+    {
+      id: 4,
+      iconSrc: '/icons/ido.svg',
+      title: 'Energy-Efficient\n Blockchain Technologies',
+      text: 'We can also focus on creating more sustainable and energy-efficient blockchain technologies, appealing to environmentally conscious stakeholders and markets.'
     }
   ]
 }
@@ -195,36 +202,6 @@ const titleBlockStories = 'More Success Stories'
 const infoStoriesItems = [
   {
     id: 1,
-    title: 'Runes',
-    items: [
-      {
-        title: 'Who:',
-        text: 'Our client who is developing a Runes DEX (this team also has members actively maintaining the main repository of Bitcoin Runes). '
-      },
-      {
-        title: 'What we did:',
-        text: 'Worked alongside the contributors of Bitcoin Runes, taking part in the creation of one of the world’s first Bitcoin Runes DEX. Our team is responsible for the QA infrastructure and writes code based on the ‘ord’ source code—the software that implements the Bitcoin Runes protocol.'
-      },
-      {
-        title: 'Why it matters:',
-        text: "By collaborating directly with the Bitcoin Runes team, we help shape the protocol's future, providing expert oversight on its quality assurance infrastructure."
-      },
-      {
-        title: 'Tech stack:',
-        text: 'TypeScript, Rust, Bitcoin Protocol'
-      },
-    ],
-    img: {
-      top: true,
-      imgSrc: {
-        webp: '/images/stories/runes.webp',
-        webp2x: '/images/stories/runes2x.webp',
-      }
-    },
-    linkSrc: '/cases/runes',
-  },
-  {
-    id: 2,
     title: 'GTM',
     linkSrc: '/cases/gtm',
     items: [
@@ -252,6 +229,36 @@ const infoStoriesItems = [
         webp2x: '/images/stories/gtm2x.webp',
       }
     }
+  },
+  {
+    id: 2,
+    title: 'Runes',
+    items: [
+      {
+        title: 'Who:',
+        text: 'Our client who is developing a Runes DEX (this team also has members actively maintaining the main repository of Bitcoin Runes). '
+      },
+      {
+        title: 'What we did:',
+        text: 'Worked alongside the contributors of Bitcoin Runes, taking part in the creation of one of the world’s first Bitcoin Runes DEX. Our team is responsible for the QA infrastructure and writes code based on the ‘ord’ source code—the software that implements the Bitcoin Runes protocol.'
+      },
+      {
+        title: 'Why it matters:',
+        text: "By collaborating directly with the Bitcoin Runes team, we help shape the protocol's future, providing expert oversight on its quality assurance infrastructure."
+      },
+      {
+        title: 'Tech stack:',
+        text: 'TypeScript, Rust, Bitcoin Protocol'
+      },
+    ],
+    img: {
+      top: true,
+      imgSrc: {
+        webp: '/images/stories/runes.webp',
+        webp2x: '/images/stories/runes2x.webp',
+      }
+    },
+    linkSrc: '/cases/runes',
   },
 ]
 

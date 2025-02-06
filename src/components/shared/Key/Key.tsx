@@ -72,6 +72,10 @@ const KeyItem = styled.div`
 
 const KeyIcon = styled.span`
   height: 90px;
+
+  img {
+    height:100%;
+  }
 `;
 
 const KeyItemContent = styled.div`

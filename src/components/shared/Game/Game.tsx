@@ -30,10 +30,14 @@ const GameItem = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
+
+  @media(max-width:600px) {
+     gap: 24px;
+  }
 `;
 
 const GameItemIcon = styled.span`
-  max-width: 160px;
+  max-width: clamp(4.6875rem, 2.985rem + 6.5637vw, 10rem);
 
   img {
     width: 100%;
@@ -41,7 +45,7 @@ const GameItemIcon = styled.span`
 `;
 
 const GameItemText = styled.p`
-  font-size: 30px;
+  font-size: clamp(1rem, 0.7196rem + 1.0811vw, 1.875rem);
   font-weight: 600;
   line-height: 119%;
   letter-spacing: -0.2px;

@@ -6,12 +6,13 @@ import { Container } from "@/components/widgets";
 interface WeCreateItem {
   id: number;
   title: string;
-  iconSrc: string;
-  text: string;
+  iconSrc?: string;
+  text?: string;
 }
 
 interface WeCreateInfo {
   title: string;
+  classAdd: string;
   items: WeCreateItem[];
 }
 
@@ -30,16 +31,27 @@ const WeCreateInner = styled.div`
 `;
 
 const WeCreateItems = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display:grid;
   gap: 24px;
 
   @media (max-width: 1600px) {
-    grid-template-columns: repeat(2, 1fr);
+    &.grid-two,
+    &.grid-three,
+    &.grid-four {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.grid-five {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   @media (max-width: 1220px) {
-    grid-template-columns: repeat(1, 1fr);
+    &.grid-two,
+    &.grid-three,
+    &.grid-four {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 `;
 
@@ -50,18 +62,6 @@ const WeCreateItem = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-
-  @media (max-width: 1600px) {
-    &:nth-child(3) {
-      grid-column: span 2;
-    }
-  }
-
-  @media (max-width: 1220px) {
-    &:nth-child(3) {
-      grid-column: span 1;
-    }
-  }
 `;
 
 const WeCreateIcon = styled.span`
@@ -73,6 +73,11 @@ const WeCreateIcon = styled.span`
   img {
     width: 100%;
     height: 100%;
+  }
+
+  @media (max-width: 550px) {
+    width: 50px;
+    height: 50px;
   }
 `;
 
@@ -87,6 +92,7 @@ const WeCreateItemTitle = styled.h3`
   font-weight: 700;
   line-height: 117%;
   text-transform: capitalize;
+  white-space: pre-line;
 `;
 
 const WeCreateItemText = styled.p`
@@ -101,17 +107,17 @@ export const WeCreate: React.FC<WeCreateProp> = ({ info }) => {
         <WeCreateInner>
           <h2 className="title-two">{info.title}</h2>
 
-          <WeCreateItems>
+          <WeCreateItems className={info.classAdd}>
             {info.items.map((item) => (
               <WeCreateItem key={item.id}>
-                <WeCreateIcon>
+                {item.iconSrc && <WeCreateIcon>
                   <img src={`${item.iconSrc}`} alt="icon" />
-                </WeCreateIcon>
+                </WeCreateIcon>}
 
                 <WeCreateItemContent>
                   <WeCreateItemTitle>{item.title}</WeCreateItemTitle>
 
-                  <WeCreateItemText>{item.text}</WeCreateItemText>
+                  {item.text && <WeCreateItemText>{item.text}</WeCreateItemText>}
                 </WeCreateItemContent>
               </WeCreateItem>
             ))}

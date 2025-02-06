@@ -95,25 +95,32 @@ const killerInfo = {
 
 const weCreate = {
   title: 'Something close we can create',
+  classAdd: 'grid-four',
   items: [
     {
       id: 1,
-      iconSrc: '/icons/ido.svg',
-      title: 'ICO/IDO Platform(Initial Coin Offering/Initial DEX Offering)',
-      text: 'Developing a platform for organizing and conducting crowdfunding campaigns using cryptocurrencies, including tools for token creation and management, fundraising, and distribution of tokens to investors.'
+      iconSrc: '/icons/mouse.svg',
+      title: 'Blockchain-Based Gaming Platforms',
+      text: 'We can design and build full-scale decentralized gaming platforms that utilize blockchain technology for game mechanics, ownership verification, and asset trading.'
     },
     {
       id: 2,
-      iconSrc: '/icons/setting.svg',
-      title: 'Digital Asset Management System',
-      text: 'Creating a solution for inventorying and managing digital assets such as software licenses, digital media files, and documents, with capabilities for their exchange and sale.'
+      iconSrc: '/icons/ido.svg',
+      title: 'NFT\n Marketplace',
+      text: 'We can develop specialized marketplaces for trading in-game assets, such as skins, characters, or equipment, represented as non-fungible tokens (NFTs), which would perfectly complement existing game ecosystems.'
     },
     {
       id: 3,
-      iconSrc: '/icons/nft.svg',
-      title: 'NFT Marketplace',
-      text: 'Developing a platform for creating, buying, selling, and auctioning non-fungible tokens (NFTs), providing opportunities for artists, musicians, and other creators of digital content.'
-    }
+      iconSrc: '/icons/finance.svg',
+      title: 'Decentralized Finance(DeFi) Integrations',
+      text: 'Leveraging our knowledge of Web3, we can create solutions that integrate DeFi elements into games, including staking, liquidity farming, or in-game financial transactions using cryptocurrency.'
+    },
+    {
+      id: 4,
+      iconSrc: '/icons/person.svg',
+      title: 'Player Identity and Reputation Systems',
+      text: 'We can build systems that use blockchain to verify player identity and track reputation securely across multiple platforms, enhancing security and trust in online gaming communities.'
+    },
   ]
 }
 

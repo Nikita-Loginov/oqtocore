@@ -119,7 +119,8 @@ const stackInfo = {
               id: 1,
               title: 'AWS Services',
               list: ['AWS Amplify (frontend hosting)', 'AWS Elemental MediaConvert (Video transcoding)', 'AWS Beanstalk (backend hosting)', 'AWS Rekognition (Object and scene detection)', 'AWS Rekognition (Object and scene detection)', 'AWS S3 (Storage)', 'AWS Step Functions (Orchestration)', 'AWS CloudFront (CDN and content delivery)', 'AWS Lambda (Processing and serverless functions)', 'AWS Transcribe (Transcription)', 'Amazon SNS (Notifications)', 'AWS Translate (Multi-language support)', 'Amazon Athena (Analytics for storage and bandwidth)'],
-            }
+              mibbleLink: true
+            },
           ]
         },
         {
@@ -151,25 +152,44 @@ const killerInfo = {
 
 const weCreate = {
   title: 'Something close we can create',
+  classAdd: 'grid-five',
   items: [
     {
       id: 1,
-      iconSrc: '/icons/ido.svg',
-      title: 'ICO/IDO Platform(Initial Coin Offering/Initial DEX Offering)',
-      text: 'Developing a platform for organizing and conducting crowdfunding campaigns using cryptocurrencies, including tools for token creation and management, fundraising, and distribution of tokens to investors.'
+      title: 'IE-Learning Platform',
     },
     {
       id: 2,
-      iconSrc: '/icons/setting.svg',
-      title: 'Digital Asset Management System',
-      text: 'Creating a solution for inventorying and managing digital assets such as software licenses, digital media files, and documents, with capabilities for their exchange and sale.'
+      title: 'Telemedicine System',
     },
     {
       id: 3,
-      iconSrc: '/icons/nft.svg',
-      title: 'NFT Marketplace',
-      text: 'Developing a platform for creating, buying, selling, and auctioning non-fungible tokens (NFTs), providing opportunities for artists, musicians, and other creators of digital content.'
-    }
+      title: 'Financial Webinar Platform',
+    },
+    {
+      id: 4,
+      title: 'Media Streaming Service',
+    },
+    {
+      id: 5,
+      title: 'Online Fitness Platform',
+    },
+    {
+      id: 6,
+      title: 'VirtualConference Platform',
+    },
+    {
+      id: 7,
+      title: 'Music Streaming Service',
+    },
+    {
+      id: 8,
+      title: 'Legal Case Review Platform',
+    },
+    {
+      id: 9,
+      title: 'Corporate Training Portal',
+    },
   ]
 }
 

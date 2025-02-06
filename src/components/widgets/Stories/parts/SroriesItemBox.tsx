@@ -4,9 +4,11 @@ import React from "react";
 
 const StoriesBox = styled.div`
   border: 2px solid rgb(55, 55, 55);
-  border-radius: 60px;
+  border-radius: clamp(1.5rem, 0.5702rem + 2.9752vw, 3.75rem);
   background: rgb(1, 1, 1);
   padding: clamp(1.25rem, 0.0483rem + 4.6332vw, 5rem);
+
+  // @media()
 `;
 
 const SroriesContentBox = styled.div`

@@ -78,7 +78,7 @@ const CasesTopTag = styled.div`
   line-height: 1.35;
   border-radius: 51px;
   background: rgb(43, 36, 255);
-  padding: clamp(0.75rem, 0.5898rem + 0.6178vw, 1.25rem) clamp(1.25rem, 0.9696rem + 1.0811vw, 2.125rem);
+  padding: clamp(0.75rem, 0.5898rem + 0.6178vw, 1.25rem) clamp(1.4375rem, 1.2572rem + 0.695vw, 2rem);;
 `;
 
 const CasesTopImg = styled.div`
