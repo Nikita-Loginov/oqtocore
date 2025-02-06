@@ -100,7 +100,8 @@ const marketInfo = {
 
 const architecture = {
   title: 'architecture',
-  imgSrc: ['/images/architecture/inrtanet']
+  imgSrc: ['/images/architecture/inrtanet'],
+  imgFormat: 'svg'
 }
 
 const stackInfo = {
@@ -209,7 +210,7 @@ const infoStoriesItems = [
   {
     id: 2,
     title: 'GTM',
-    linkSrc: '/cases/gametrade-market',
+    linkSrc: '/cases/gtm',
     items: [
       {
         title: 'Who:',

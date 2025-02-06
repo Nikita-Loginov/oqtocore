@@ -43,7 +43,7 @@ const infoStoriesItems = [
   {
     id: 1,
     title: 'GTM',
-    linkSrc: '/cases/gametrade-market',
+    linkSrc: '/cases/gtm',
     items: [
       {
         title: 'Who:',
@@ -73,7 +73,7 @@ const infoStoriesItems = [
   {
     id: 2,
     title: 'Runes',
-    linkSrc: '/cases/bitcoin-runes',
+    linkSrc: '/cases/runes',
     items: [
       {
         title: 'Who:',

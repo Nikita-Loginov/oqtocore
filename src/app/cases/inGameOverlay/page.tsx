@@ -83,7 +83,8 @@ const infoKey = {
 
 const architecture = {
   title: 'architecture',
-  imgSrc: ['/images/architecture/inGameOverlay']
+  imgSrc: ['/images/architecture/inGameOverlay'],
+  imgFormat: 'webp'
 }
 
 const killerInfo = {
@@ -123,7 +124,7 @@ const infoStoriesItems = [
   {
     id: 2,
     title: 'GTM',
-    linkSrc: '/cases/gametrade-market',
+    linkSrc: '/cases/gmt',
     items: [
       {
         title: 'Who:',
@@ -178,7 +179,7 @@ const infoStoriesItems = [
         webp2x: '/images/stories/runes2x.webp',
       }
     },
-    linkSrc: '/cases/bitcoin-runes',
+    linkSrc: '/cases/runes',
   },
 ]
 

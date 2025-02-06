@@ -81,7 +81,8 @@ const infoKey = {
 
 const architecture = {
   title: 'architecture',
-  imgSrc: ['/images/architecture/flyminingOne', '/images/architecture/flyminingTwo']
+  imgSrc: ['/images/architecture/flyminingOne', '/images/architecture/flyminingTwo'],
+  imgFormat: 'webp'
 }
 
 const stackInfo = {
@@ -220,12 +221,12 @@ const infoStoriesItems = [
         webp2x: '/images/stories/runes2x.webp',
       }
     },
-    linkSrc: '/cases/bitcoin-runes',
+    linkSrc: '/cases/runes',
   },
   {
     id: 2,
     title: 'GTM',
-    linkSrc: '/cases/gametrade-market',
+    linkSrc: '/cases/gtm',
     items: [
       {
         title: 'Who:',

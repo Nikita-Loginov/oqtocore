@@ -117,7 +117,8 @@ const marketInfo = {
 
 const architecture = {
   title: 'architecture',
-  imgSrc: ['/images/architecture/gtm']
+  imgSrc: ['/images/architecture/gtm'],
+  imgFormat: 'webp'
 }
 
 const stackInfo = {
@@ -244,7 +245,7 @@ const infoStoriesItems = [
         webp2x: '/images/stories/runes2x.webp',
       }
     },
-    linkSrc: '/cases/bitcoin-runes',
+    linkSrc: '/cases/runes',
   },
   {
     id: 2,
@@ -279,7 +280,7 @@ const infoStoriesItems = [
         webp2x: '/images/stories/game2x.webp',
       }
     },
-    linkSrc: '/cases/flymining',
+    linkSrc: '/cases/inGameOverlay',
   },
 ]
 

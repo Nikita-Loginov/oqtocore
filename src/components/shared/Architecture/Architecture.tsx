@@ -7,6 +7,7 @@ interface ArchitectureProp {
   info: {
     title: string;
     imgSrc: string[];
+    imgFormat: string;
   };
 }
 
@@ -40,14 +41,21 @@ export const Architecture: React.FC<ArchitectureProp> = ({ info }) => {
           <h2 className="title-two">{info.title}</h2>
 
           <ArchitectureImgs>
-            {info.imgSrc.map((itemSrc, index) => (
-              <picture key={index}>
-              <source
-                srcSet={`${itemSrc}.webp 1x, ${itemSrc}2x.webp 2x`}
-              />
-              <img src={`${itemSrc}.webp`} alt="description" />
-            </picture>
-            ))}
+            {info.imgFormat !== "svg"
+              ? info.imgSrc.map((itemSrc, index) => (
+                  <picture key={index}>
+                    <source
+                      srcSet={`${itemSrc}.${info.imgFormat} 1x, ${itemSrc}2x.${info.imgFormat} 2x`}
+                    />
+                    <img
+                      src={`${itemSrc}.${info.imgFormat}`}
+                      alt="img"
+                    />
+                  </picture>
+                ))
+              : info.imgSrc.map((itemSrc, index) => (
+                  <img key={index} src={`${itemSrc}.${info.imgFormat}`} alt="img" />
+                ))}
           </ArchitectureImgs>
         </ArchitectureInner>
       </Container>

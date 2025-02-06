@@ -106,7 +106,8 @@ const marketInfo = {
 
 const architecture = {
   title: 'architecture',
-  imgSrc: ['/images/architecture/runes']
+  imgSrc: ['/images/architecture/runes'],
+  imgFormat: 'webp'
 }
 
 const stackInfo = {
@@ -180,7 +181,7 @@ const infoStoriesItems = [
   {
     id: 1,
     title: 'In-Game Overlay',
-    linkSrc: '/cases/in-game-overlay',
+    linkSrc: '/cases/inGameOverlay',
     items: [
       {
         title: 'Who:',
